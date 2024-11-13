@@ -825,7 +825,7 @@ CreateThread(function()
                     cruiseOn = false
                     harness = false
                 end
-                DisplayRadar(Menu.isOutMapChecked)
+                DisplayRadar(true)
             end
         else
             SendNUIMessage({
