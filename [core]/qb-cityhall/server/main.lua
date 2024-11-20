@@ -51,7 +51,7 @@ RegisterNetEvent('qb-cityhall:server:requestId', function(item, hall)
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
     local itemInfo = Config.Cityhalls[hall].licenses[item]
-    if not Player.Functions.RemoveMoney('cash', itemInfo.cost, 'cityhall id') then return TriggerClientEvent('QBCore:Notify', src, ('You don\'t have enough money on you, you need %s cash'):format(itemInfo.cost), 'error') end
+    if not Player.Functions.RemoveMoney('cash', itemInfo.cost, 'cityhall id') then return TriggerClientEvent('QBCore:Notify', src, ('Bạn không có đủ tiền, bạn cần %s tiền mặt'):format(itemInfo.cost), 'error') end
     local info = {}
     if item == 'id_card' then
         info.citizenid = Player.PlayerData.citizenid
@@ -64,7 +64,7 @@ RegisterNetEvent('qb-cityhall:server:requestId', function(item, hall)
         info.firstname = Player.PlayerData.charinfo.firstname
         info.lastname = Player.PlayerData.charinfo.lastname
         info.birthdate = Player.PlayerData.charinfo.birthdate
-        info.type = 'Class C Driver License'
+        info.type = 'Bằng lái xe hạng C'
     elseif item == 'weaponlicense' then
         info.firstname = Player.PlayerData.charinfo.firstname
         info.lastname = Player.PlayerData.charinfo.lastname
@@ -88,14 +88,14 @@ RegisterNetEvent('qb-cityhall:server:sendDriverTest', function(instructors)
         else
             local mailData = {
                 sender = 'Township',
-                subject = 'Driving lessons request',
-                message = 'Hello,<br><br>We have just received a message that someone wants to take driving lessons.<br>If you are willing to teach, please contact them:<br>Name: <strong>' .. Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname .. '<br />Phone Number: <strong>' .. Player.PlayerData.charinfo.phone .. '</strong><br><br>Kind regards,<br>Township Los Santos',
+                subject = 'Yêu cầu học lái xe',
+                message = 'Xin chào,<br><br>Chúng tôi vừa nhận được tin nhắn rằng có người muốn học lái xe.<br>Nếu bạn muốn dạy, vui lòng liên hệ với họ:<br>Tên: <strong>' .. Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname .. '<br />Phone Number: <strong>' .. Player.PlayerData.charinfo.phone .. '</strong><br><br>Kind regards,<br>Township Los Santos',
                 button = {}
             }
             exports['qb-phone']:sendNewMailToOffline(citizenid, mailData)
         end
     end
-    TriggerClientEvent('QBCore:Notify', src, 'An email has been sent to driving schools, and you will be contacted automatically', 'success', 5000)
+    TriggerClientEvent('QBCore:Notify', src, 'Một email đã được gửi đến các trường dạy lái xe và bạn sẽ tự động được liên lạc', 'success', 5000)
 end)
 
 RegisterNetEvent('qb-cityhall:server:ApplyJob', function(job, cityhallCoords)
@@ -125,7 +125,7 @@ end)
 
 -- Commands
 
-QBCore.Commands.Add('drivinglicense', 'Give a drivers license to someone', { { 'id', 'ID of a person' } }, true, function(source, args)
+QBCore.Commands.Add('drivinglicense', 'Trao bằng lái xe cho ai đó', { { 'id', 'ID Người chơi' } }, true, function(source, args)
     local Player = QBCore.Functions.GetPlayer(source)
     local SearchedPlayer = QBCore.Functions.GetPlayer(tonumber(args[1]))
     if SearchedPlayer then
@@ -135,16 +135,16 @@ QBCore.Commands.Add('drivinglicense', 'Give a drivers license to someone', { { '
                     if Config.DrivingSchools[i].instructors[id] == Player.PlayerData.citizenid then
                         SearchedPlayer.PlayerData.metadata['licences']['driver'] = true
                         SearchedPlayer.Functions.SetMetaData('licences', SearchedPlayer.PlayerData.metadata['licences'])
-                        TriggerClientEvent('QBCore:Notify', SearchedPlayer.PlayerData.source, 'You have passed! Pick up your drivers license at the town hall', 'success', 5000)
-                        TriggerClientEvent('QBCore:Notify', source, ('Player with ID %s has been granted access to a driving license'):format(SearchedPlayer.PlayerData.source), 'success', 5000)
+                        TriggerClientEvent('QBCore:Notify', SearchedPlayer.PlayerData.source, 'Bạn đã vượt qua! Nhận bằng lái xe tại tòa thị chính', 'success', 5000)
+                        TriggerClientEvent('QBCore:Notify', source, ('Người chơi có ID %s đã được cấp giấy phép lái xe'):format(SearchedPlayer.PlayerData.source), 'success', 5000)
                         break
                     end
                 end
             end
         else
-            TriggerClientEvent('QBCore:Notify', source, "Can't give permission for a drivers license, this person already has permission", 'error')
+            TriggerClientEvent('QBCore:Notify', source, "Không thể cấp giấy phép lái xe, người này đã có giấy phép rồi", 'error')
         end
     else
-        TriggerClientEvent('QBCore:Notify', source, 'Player Not Online', 'error')
+        TriggerClientEvent('QBCore:Notify', source, 'Người không Online', 'error')
     end
 end)
