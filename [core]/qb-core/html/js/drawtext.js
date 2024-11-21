@@ -6,6 +6,7 @@ const drawText = async (textData) => {
   switch (textData.position) {
     case "left":
       addClass(text, position);
+      addClass(text, "font-type-custom");
       direction = "left";
       break;
     case "top":

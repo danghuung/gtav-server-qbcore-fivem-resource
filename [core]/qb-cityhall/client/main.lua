@@ -176,10 +176,10 @@ local function spawnPeds()
                         if inside then
                             if current.drivingschool then
                                 inRangeDrivingSchool = true
-                                exports['qb-core']:DrawText('<span style="font-size: 20px;">Bấm <span style="color: green;">[E]</span> để học bằng lái</span>')
+                                exports['qb-core']:DrawText('Bấm <span style="color: green;">[E]</span> để học bằng lái')
                             elseif current.cityhall then
                                 inRangeCityhall = true
-                                exports['qb-core']:DrawText('<span style="font-size: 20px;">Bấm <span style="color: green;">[E]</span> để mở</span>')
+                                exports['qb-core']:DrawText('Bấm <span style="color: green;">[E]</span> để mở')
                             end
                         else
                             exports['qb-core']:HideText()
@@ -259,7 +259,7 @@ end)
 
 RegisterNUICallback('close', function(_, cb)
     setCityhallPageState(false, false)
-    if not Config.UseTarget and inRangeCityhall then exports['qb-core']:DrawText('<span style="font-size: 20px;">Bấm <span style="color: green;">[E]</span> để mở</span>') end -- Reopen interaction when you're still inside the zone
+    if not Config.UseTarget and inRangeCityhall then exports['qb-core']:DrawText('Bấm <span style="color: green;">[E]</span> để mở') end -- Reopen interaction when you're still inside the zone
     cb('ok')
 end)
 
