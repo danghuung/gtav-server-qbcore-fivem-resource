@@ -1,5 +1,20 @@
 QBCore.Functions = {}
 
+-- Font
+CreateThread(function()
+    RegisterFontFile('BalooPaaji2-SemiBold')
+    QBCore.Font = RegisterFontId('Baloo Paaji 2 SemiBold')
+    AddTextEntry('STRING', "<FONT FACE='Baloo Paaji 2 SemiBold'>~a~</FONT>")
+    AddTextEntry('CUSTOM_STRING', "<FONT FACE='Baloo Paaji 2 SemiBold'>~a~</FONT>")
+end)
+
+function QBCore.Functions.FloatingNotification(msg, x, y, z)
+    AddTextEntry('FloatingNotification', "<FONT FACE='Baloo Paaji 2 SemiBold'>" .. msg .. "</FONT>")
+    SetFloatingHelpTextWorldPosition(1, x, y, z)
+    SetFloatingHelpTextWorldType(1, 1, 2, -1, 3, 0)
+    BeginTextCommandDisplayHelp('FloatingNotification')
+    EndTextCommandDisplayHelp(2, false, false, -1)
+end
 -- Callbacks
 
 function QBCore.Functions.CreateClientCallback(name, cb)
@@ -138,7 +153,7 @@ function QBCore.Functions.IsWearingGloves()
     local ped = PlayerPedId()
     local armIndex = GetPedDrawableVariation(ped, 3)
     local model = GetEntityModel(ped)
-    if model == `mp_m_freemode_01` then
+    if model == "mp_m_freemode_01" then
         if QBCore.Shared.MaleNoGloves[armIndex] then
             return false
         end

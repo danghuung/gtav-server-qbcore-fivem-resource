@@ -41,6 +41,7 @@ server_scripts {
 ui_page 'html/index.html'
 
 files {
+    'stream/BalooPaaji2-SemiBold.gfx',
     'html/index.html',
     'html/css/style.css',
     'html/css/drawtext.css',
