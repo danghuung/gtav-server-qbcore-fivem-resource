@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@600&display=swap");
+
+.cityhall-header,
+.cityhall-option-block > p,
+.identity-page-block > p,
+.request-identity-button > p,
+.job-page-block > p,
+.back-to-main > p,
+.apply-job-button > p{
+    font-family: "Baloo Paaji 2", sans-serif;
+}
