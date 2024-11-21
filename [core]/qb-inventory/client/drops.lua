@@ -78,7 +78,7 @@ RegisterNetEvent('qb-inventory:client:setupDropTarget', function(dropId)
                     bagObject = bag
                     holdingDrop = true
                     heldDrop = newDropId
-                    exports['qb-core']:DrawText('Press [G] to drop the bag')
+                    exports['qb-core']:DrawText('Nhấn [G] để thả túi')
                 end,
             }
         },

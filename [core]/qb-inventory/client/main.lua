@@ -303,7 +303,7 @@ for i = 1, 5 do
         if not itemData then return end
         if itemData.type == "weapon" then
             if holdingDrop then
-                return QBCore.Functions.Notify("Your already holding a bag, Go Drop it!", "error", 5500)
+                return QBCore.Functions.Notify("Bạn đã cầm sẵn túi rồi, Bỏ nó đi!", "error", 5500)
             end
         end
         TriggerServerEvent('qb-inventory:server:useItem', itemData)
