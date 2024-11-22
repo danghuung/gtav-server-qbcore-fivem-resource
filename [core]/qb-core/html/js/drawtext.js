@@ -4,9 +4,13 @@ const drawText = async (textData) => {
   const text = document.getElementById("text");
   let {position} = textData;
   switch (textData.position) {
-    case "left":
+    case "top-left":
       addClass(text, position);
       addClass(text, "font-type-custom");
+      direction = "top-left";
+      break;
+    case "left":
+      addClass(text, position);
       direction = "left";
       break;
     case "top":
@@ -46,6 +50,11 @@ const changeText = async (textData) => {
   removeClass(text, "pressed");
 
   switch (textData.position) {
+    case "top-left":
+      addClass(text, position);
+      addClass(text, "font-type-custom");
+      direction = "top-left";
+      break;
     case "left":
       addClass(text, position);
       direction = "left";

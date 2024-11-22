@@ -97,6 +97,23 @@
     opacity: 0;
 }
 
+.top-left {
+    top: 1%;
+    left: -100px;
+}
+
+.top-left.show {
+    transition: 0.5s;
+    left: 10px;
+    opacity: 1;
+}
+
+.top-left.hide {
+    transition: 0.5s;
+    left: -100px;
+    opacity: 0;
+}
+
 .font-type-custom {
     font-family: "Baloo Paaji 2", sans-serif !important;
     font-size: 20px;
