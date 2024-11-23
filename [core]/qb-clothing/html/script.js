@@ -536,11 +536,11 @@ QBClothing.SetMaxValues = function(maxValues) {
 
             var itemMax = $(containers).find('[data-headertype="item-header"]');
             $(itemMax).data('maxItem', maxValues[containers.data('type')].item);
-            $(itemMax).html("<p><span data-tkey='item'>Item</span>: " + maxValues[containers.data('type')].item + "</p>");
+            $(itemMax).html("<p><span data-tkey='item'>Mục</span>: " + maxValues[containers.data('type')].item + "</p>");
 
             var headerMax = $(containers).find('[data-headertype="texture-header"]');
             $(headerMax).data('maxTexture', maxValues[containers.data('type')].texture);
-            $(headerMax).html("<p><span data-tkey='texture'>Texture</span>: " + maxValues[containers.data('type')].texture + "</p>");
+            $(headerMax).html("<p><span data-tkey='texture'>Màu sắc</span>: " + maxValues[containers.data('type')].texture + "</p>");
 
             var itemInputMax = $(containers).find('[data-type="item"]');
             $(itemInputMax).attr({ 'max': maxValues[containers.data('type')].item, 'min' : -1 });
@@ -553,11 +553,11 @@ QBClothing.SetMaxValues = function(maxValues) {
 
             var itemMax = $(containers).find('[data-headertype="item-header"]');
             $(itemMax).data('maxItem', maxValues[containers.data('type')].item);
-            $(itemMax).html("<p><span data-tkey='item'>Item</span>: " + maxValues[containers.data('type')].item + "</p>");
+            $(itemMax).html("<p><span data-tkey='item'>Mục</span>: " + maxValues[containers.data('type')].item + "</p>");
 
             var headerMax = $(containers).find('[data-headertype="texture-header"]');
             $(headerMax).data('maxTexture', maxValues[containers.data('type')].texture);
-            $(headerMax).html("<p><span data-tkey='texture'>Texture</span>: " + maxValues[containers.data('type')].texture + "</p>");
+            $(headerMax).html("<p><span data-tkey='texture'>Màu sắc</span>: " + maxValues[containers.data('type')].texture + "</p>");
 
             var itemInputMax = $(containers).find('[data-type="item"]');
             $(itemInputMax).attr({ 'max': maxValues[containers.data('type')].item, 'min' : -1 });
@@ -570,11 +570,11 @@ QBClothing.SetMaxValues = function(maxValues) {
 
             var itemMax = $(containers).find('[data-headertype="item-header"]');
             $(itemMax).data('maxItem', maxValues[containers.data('type')].item);
-            $(itemMax).html("<p><span data-tkey='item'>Item</span>: " + maxValues[containers.data('type')].item + "</p>");
+            $(itemMax).html("<p><span data-tkey='item'>Mục</span>: " + maxValues[containers.data('type')].item + "</p>");
 
             var headerMax = $(containers).find('[data-headertype="texture-header"]');
             $(headerMax).data('maxTexture', maxValues[containers.data('type')].texture);
-            $(headerMax).html("<p><span data-tkey='texture'>Texture</span>: " + maxValues[containers.data('type')].texture + "</p>");
+            $(headerMax).html("<p><span data-tkey='texture'>Màu sắc</span>: " + maxValues[containers.data('type')].texture + "</p>");
 
             var itemInputMax = $(containers).find('[data-type="item"]');
             $(itemInputMax).attr({ 'max': maxValues[containers.data('type')].item, 'min' : -1 });
@@ -587,11 +587,11 @@ QBClothing.SetMaxValues = function(maxValues) {
 
             var itemMax = $(containers).find('[data-headertype="item-header"]');
             $(itemMax).data('maxItem', maxValues[containers.data('type')].item);
-            $(itemMax).html("<p><span data-tkey='item'>Item</span>: " + maxValues[containers.data('type')].item + "</p>");
+            $(itemMax).html("<p><span data-tkey='item'>Mục</span>: " + maxValues[containers.data('type')].item + "</p>");
 
             var headerMax = $(containers).find('[data-headertype="texture-header"]');
             $(headerMax).data('maxTexture', maxValues[containers.data('type')].texture);
-            $(headerMax).html("<p><span data-tkey='texture'>Texture</span>: " + maxValues[containers.data('type')].texture + "</p>");
+            $(headerMax).html("<p><span data-tkey='texture'>Màu sắc</span>: " + maxValues[containers.data('type')].texture + "</p>");
 
             var itemInputMax = $(containers).find('[data-type="item"]');
             $(itemInputMax).attr({ 'max': maxValues[containers.data('type')].item, 'min' : -1 });
