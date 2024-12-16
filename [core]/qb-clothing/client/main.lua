@@ -1591,9 +1591,9 @@ Citizen.CreateThread(function()
     for k, _ in pairs (Config.Stores) do
         if Config.Stores[k].shopType == "clothing" then
             local clothingShop = AddBlipForCoord(Config.Stores[k].coords)
-            SetBlipSprite(clothingShop, 366)
+            SetBlipSprite(clothingShop, 73)
             SetBlipColour(clothingShop, 47)
-            SetBlipScale (clothingShop, 0.7)
+            SetBlipScale (clothingShop, 0.6)
             SetBlipAsShortRange(clothingShop, true)
             BeginTextCommandSetBlipName("STRING")
             AddTextComponentString(Lang:t("store.clothing"))
@@ -1603,7 +1603,7 @@ Citizen.CreateThread(function()
         if Config.Stores[k].shopType == "barber" then
             local barberShop = AddBlipForCoord(Config.Stores[k].coords)
             SetBlipSprite(barberShop, 71)
-            SetBlipColour(barberShop, 0)
+            SetBlipColour(barberShop, 47)
             SetBlipScale (barberShop, 0.7)
             SetBlipAsShortRange(barberShop, true)
             BeginTextCommandSetBlipName("STRING")
@@ -1613,8 +1613,8 @@ Citizen.CreateThread(function()
 
         if Config.Stores[k].shopType == "surgeon" then
             local surgeonShop = AddBlipForCoord(Config.Stores[k].coords)
-            SetBlipSprite(surgeonShop, 71)
-            SetBlipColour(surgeonShop, 0)
+            SetBlipSprite(surgeonShop, 75)
+            SetBlipColour(surgeonShop, 47)
             SetBlipScale  (surgeonShop, 0.7)
             SetBlipAsShortRange(surgeonShop, true)
             BeginTextCommandSetBlipName("STRING")
@@ -1757,13 +1757,13 @@ function loadStores()
                     zoneName = zone.name
                     inZone = true
                     if zoneName == 'surgeon' then
-                        exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> - '..Lang:t("store.surgeon"), 'top-left')
+                        exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> - '..Lang:t("actions.surgeon"), 'left')
                     elseif zoneName == 'clothing' then
-                        exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> - '..Lang:t("store.clothing"), 'top-left')
+                        exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> - '..Lang:t("actions.buy_clothing"), 'left')
                     elseif zoneName == 'barber' then
-                        exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> - '..Lang:t("store.barber"), 'top-left')
+                        exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> - '..Lang:t("actions.hair_cut"), 'left')
                     elseif zoneName == 'outfit' then
-                        exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> - '..Lang:t("store.outfitchanger"), 'top-left')
+                        exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> - '..Lang:t("actions.change_outfit"), 'left')
                     end
                 else
                     inZone = false
@@ -1779,7 +1779,7 @@ function loadStores()
                                 if (job == Config.ClothingRooms[zoneID].requiredJob) then
                                     zoneName = zoneID
                                     inZone = true
-                                    exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> mở '..Lang:t("store.clothing"), 'top-left')
+                                    exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> mở '..Lang:t("actions.buy_clothing"), 'top-left')
                                 end
                             else
                                 inZone = false

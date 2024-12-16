@@ -1,8 +1,8 @@
 local Translations = {
     store = {
         barber = "Tiệm hớt tóc",
-        surgeon = "Plastic Surgeon",
-        clothing = "Tiệm quần áo",
+        surgeon = "Phẫu thuật thẩm mỹ",
+        clothing = "Cửa hàng quần áo",
         outfitchanger = "Thay đổi trang phục"
     },
 
@@ -98,6 +98,13 @@ local Translations = {
     notify = {
         error_bracelet = "Bạn không thể tháo vòng đeo mắt cá chân của bạn ...",
         info_deleteOutfit = "Bạn đã xóa trang phục %{outfit} của mình!"
+    },
+
+    actions = {
+        buy_clothing = "Mua quần áo",
+        change_outfit = "Thay đổi trang phục",
+        hair_cut = "Hớt tóc",
+        surgeon = "Phẫu thuật thẩm mỹ"
     }
 }
 
