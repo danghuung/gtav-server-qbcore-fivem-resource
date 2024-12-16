@@ -11,18 +11,22 @@ const drawText = async (textData) => {
       break;
     case "left":
       addClass(text, position);
+      addClass(text, "font-type-custom");
       direction = "left";
       break;
     case "top":
       addClass(text, position);
+      addClass(text, "font-type-custom");
       direction = "top";
       break;
     case "right":
       addClass(text, position);
+      addClass(text, "font-type-custom");
       direction = "right";
       break;
     default:
       addClass(text, "left");
+      addClass(text, "font-type-custom");
       direction = "left";
       break;
   }
@@ -57,18 +61,22 @@ const changeText = async (textData) => {
       break;
     case "left":
       addClass(text, position);
+      addClass(text, "font-type-custom");
       direction = "left";
       break;
     case "top":
       addClass(text, position);
+      addClass(text, "font-type-custom");
       direction = "top";
       break;
     case "right":
       addClass(text, position);
+      addClass(text, "font-type-custom");
       direction = "right";
       break;
     default:
       addClass(text, "left");
+      addClass(text, "font-type-custom");
       direction = "left";
       break;
   }

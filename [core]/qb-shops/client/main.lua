@@ -201,7 +201,7 @@ if not Config.UseTarget then
             if isPointInside then
                 if tableCheck(playerData, zone.name) then
                     currentShop = zone.name
-                    exports['qb-core']:DrawText(Lang:t('info.open_shop'))
+                    exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> để mở cửa hàng')
                     listenForControl()
                 end
             else
