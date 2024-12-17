@@ -18,12 +18,12 @@ Config.Blips = {
     ['mechanic'] = { label= 'Trung tâm cứu hộ', blipsprite = 446, blipscale = 0.99, blipcolor = 46 },
     ['hardware'] = { label= 'Cửa hàng dụng cụ', blipsprite = 402, blipscale = 0.8, blipcolor = 0 }
 }
-Config.DeliveryLocations = {
-    ['main'] = { label = 'GO Postal', coords = vector4(69.0862, 127.6753, 79.2123, 156.7736) },
-    ['vehicleWithdraw'] = vector4(71.9318, 120.8389, 79.0823, 160.5110),
-    ['vehicleDeposit'] = vector3(62.7282, 124.9846, 79.0926),
-    ['stores'] = {} -- auto generated
-}
+--Config.DeliveryLocations = {
+--    ['main'] = { label = 'GO Postal', coords = vector4(69.0862, 127.6753, 79.2123, 156.7736) },
+--    ['vehicleWithdraw'] = vector4(71.9318, 120.8389, 79.0823, 160.5110),
+--    ['vehicleDeposit'] = vector3(62.7282, 124.9846, 79.0926),
+--    ['stores'] = {} -- auto generated
+--}
 
 Config.Vehicles = {
     ['boxville2'] = { ['label'] = 'Boxville StepVan', ['cargodoors'] = { [0] = 2, [1] = 3 }, ['trunkpos'] = 1.5 },

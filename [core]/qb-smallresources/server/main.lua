@@ -40,20 +40,20 @@ RegisterNetEvent('seatbelt:DoHarnessDamage', function(hp, data)
     end
 end)
 
-RegisterNetEvent('qb-carwash:server:washCar', function()
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-
-    if not Player then return end
-
-    if Player.Functions.RemoveMoney('cash', Config.CarWash.defaultPrice, 'car-washed') then
-        TriggerClientEvent('qb-carwash:client:washCar', src)
-    elseif Player.Functions.RemoveMoney('bank', Config.CarWash.defaultPrice, 'car-washed') then
-        TriggerClientEvent('qb-carwash:client:washCar', src)
-    else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t('error.dont_have_enough_money'), 'error')
-    end
-end)
+--RegisterNetEvent('qb-carwash:server:washCar', function()
+--    local src = source
+--    local Player = QBCore.Functions.GetPlayer(src)
+--
+--    if not Player then return end
+--
+--    if Player.Functions.RemoveMoney('cash', Config.CarWash.defaultPrice, 'car-washed') then
+--        TriggerClientEvent('qb-carwash:client:washCar', src)
+--    elseif Player.Functions.RemoveMoney('bank', Config.CarWash.defaultPrice, 'car-washed') then
+--        TriggerClientEvent('qb-carwash:client:washCar', src)
+--    else
+--        TriggerClientEvent('QBCore:Notify', src, Lang:t('error.dont_have_enough_money'), 'error')
+--    end
+--end)
 
 QBCore.Functions.CreateCallback('smallresources:server:GetCurrentPlayers', function(_, cb)
     cb(#GetPlayers())
