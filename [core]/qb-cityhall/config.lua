@@ -17,9 +17,9 @@ Config.Cityhalls = {
         coords = vec3(-265.0, -963.6, 31.2),
         showBlip = true,
         blipData = {
-            sprite = 487,
+            sprite = 787,
             display = 4,
-            scale = 0.65,
+            scale = 0.9,
             colour = 0,
             title = 'Trung tâm việc làm'
         },
@@ -47,10 +47,10 @@ Config.DrivingSchools = {
         coords = vec3(240.3, -1379.89, 33.74),
         showBlip = true,
         blipData = {
-            sprite = 225,
+            sprite = 408,
             display = 4,
-            scale = 0.65,
-            colour = 3,
+            scale = 0.7,
+            colour = 0,
             title = 'Trung tâm đào tạo GPLX'
         },
         instructors = {

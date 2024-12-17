@@ -11,7 +11,7 @@ Config.Fuel = 'LegacyFuel'
 
 Config.Blips = {
     ['normal'] = { label= 'Tạp hóa 24/7', blipsprite = 52, blipscale = 0.8, blipcolor = 2 },
-    ['ltdgasoline'] = { label= 'Tạp hóa cây xăng', blipsprite = 52, blipscale = 0.8, blipcolor = 2 },
+    ['ltdgasoline'] = { label= 'Tạp hóa cây xăng', blipsprite = 52, blipscale = 0.8, blipcolor = 36 },
     ['robsliquor'] = { label= 'Tiệm rượu', blipsprite = 93, blipscale = 0.7, blipcolor = 1 },
     ['ammunation'] = { label= 'Cửa hàng vũ khí', blipsprite = 110, blipscale = 0.6, blipcolor = 0 },
     ['weedshop'] = { label= 'Tạp hóa bãi biển', blipsprite = 378, blipscale = 0.6, blipcolor = 1 },
@@ -201,21 +201,21 @@ Config.Locations = {
         ['useStock'] = true
     },
 
-    ['247supermarket2'] = {
-        ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(-3039.54, 584.38, 7.91, 17.27),
-        ['ped'] = 'mp_m_shopkeep_01',
-        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
-        ['radius'] = 1.5,
-        ['targetIcon'] = 'fas fa-shopping-basket',
-        ['targetLabel'] = 'Open Shop',
-        ['products'] = Config.Products['normal'],
-        ['showblip'] = true,
-        ['blipsprite'] = Config.Blips['normal']['blipsprite'],
-        ['blipscale'] = Config.Blips['normal']['blipscale'],
-        ['blipcolor'] = Config.Blips['normal']['blipcolor'],
-        ['delivery'] = vector4(-3047.95, 590.71, 7.62, 19.53)
-    },
+    --['247supermarket2'] = {
+    --    ['label'] = Config.Blips['normal']['label'],
+    --    ['coords'] = vector4(-3039.54, 584.38, 7.91, 17.27),
+    --    ['ped'] = 'mp_m_shopkeep_01',
+    --    ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+    --    ['radius'] = 1.5,
+    --    ['targetIcon'] = 'fas fa-shopping-basket',
+    --    ['targetLabel'] = 'Open Shop',
+    --    ['products'] = Config.Products['normal'],
+    --    ['showblip'] = true,
+    --    ['blipsprite'] = Config.Blips['normal']['blipsprite'],
+    --    ['blipscale'] = Config.Blips['normal']['blipscale'],
+    --    ['blipcolor'] = Config.Blips['normal']['blipcolor'],
+    --    ['delivery'] = vector4(-3047.95, 590.71, 7.62, 19.53)
+    --},
 
     ['247supermarket3'] = {
         ['label'] = Config.Blips['normal']['label'],
@@ -340,9 +340,9 @@ Config.Locations = {
         ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['normal'],
         ['showblip'] = true,
-        ['blipsprite'] = Config.Blips['normal']['blipsprite'],
-        ['blipscale'] = Config.Blips['normal']['blipscale'],
-        ['blipcolor'] = Config.Blips['normal']['blipcolor'],
+        ['blipsprite'] = Config.Blips['ltdgasoline']['blipsprite'],
+        ['blipscale'] = Config.Blips['ltdgasoline']['blipscale'],
+        ['blipcolor'] = Config.Blips['ltdgasoline']['blipcolor'],
         ['delivery'] = vector4(-40.51, -1747.45, 29.29, 326.39)
     },
 
@@ -356,9 +356,9 @@ Config.Locations = {
         ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['normal'],
         ['showblip'] = true,
-        ['blipsprite'] = Config.Blips['normal']['blipsprite'],
-        ['blipscale'] = Config.Blips['normal']['blipscale'],
-        ['blipcolor'] = Config.Blips['normal']['blipcolor'],
+        ['blipsprite'] = Config.Blips['ltdgasoline']['blipsprite'],
+        ['blipscale'] = Config.Blips['ltdgasoline']['blipscale'],
+        ['blipcolor'] = Config.Blips['ltdgasoline']['blipcolor'],
         ['delivery'] = vector4(-702.89, -917.44, 19.21, 181.96)
     },
 
@@ -372,9 +372,9 @@ Config.Locations = {
         ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['normal'],
         ['showblip'] = true,
-        ['blipsprite'] = Config.Blips['normal']['blipsprite'],
-        ['blipscale'] = Config.Blips['normal']['blipscale'],
-        ['blipcolor'] = Config.Blips['normal']['blipcolor'],
+        ['blipsprite'] = Config.Blips['ltdgasoline']['blipsprite'],
+        ['blipscale'] = Config.Blips['ltdgasoline']['blipscale'],
+        ['blipcolor'] = Config.Blips['ltdgasoline']['blipcolor'],
         ['delivery'] = vector4(-1829.29, 801.49, 138.41, 41.39)
     },
 
@@ -388,9 +388,9 @@ Config.Locations = {
         ['targetLabel'] = 'Open Open Shop',
         ['products'] = Config.Products['normal'],
         ['showblip'] = true,
-        ['blipsprite'] = Config.Blips['normal']['blipsprite'],
-        ['blipscale'] = Config.Blips['normal']['blipscale'],
-        ['blipcolor'] = Config.Blips['normal']['blipcolor'],
+        ['blipsprite'] = Config.Blips['ltdgasoline']['blipsprite'],
+        ['blipscale'] = Config.Blips['ltdgasoline']['blipscale'],
+        ['blipcolor'] = Config.Blips['ltdgasoline']['blipcolor'],
         ['delivery'] = vector4(1160.62, -312.06, 69.28, 3.77)
     },
 
@@ -404,9 +404,9 @@ Config.Locations = {
         ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['normal'],
         ['showblip'] = true,
-        ['blipsprite'] = Config.Blips['normal']['blipsprite'],
-        ['blipscale'] = Config.Blips['normal']['blipscale'],
-        ['blipcolor'] = Config.Blips['normal']['blipcolor'],
+        ['blipsprite'] = Config.Blips['ltdgasoline']['blipsprite'],
+        ['blipscale'] = Config.Blips['ltdgasoline']['blipscale'],
+        ['blipcolor'] = Config.Blips['ltdgasoline']['blipcolor'],
         ['delivery'] = vector4(1702.68, 4917.28, 42.22, 139.27)
     },
 

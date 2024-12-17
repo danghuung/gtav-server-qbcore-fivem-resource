@@ -163,9 +163,9 @@ Config.Garages = {
             vector4(396.55, -1643.93, 28.88, 321.91)
         },
         showBlip = true,
-        blipName = 'Depot Lot',
-        blipNumber = 68,
-        blipColor = 3,
+        blipName = 'Garage giam xe',
+        blipNumber = 524,
+        blipColor = 17,
         type = 'depot',
         category = Config.VehicleClass['car']
     },
