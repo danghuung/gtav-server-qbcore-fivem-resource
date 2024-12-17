@@ -78,6 +78,9 @@ const bankingApp = Vue.createApp({
                 }));
             });
             this.isBankOpen = true;
+            if (this.accounts.length > 0) {
+                this.selectedMoneyAccount = this.accounts[0];
+            }
         },
         openATM(bankData) {
             const playerData = bankData.playerData;
@@ -95,6 +98,9 @@ const bankingApp = Vue.createApp({
                 });
             });
             this.isATMOpen = true;
+            if (this.accounts.length > 0) {
+                this.selectedMoneyAccount = this.accounts[0];
+            }
         },
         pinPrompt(enteredPin) {
             const bankData = this.tempBankData;
@@ -112,7 +118,7 @@ const bankingApp = Vue.createApp({
                 .post("https://qb-banking/withdraw", {
                     accountName: this.selectedMoneyAccount.name,
                     amount: this.selectedMoneyAmount,
-                    reason: this.moneyReason,
+                    reason: "Rút tiền",
                 })
                 .then((response) => {
                     if (response.data.success) {
@@ -120,7 +126,7 @@ const bankingApp = Vue.createApp({
                         if (account) {
                             account.balance -= this.selectedMoneyAmount;
                             this.playerCash += this.selectedMoneyAmount;
-                            this.addStatement(this.accountNumber, this.selectedMoneyAccount.name, this.moneyReason, this.selectedMoneyAmount, "withdraw");
+                            this.addStatement(this.accountNumber, this.selectedMoneyAccount.name, "Rút tiền", this.selectedMoneyAmount, "withdraw");
                             this.selectedMoneyAmount = 0;
                             this.moneyReason = "";
                             this.selectedMoneyAccount = null;
@@ -139,7 +145,7 @@ const bankingApp = Vue.createApp({
                 .post("https://qb-banking/deposit", {
                     accountName: this.selectedMoneyAccount.name,
                     amount: this.selectedMoneyAmount,
-                    reason: this.moneyReason,
+                    reason: "Gửi tiền",
                 })
                 .then((response) => {
                     if (response.data.success) {
@@ -147,7 +153,7 @@ const bankingApp = Vue.createApp({
                         if (account) {
                             account.balance += this.selectedMoneyAmount;
                             this.playerCash -= this.selectedMoneyAmount;
-                            this.addStatement(this.accountNumber, this.selectedMoneyAccount.name, this.moneyReason, this.selectedMoneyAmount, "deposit");
+                            this.addStatement(this.accountNumber, this.selectedMoneyAccount.name, "Gửi tiền", this.selectedMoneyAmount, "deposit");
                             this.selectedMoneyAmount = 0;
                             this.moneyReason = "";
                             this.selectedMoneyAccount = null;
@@ -158,39 +164,39 @@ const bankingApp = Vue.createApp({
                     }
                 });
         },
-        internalTransfer() {
-            if (!this.internalFromAccount || !this.internalToAccount || this.internalTransferAmount <= 0) {
-                return;
-            }
-            axios
-                .post("https://qb-banking/internalTransfer", {
-                    fromAccountName: this.internalFromAccount.name,
-                    toAccountName: this.internalToAccount.name,
-                    amount: this.internalTransferAmount,
-                    reason: this.transferReason,
-                })
-                .then((response) => {
-                    if (response.data.success) {
-                        const fromAccount = this.accounts.find((acc) => acc.name === this.internalFromAccount.name);
-                        if (fromAccount) {
-                            fromAccount.balance -= this.internalTransferAmount;
-                        }
-                        const toAccount = this.accounts.find((acc) => acc.name === this.internalToAccount.name);
-                        if (toAccount) {
-                            toAccount.balance += this.internalTransferAmount;
-                        }
-                        this.addStatement(this.accountNumber, this.internalFromAccount.name, this.transferReason, this.internalTransferAmount, "withdraw");
-                        this.addStatement(this.accountNumber, this.internalToAccount.name, this.transferReason, this.internalTransferAmount, "deposit");
-                        this.internalTransferAmount = 0;
-                        this.transferReason = "";
-                        this.internalFromAccount = null;
-                        this.internalToAccount = null;
-                        this.addNotification(response.data.message, "success");
-                    } else {
-                        this.addNotification(response.data.message, "error");
-                    }
-                });
-        },
+        // internalTransfer() {
+        //     if (!this.internalFromAccount || !this.internalToAccount || this.internalTransferAmount <= 0) {
+        //         return;
+        //     }
+        //     axios
+        //         .post("https://qb-banking/internalTransfer", {
+        //             fromAccountName: this.internalFromAccount.name,
+        //             toAccountName: this.internalToAccount.name,
+        //             amount: this.internalTransferAmount,
+        //             reason: this.transferReason,
+        //         })
+        //         .then((response) => {
+        //             if (response.data.success) {
+        //                 const fromAccount = this.accounts.find((acc) => acc.name === this.internalFromAccount.name);
+        //                 if (fromAccount) {
+        //                     fromAccount.balance -= this.internalTransferAmount;
+        //                 }
+        //                 const toAccount = this.accounts.find((acc) => acc.name === this.internalToAccount.name);
+        //                 if (toAccount) {
+        //                     toAccount.balance += this.internalTransferAmount;
+        //                 }
+        //                 this.addStatement(this.accountNumber, this.internalFromAccount.name, this.transferReason, this.internalTransferAmount, "withdraw");
+        //                 this.addStatement(this.accountNumber, this.internalToAccount.name, this.transferReason, this.internalTransferAmount, "deposit");
+        //                 this.internalTransferAmount = 0;
+        //                 this.transferReason = "";
+        //                 this.internalFromAccount = null;
+        //                 this.internalToAccount = null;
+        //                 this.addNotification(response.data.message, "success");
+        //             } else {
+        //                 this.addNotification(response.data.message, "error");
+        //             }
+        //         });
+        // },
         externalTransfer() {
             if (!this.externalFromAccount || !this.externalAccountNumber || this.externalTransferAmount <= 0) {
                 return;

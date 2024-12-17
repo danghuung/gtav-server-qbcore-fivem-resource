@@ -201,7 +201,7 @@ if not Config.useTarget then
 
         combo:onPlayerInOut(function(isPointInside)
             if isPointInside then
-                exports['qb-core']:DrawText('Open Bank')
+                exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> để mở Bank')
                 CreateThread(function()
                     while isPointInside do
                         Wait(0)
