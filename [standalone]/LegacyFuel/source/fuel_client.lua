@@ -152,9 +152,9 @@ AddEventHandler('fuel:refuelFromPump', function(pumpObject, ped, vehicle)
 
 			DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.CancelFuelingPump .. extraString)
 			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 0.5, Round(currentFuel, 1) .. "%")
-			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 1.3, Round(currentCost, 1) ..   '~b~$~w~   cost')
+			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 1.3, Round(currentCost, 1) ..   '~b~$~w~   giá')
 		else
-			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 0.5, Config.Strings.CancelFuelingJerryCan .. "\nGas can: ~g~" .. Round(GetAmmoInPedWeapon(ped, 883325847) / 4500 * 100, 1) .. "% | Vehicle: " .. Round(currentFuel, 1) .. "%")
+			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 0.5, Config.Strings.CancelFuelingJerryCan .. "\nCan xăng: ~g~" .. Round(GetAmmoInPedWeapon(ped, 883325847) / 4500 * 100, 1) .. "% | Vehicle: " .. Round(currentFuel, 1) .. "%")
 		end
 
 		if not IsEntityPlayingAnim(ped, "timetable@gardener@filling_can", "gar_ig_5_filling_can", 3) then

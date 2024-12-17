@@ -48,12 +48,12 @@ function CreateBlip(coords)
 
 	SetBlipSprite(blip, 361)
 	SetBlipScale(blip, 0.6)
-	SetBlipColour(blip, 4)
+	SetBlipColour(blip, 1)
 	SetBlipDisplay(blip, 4)
 	SetBlipAsShortRange(blip, true)
 
 	BeginTextCommandSetBlipName("STRING")
-	AddTextComponentString("Gas Station")
+	AddTextComponentString("Trạm xăng")
 	EndTextCommandSetBlipName(blip)
 
 	return blip
