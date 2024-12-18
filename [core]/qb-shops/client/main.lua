@@ -12,7 +12,7 @@ local function createBlips()
 
     for store in pairs(Config.Locations) do
         if Config.Locations[store]['showblip'] then
-            local StoreBlip = AddBlipForCoord(Config.Locations[store]['coords']['x'], Config.Locations[store]['coords']['y'], Config.Locations[store]['coords']['z'])
+            local StoreBlip = AddBlipForCoord(Config.Locations[store]['coordsBlips']['x'], Config.Locations[store]['coordsBlips']['y'], Config.Locations[store]['coordsBlips']['z'])
             SetBlipSprite(StoreBlip, Config.Locations[store]['blipsprite'])
             SetBlipScale(StoreBlip, Config.Locations[store]['blipscale'])
             SetBlipDisplay(StoreBlip, 4)

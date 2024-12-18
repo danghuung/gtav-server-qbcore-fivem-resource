@@ -93,7 +93,7 @@ QBCore.Functions.CreateCallback('qb-mechanicjob:server:hasPermission', function(
 end)
 
 -- Events
-
+-- mo shop sua xe
 RegisterNetEvent('qb-mechanicjob:server:stash', function(data)
     local src = source
     local shopName = data.job

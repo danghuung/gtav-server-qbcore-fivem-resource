@@ -75,16 +75,16 @@ QBShared.Jobs = {
 		},
 	},
 	mechanic = {
-		label = 'LS Customs',
+		label = 'Cứu hộ',
 		type = 'mechanic',
 		defaultDuty = true,
 		offDutyPay = false,
 		grades = {
-			['0'] = { name = 'Recruit', payment = 50 },
-			['1'] = { name = 'Novice', payment = 75 },
-			['2'] = { name = 'Experienced', payment = 100 },
-			['3'] = { name = 'Advanced', payment = 125 },
-			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+			['0'] = { name = 'Học việc', payment = 50 },
+			['1'] = { name = 'Thợ chính', payment = 75 },
+			['2'] = { name = 'Thợ lâu năm', payment = 100 },
+			['3'] = { name = 'Phó giám đốc', payment = 125 },
+			['4'] = { name = 'Giám đốc', isboss = true, payment = 150 },
 		},
 	},
 	mechanic2 = {

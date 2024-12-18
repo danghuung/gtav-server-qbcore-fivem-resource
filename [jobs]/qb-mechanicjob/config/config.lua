@@ -30,13 +30,17 @@ Config.WearableParts = { -- unused if Config.UseWearableParts is false (feel fre
     fuel = { label = Lang:t('menu.fuel_repair'), maxValue = 100, repair = { plastic = 2 } },
 }
 
+Config.Blips = {
+    ['normal'] = { shopLabel = "Nơi độ xe", blipSprite = 72, blipColor = 17 }
+}
+
 Config.Shops = {
     mechanic = { -- City location
         managed = true,
-        shopLabel = 'LS Customs',
+        shopLabel = Config.Blips['normal']['shopLabel'],
         showBlip = true,
-        blipSprite = 72,
-        blipColor = 46,
+        blipSprite = Config.Blips['normal']['blipSprite'],
+        blipColor = Config.Blips['normal']['blipColor'],
         blipCoords = vector3(-346.02, -130.68, 39.02),
         duty = vector3(-348.18, -134.55, 39.59),
         stash = vector3(-346.02, -130.68, 39.02),
@@ -49,10 +53,10 @@ Config.Shops = {
     },
     mechanic2 = { -- Harmony Location
         managed = true,
-        shopLabel = 'LS Customs',
+        shopLabel = Config.Blips['normal']['shopLabel'],
         showBlip = true,
-        blipSprite = 72,
-        blipColor = 46,
+        blipSprite = Config.Blips['normal']['blipSprite'],
+        blipColor = Config.Blips['normal']['blipColor'],
         blipCoords = vector3(1174.93, 2639.45, 37.75),
         duty = vector3(1185.86, 2638.70, 38.93),
         stash = vector3(1175.11, 2635.375, 37.78),
@@ -63,28 +67,28 @@ Config.Shops = {
             list = { 'flatbed', 'towtruck', 'minivan', 'blista' }
         },
     },
-    mechanic3 = { -- Airport Location
-        managed = true,
-        shopLabel = 'LS Customs',
-        showBlip = true,
-        blipSprite = 72,
-        blipColor = 46,
-        blipCoords = vector3(-1154.92, -2006.41, 13.18),
-        duty = vector3(-1149.17, -1998.27, 13.91),
-        stash = vector3(-1146.40, -2002.05, 13.19),
-        paint = vector3(-1170.60, -2014.90, 13.23),
-        vehicles = {
-            withdraw = vector3(-1142.04, -1994.58, 13.26),
-            spawn = vector4(-1137.42, -1993.26, 13.14, 226.07),
-            list = { 'flatbed', 'towtruck', 'minivan', 'blista' }
-        },
-    },
+    --mechanic3 = { -- Airport Location
+    --    managed = true,
+    --    shopLabel = 'LS Customs',
+    --    showBlip = true,
+    --    blipSprite = 72,
+    --    blipColor = 46,
+    --    blipCoords = vector3(-1154.92, -2006.41, 13.18),
+    --    duty = vector3(-1149.17, -1998.27, 13.91),
+    --    stash = vector3(-1146.40, -2002.05, 13.19),
+    --    paint = vector3(-1170.60, -2014.90, 13.23),
+    --    vehicles = {
+    --        withdraw = vector3(-1142.04, -1994.58, 13.26),
+    --        spawn = vector4(-1137.42, -1993.26, 13.14, 226.07),
+    --        list = { 'flatbed', 'towtruck', 'minivan', 'blista' }
+    --    },
+    --},
     bennys = { -- Default Bennys Location
         managed = true,
-        shopLabel = 'Benny\'s Motorworks',
+        shopLabel = Config.Blips['normal']['shopLabel'],
         showBlip = true,
-        blipSprite = 72,
-        blipColor = 46,
+        blipSprite = Config.Blips['normal']['blipSprite'],
+        blipColor = Config.Blips['normal']['blipColor'],
         blipCoords = vector3(-211.73, -1325.28, 30.89),
         duty = vector3(-202.92, -1313.74, 31.70),
         stash = vector3(-199.58, -1314.65, 31.08),
@@ -97,10 +101,10 @@ Config.Shops = {
     },
     beeker = { -- Paleto Location
         managed = true,
-        shopLabel = 'Beeker\'s Garage',
+        shopLabel = Config.Blips['normal']['shopLabel'],
         showBlip = true,
-        blipSprite = 72,
-        blipColor = 46,
+        blipSprite = Config.Blips['normal']['blipSprite'],
+        blipColor = Config.Blips['normal']['blipColor'],
         blipCoords = vector3(109.95, 6627.34, 31.79),
         duty = vector3(101.74, 6620.04, 32.95),
         stash = vector3(107.00, 6629.88, 31.81),

@@ -110,14 +110,13 @@ RegisterNetEvent('qb-mechanicjob:client:SpawnListVehicle', function(data)
 end)
 
 -- Main Thread
-
 CreateThread(function()
     for k, v in pairs(Config.Shops) do
         if v.showBlip then
             local blip = AddBlipForCoord(v.blipCoords)
             SetBlipSprite(blip, v.blipSprite)
             SetBlipDisplay(blip, 4)
-            SetBlipScale(blip, 0.6)
+            SetBlipScale(blip, 0.8)
             SetBlipColour(blip, v.blipColor)
             SetBlipAsShortRange(blip, true)
             BeginTextCommandSetBlipName('STRING')
