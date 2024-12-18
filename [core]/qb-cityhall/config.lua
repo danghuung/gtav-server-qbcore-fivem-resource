@@ -34,7 +34,7 @@ Config.Cityhalls = {
                 metadata = 'driver'
             },
             ['weaponlicense'] = {
-                label = 'Giấy phép sử dụng súng',
+                label = 'Giấy phép sử dụng vũ khí',
                 cost = 50,
                 metadata = 'weapon'
             },

@@ -39,6 +39,7 @@ local Translations = {
         healthy = 'Bạn đã được chữa lành!',
         safe = 'Hospital Safe',
         pb_hospital = 'Bệnh Viện',
+        paleto_hospital = 'Bệnh viện Paleto',
         pain_message = ' %{limb} đang bị %{severity}',
         many_places = 'Bạn bị đau nghiêm trọng...',
         bleed_alert = 'Bạn bị %{bleedstate}',
@@ -127,7 +128,7 @@ local Translations = {
     }
 }
 
-if GetConvar('qb_locale', 'en') == 'vn' then
+if GetConvar('qb_locale', 'en') == 'vi' then
     Lang = Locale:new({
         phrases = Translations,
         warnOnMissing = true,

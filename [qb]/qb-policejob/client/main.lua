@@ -213,10 +213,15 @@ CreateThread(function()
     for i = 1, #Config.Locations['stations'] do
         local station = Config.Locations['stations'][i]
         local blip = AddBlipForCoord(station.coords.x, station.coords.y, station.coords.z)
-        SetBlipSprite(blip, 60)
+        if station.flag == 1 then
+            SetBlipSprite(blip, 252)
+            SetBlipColour(blip, 0)
+        else
+            SetBlipSprite(blip, 60)
+            SetBlipColour(blip, 29)
+        end
         SetBlipAsShortRange(blip, true)
-        SetBlipScale(blip, 0.8)
-        SetBlipColour(blip, 29)
+        SetBlipScale(blip, 0.99)
         BeginTextCommandSetBlipName('STRING')
         AddTextComponentSubstringPlayerName(station.label)
         EndTextCommandSetBlipName(blip)
