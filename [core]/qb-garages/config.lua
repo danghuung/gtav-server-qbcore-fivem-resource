@@ -59,12 +59,10 @@ Config.Garages = {
     -- Garage 9h tp
     hours9garage = {
         label = 'Hours 9 Garage',
-        takeVehicle = vector3(-1164.14, -740.67, 19.68),
-        depositVehicle = vector3(-1167.22, -731.28, 20.35),
+        takeVehicle = vector3(-1527.12, -447.03, 35.44),
+        depositVehicle = vector3(-1518.86, -440.4, 35.44),
         spawnPoint = {
-            vector4(-1186.2, -742.63, 20.11, 307.26),
-            vector4(-1202.34, -729.66, 21.15, 302.71),
-            vector4(-1163.96, -748.93, 19.25, 32.7)
+            vector4(-1530.2, -443.4, 35.38, 318.93)
         },
         showBlip = true,
         blipName = Config.Blips['public']['blipName'],
@@ -155,12 +153,12 @@ Config.Garages = {
     },
 
     -- Garage bai bien
-    beachgarage = {
-        label = 'Beach Garage',
-        takeVehicle = vector3(-3154.28, 1062.05, 20.67),
-        depositVehicle = vector3(-3147.8, 1072.88, 20.66),
+    fuelgarage = {
+        label = 'Fuel Garage',
+        takeVehicle = vector3(-2537.1, 2345.4, 33.06),
+        depositVehicle = vector3(-2538.5, 2334.48, 33.06),
         spawnPoint = {
-            vector4(-3157.13, 1067.91, 20.68, 261.47)
+            vector4(-2530.71, 2347.5, 33.06, 210.81)
         },
         showBlip = true,
         blipName = Config.Blips['public']['blipName'],
