@@ -99,18 +99,49 @@ local function CreateBlips(setloc)
 end
 
 local function CreateZone(index, garage, zoneType)
-    local zone = CircleZone:Create(garage.takeVehicle, 10.0, {
+    local takeZone = CircleZone:Create(garage.takeVehicle, 2.0, {
         name = zoneType .. '_' .. index,
         debugPoly = false,
         useZ = true,
         data = {
             indexgarage = index,
             type = garage.type,
-            category = garage.category
+            category = garage.category,
+            zoneType = "take"
         }
     })
 
-    return zone
+    local depositZone = CircleZone:Create(garage.depositVehicle, 2.5, {
+        name = zoneType .. '_' .. index,
+        debugPoly = false,
+        useZ = true,
+        data = {
+            indexgarage = index,
+            type = garage.type,
+            category = garage.category,
+            zoneType = "deposit"
+        }
+    })
+
+    return takeZone, depositZone
+end
+
+local function CreateCircleMarkerZone(coords, zoneDiameter, colorR, colorG, colorB, colorAlpha)
+    while true do
+        Wait(0)
+        local playerCoords = GetEntityCoords(PlayerPedId())
+        local distancePlayerToZone = #(playerCoords - coords)
+
+        local metadata = {
+            zoneDiameter = zoneDiameter,
+            zoneHeight = 0.5,
+            colorR = colorR,
+            colorG = colorG,
+            colorB = colorB,
+            colorAlpha = colorAlpha
+        }
+        exports['qb-core']:DrawCircleMarker(distancePlayerToZone, 20, coords, metadata)
+    end
 end
 
 local function CreateBlipsZones()
@@ -119,22 +150,34 @@ local function CreateBlipsZones()
     PlayerJob = PlayerData.job
 
     for index, garage in pairs(Config.Garages) do
-        local zone
+        local takeZone
+        local depositZone
         if garage.showBlip then
             CreateBlips(garage)
+            CreateThread(function()
+                CreateCircleMarkerZone(garage.takeVehicle, 3.5, 0, 255, 0, 155)
+            end)
+            CreateThread(function()
+                CreateCircleMarkerZone(garage.depositVehicle, 4.5, 255, 0, 0, 155)
+            end)
         end
-        if garage.type == 'job' and (PlayerJob.name == garage.job or PlayerJob.type == garage.jobType) then
-            zone = CreateZone(index, garage, 'job')
-        elseif garage.type == 'gang' and PlayerGang.name == garage.job then
-            zone = CreateZone(index, garage, 'gang')
-        elseif garage.type == 'depot' then
-            zone = CreateZone(index, garage, 'depot')
-        elseif garage.type == 'public' then
-            zone = CreateZone(index, garage, 'public')
+        local garageType = garage.type
+        if garageType == 'job' and (PlayerJob.name == garage.job or PlayerJob.type == garage.jobType) then
+            takeZone, depositZone = CreateZone(index, garage, garageType)
+        elseif garageType == 'gang' and PlayerGang.name == garage.job then
+            takeZone, depositZone = CreateZone(index, garage, garageType)
+        elseif garageType == 'depot' then
+            takeZone, depositZone = CreateZone(index, garage, garageType)
+        elseif garageType == 'public' then
+            takeZone, depositZone = CreateZone(index, garage, garageType)
         end
 
-        if zone then
-            garageZones[#garageZones + 1] = zone
+        if takeZone then
+            garageZones[#garageZones + 1] = takeZone
+        end
+
+        if depositZone then
+            garageZones[#garageZones + 1] = depositZone
         end
     end
 
@@ -154,25 +197,25 @@ local function CreateBlipsZones()
                                 QBCore.Functions.Notify(Lang:t('error.not_correct_type'), 'error', 3500)
                                 return
                             end
-                            DepositVehicle(currentVehicle, zone.data)
-                        else
+
+                            if zone.data.zoneType == 'deposit' then
+                                DepositVehicle(currentVehicle, zone.data)
+                            end
+                        elseif zone.data.zoneType == 'take' then
                             OpenGarageMenu(zone.data)
                         end
                     end
                 end
             end)
 
-            local displayText = Lang:t('info.car_e')
-            if zone.data.vehicle == 'sea' then
-                displayText = Lang:t('info.sea_e')
-            elseif zone.data.vehicle == 'air' then
-                displayText = Lang:t('info.air_e')
-            elseif zone.data.vehicle == 'rig' then
-                displayText = Lang:t('info.rig_e')
-            elseif zone.data.type == 'depot' then
-                displayText = Lang:t('info.depot_e')
+            local displayText = 'Nhấn <span class="key-start-action-input">[E]</span> '
+            if zone.data.zoneType == 'take' and GetVehiclePedIsUsing(PlayerPedId()) == 0 then
+                displayText = displayText .. Config.takeVehicleText
+                exports['qb-core']:DrawText(displayText, 'left')
+            elseif zone.data.zoneType == 'deposit' and GetVehiclePedIsUsing(PlayerPedId()) ~= 0 then
+                displayText = displayText .. Config.depositVehicleText
+                exports['qb-core']:DrawText(displayText, 'left')
             end
-            exports['qb-core']:DrawText(displayText, 'left')
         else
             listenForKey = false
             exports['qb-core']:HideText()

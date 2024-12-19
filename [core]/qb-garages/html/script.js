@@ -1,7 +1,7 @@
 window.addEventListener("message", function (event) {
     const data = event.data;
     if (data.action === "VehicleList") {
-        const garageLabel = data.garageLabel;
+        const garageLabel = "Garage của bạn";
         const vehicles = data.vehicles;
         populateVehicleList(garageLabel, vehicles);
         displayUI();
@@ -85,7 +85,7 @@ function populateVehicleList(garageLabel, vehicles) {
         if (v.balance && v.balance > 0) {
             financeInfo.textContent = "Balance: $" + v.balance.toFixed(0);
         } else {
-            financeInfo.textContent = "Paid Off";
+            financeInfo.textContent = "Sẵn sàng";
         }
 
         financeDriveContainer.appendChild(financeInfo);
@@ -103,10 +103,10 @@ function populateVehicleList(garageLabel, vehicles) {
                 } else if (v.type === "depot") {
                     status = "$" + v.depotPrice.toFixed(0);
                 } else {
-                    status = "Out";
+                    status = "Thất lạc";
                 }
             } else {
-                status = "Out";
+                status = "Thất lạc";
             }
         } else if (v.state === 1) {
             if (v.depotPrice && v.depotPrice > 0) {
@@ -117,26 +117,26 @@ function populateVehicleList(garageLabel, vehicles) {
                 } else if (v.type === "public") {
                     status = "Depot";
                 } else {
-                    status = "Drive";
+                    status = "Lấy xe";
                 }
             } else {
-                status = "Drive";
+                status = "Lấy xe";
             }
         } else if (v.state === 2) {
-            status = "Impound";
+            status = "Bị giam";
         }
 
         const driveButton = document.createElement("button");
         driveButton.classList.add("drive-btn");
         driveButton.textContent = status;
 
-        if (status === "Depot" || status === "Impound") {
+        if (status === "Depot" || status === "Bị giam") {
             driveButton.style.backgroundColor = "#222";
             driveButton.disabled = true;
         }
 
-        if (status === "Out") {
-            driveButton.style.backgroundColor = "#222";
+        if (status === "Thất lạc") {
+            driveButton.style.backgroundColor = "#FA1515FF";
         }
 
         driveButton.onclick = function () {
@@ -158,7 +158,7 @@ function populateVehicleList(garageLabel, vehicles) {
                 stats: vehicleStats,
             };
 
-            if (status === "Out") {
+            if (status === "Thất lạc") {
                 fetch("https://qb-garages/trackVehicle", {
                     method: "POST",
                     headers: {
@@ -222,12 +222,17 @@ function populateVehicleList(garageLabel, vehicles) {
             body: 1000,
         };
 
+        const labelVN = {
+            "fuel": "Xăng",
+            "engine": "Động cơ",
+            "body": "Thân xe"
+        };
         ["fuel", "engine", "body"].forEach((statLabel) => {
             const stat = document.createElement("div");
             stat.classList.add("stat");
             const label = document.createElement("div");
             label.classList.add("label");
-            label.textContent = statLabel.charAt(0).toUpperCase() + statLabel.slice(1);
+            label.textContent = labelVN[statLabel];
             stat.appendChild(label);
             const progressBar = document.createElement("div");
             progressBar.classList.add("progress-bar");
