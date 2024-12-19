@@ -64,7 +64,7 @@ const InventoryContainer = Vue.createApp({
                 errorSlot: null,
                 // Player Inventory
                 playerInventory: {},
-                inventoryLabel: "Inventory",
+                inventoryLabel: "Túi đồ",
                 totalWeight: 0,
                 // Other inventory
                 otherInventory: {},

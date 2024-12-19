@@ -32,9 +32,9 @@ div {
     align-content: flex-start;
     position: absolute;
     top: 50vh;
-    left: 14vw;
-    width: 28vw;
-    height: 47.16vh;
+    left: 10vw;
+    width: 35vw;
+    height: 58.95vh;
     overflow-x: hidden;
     overflow-y: scroll;
     transform: translateY(-50%);
@@ -63,9 +63,9 @@ div {
     align-content: flex-start;
     position: absolute;
     top: 50vh;
-    right: 14vw;
-    width: 28vw;
-    height: 47.16vh;
+    right: 10vw;
+    width: 35vw;
+    height: 58.95vh;
     overflow-x: hidden;
     overflow-y: scroll;
     transform: translateY(-50%);
@@ -74,7 +74,7 @@ div {
 .other-inventory-header {
     box-sizing: border-box;
     position: absolute;
-    top: 20.8vh;
+    top: 13vh;
     right: 14.1vw;
     width: 27.9vw;
     height: fit-content;
@@ -96,7 +96,7 @@ div {
 .centered-inventory-header {
     box-sizing: border-box;
     position: absolute;
-    top: 20.8vh;
+    top: 13vh;
     width: 27.9vw;
     left: 50vw;
     transform: translateX(-50%);
@@ -131,9 +131,10 @@ div {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(20% - 2px);
-    height: 10vh;
-    background-color: rgba(0, 0, 0, 0.3);
+    width: calc(20% - 2px);;
+    height: 11.5vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    border-radius: 6px;
 }
 
 .item-slot-img {
@@ -147,7 +148,7 @@ div {
 }
 
 .item-slot-img img {
-    width: 50%;
+    width: 80%;
     height: auto;
 }
 
@@ -169,7 +170,7 @@ div {
 }
 
 .item-slot-amount {
-    font-size: 0.7vh;
+    font-size: 1.5vh;
     color: white;
     position: absolute;
     top: 5px;
@@ -182,8 +183,8 @@ div {
 }
 
 .item-price {
-    font-size: 0.7vh;
-    color: white;
+    font-size: 1.2vh;
+    color: #68f422;
     position: absolute;
     top: 5px;
     left: 5px;
@@ -191,7 +192,7 @@ div {
     height: 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 
 .item-slot-label {
@@ -344,7 +345,7 @@ div {
 
 .context-menu {
     position: absolute;
-    font-size: 1vh;
+    font-size: 1.5vh;
     border-radius: 4px;
     background-color: #2c2c2c;
     border: 1px solid #000;
@@ -372,7 +373,7 @@ div {
     position: absolute;
     top: 0;
     left: 100%;
-    font-size: 0.9vh;
+    font-size: 1.3vh;
     background-color: #2c2c2c;
     border: 1px solid #000;
     border-radius: 4px;
@@ -382,6 +383,7 @@ div {
     display: none;
     box-shadow: 0 0 0 1px rgb(255 255 255 / 8%), 0 2px 2px rgb(0 0 0 / 3%), 0 4px 4px rgb(0 0 0 / 4%), 0 10px 8px rgb(0 0 0 / 5%), 0 15px 15px rgb(0 0 0 / 6%), 0 30px 30px rgb(0 0 0 / 7%), 0 70px 65px rgb(0 0 0 / 9%);
     z-index: 1001;
+    width: 100%;
 }
 
 .context-menu li:hover .submenu {
@@ -402,11 +404,11 @@ div {
 
 .input-container {
     position: absolute;
-    width: 4%;
+    width: 7%;
     top: calc(26% + ((47.16% - 3vh) / 2));
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #2c2c2c;
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 4px;
     padding: 10px;
     display: flex;
@@ -425,7 +427,7 @@ div {
     border: none;
     background-color: transparent;
     color: white;
-    font-size: 1vh;
+    font-size: 1.5vh;
     width: 85%;
     outline: none;
     text-align: center;
