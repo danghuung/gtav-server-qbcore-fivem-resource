@@ -35,37 +35,43 @@ body {
 }
 
 #progress-label {
-    font-size: 1.3vh;
+    font-size: 1.4vh;
     line-height: 4vh;
-    position: relative;
+    position: absolute;
     color: #ffffff;
     z-index: 10;
     font-weight: bold;
+    top: 50%; /* Canh giữa theo chiều dọc */
+    left: 50%; /* Canh giữa theo chiều ngang */
+    transform: translate(-50%, -50%); /* Cân chỉnh chính xác */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #progress-percentage {
-    font-size: 1.3vh;
+    font-size: 2vh;
     line-height: 4vh;
-    position: relative;
+    display: none;
     color: #ffffff;
     z-index: 10;
     font-weight: bold;
 }
 
 .progress-bar-container {
-    background: rgba(0, 0, 0, 0.246);
-    height: 0.5vh;
+    background: rgba(0, 0, 0, 0.24);
+    height: 4vh;
     position: relative;
     display: block;
     border-radius: 2px;
 }
 
 #progress-bar {
-    background-color: #dc143c;
+    background-color: #0070ff;
     width: 0%;
-    height: 0.5vh;
+    height: 4vh;
     border-radius: 2px;
     transition: width 0.3s;
     transition-timing-function: ease-out;
-    box-shadow: 0 0 10px rgba(220, 20, 60, 0.6);
+    box-shadow: 0 0 10px rgba(55, 224, 255, 0.6);
 }
