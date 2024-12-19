@@ -25,7 +25,7 @@ Config.Blips = {
 
 Config.Garages = {
     -- Garage tttp
-    downtowngarage = {
+    downTownGarage = {
         label = 'Downtown Garage',
         takeVehicle = vector3(231.32, -795.79, 30.58),
         depositVehicle = vector3(218.2, -782.53, 30.81),
@@ -41,7 +41,7 @@ Config.Garages = {
     },
 
     -- Garage 6h tp
-    hours6garage = {
+    hours6Garage = {
         label = 'Hours 6 Garage',
         takeVehicle = vector3(443.94, -1959.45, 22.95),
         depositVehicle = vector3(437.16, -1957.27, 23.06),
@@ -57,7 +57,7 @@ Config.Garages = {
     },
 
     -- Garage 9h tp
-    hours9garage = {
+    hours9Garage = {
         label = 'Hours 9 Garage',
         takeVehicle = vector3(-1527.12, -447.03, 35.44),
         depositVehicle = vector3(-1518.86, -440.4, 35.44),
@@ -73,7 +73,7 @@ Config.Garages = {
     },
 
     -- Garage 12h tp
-    hours12towngarage = {
+    hours12TownGarage = {
         label = 'Hours 12 Town Garage',
         takeVehicle = vector3(666.71, 625.05, 129.12),
         depositVehicle = vector3(655.58, 632.17, 128.91),
@@ -89,7 +89,7 @@ Config.Garages = {
     },
 
         -- Garage 3h
-    hours3towngarage = {
+    hours3TownGarage = {
         label = 'Hours 3 Town Garage',
         takeVehicle = vector3(1029.91, -764.08, 57.99),
         depositVehicle = vector3(1040.52, -774.84, 58.02),
@@ -105,7 +105,7 @@ Config.Garages = {
     },
 
     -- Garage tt samac 1
-    desert1garage = {
+    desert1Garage = {
         label = 'Desert 1 Garage',
         takeVehicle = vector3(1131.22, 2663.04, 38.0),
         depositVehicle = vector3(1120.03, 2669.7, 38.05),
@@ -121,7 +121,7 @@ Config.Garages = {
     },
 
     -- Garage tt samac 2
-    desert2garage = {
+    desert2Garage = {
         label = 'Desert 2 Garage',
         takeVehicle = vector3(1737.37, 3712.47, 34.13),
         depositVehicle = vector3(1720.7, 3716.46, 34.17),
@@ -137,7 +137,7 @@ Config.Garages = {
     },
 
     -- Garage 12h
-    hours12garage = {
+    hours12Garage = {
         label = 'Hours 12 Garage',
         takeVehicle = vector3(122.96, 6620.9, 31.83),
         depositVehicle = vector3(121.41, 6604.61, 31.93),
@@ -153,12 +153,28 @@ Config.Garages = {
     },
 
     -- Garage bai bien
-    fuelgarage = {
+    fuelGarage = {
         label = 'Fuel Garage',
         takeVehicle = vector3(-2537.1, 2345.4, 33.06),
         depositVehicle = vector3(-2538.5, 2334.48, 33.06),
         spawnPoint = {
             vector4(-2530.71, 2347.5, 33.06, 210.81)
+        },
+        showBlip = true,
+        blipName = Config.Blips['public']['blipName'],
+        blipNumber = Config.Blips['public']['blipNumber'],
+        blipColor = Config.Blips['public']['blipColor'],
+        type = 'public',
+        category = Config.VehicleClass['car']
+    },
+
+    -- cityhall
+    cityhallGarage = {
+        label = 'City Hall Garage',
+        takeVehicle = vector3(-305.09, -987.93, 31.08),
+        depositVehicle = vector3(-312.3, -972.84, 31.08),
+        spawnPoint = {
+            vector4(-302.36, -979.91, 30.43, 247.67)
         },
         showBlip = true,
         blipName = Config.Blips['public']['blipName'],
