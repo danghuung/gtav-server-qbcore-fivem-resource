@@ -27,10 +27,10 @@ Config.Garages = {
     -- Garage tttp
     downTownGarage = {
         label = 'Downtown Garage',
-        takeVehicle = vector3(231.32, -795.79, 30.58),
+        takeVehicle = vector3(217.45, -810.78, 30.69),
         depositVehicle = vector3(218.2, -782.53, 30.81),
         spawnPoint = {
-            vector4(231.31, -795.76, 30.58, 161.29)
+            vector4(229.6, -798.3, 29.88, 161.89)
         },
         showBlip = true,
         blipName = Config.Blips['public']['blipName'],
@@ -43,10 +43,10 @@ Config.Garages = {
     -- Garage 6h tp
     hours6Garage = {
         label = 'Hours 6 Garage',
-        takeVehicle = vector3(443.94, -1959.45, 22.95),
-        depositVehicle = vector3(437.16, -1957.27, 23.06),
+        takeVehicle = vector3(459.22, -1969.82, 23.01),
+        depositVehicle = vector3(438.33, -1959.78, 23.03),
         spawnPoint = {
-            vector4(449.41, -1961.48, 22.97, 174.21)
+            vector4(453.8, -1966.62, 22.26, 183.67)
         },
         showBlip = true,
         blipName = Config.Blips['public']['blipName'],
@@ -60,7 +60,7 @@ Config.Garages = {
     hours9Garage = {
         label = 'Hours 9 Garage',
         takeVehicle = vector3(-1527.12, -447.03, 35.44),
-        depositVehicle = vector3(-1518.86, -440.4, 35.44),
+        depositVehicle = vector3(-1517.52, -433.67, 35.44),
         spawnPoint = {
             vector4(-1530.2, -443.4, 35.38, 318.93)
         },
@@ -171,10 +171,26 @@ Config.Garages = {
     -- cityhall
     cityhallGarage = {
         label = 'City Hall Garage',
-        takeVehicle = vector3(-305.09, -987.93, 31.08),
-        depositVehicle = vector3(-312.3, -972.84, 31.08),
+        takeVehicle = vector3(-274.37, -1014.8, 30.38),
+        depositVehicle = vector3(-284.71, -1008.73, 30.38),
         spawnPoint = {
-            vector4(-302.36, -979.91, 30.43, 247.67)
+            vector4(-277.04, -1008.06, 30.39, 246.33)
+        },
+        showBlip = true,
+        blipName = Config.Blips['public']['blipName'],
+        blipNumber = Config.Blips['public']['blipNumber'],
+        blipColor = Config.Blips['public']['blipColor'],
+        type = 'public',
+        category = Config.VehicleClass['car']
+    },
+
+    -- airport garage xe
+    airportCarGarage = {
+        label = 'City Hall Garage',
+        takeVehicle = vector3(-973.51, -2928.14, 13.95),
+        depositVehicle = vector3(-962.7, -2934.79, 13.95),
+        spawnPoint = {
+            vector4(-974.7, -2935.45, 13.95, 152.15)
         },
         showBlip = true,
         blipName = Config.Blips['public']['blipName'],

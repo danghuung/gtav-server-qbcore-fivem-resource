@@ -1,6 +1,6 @@
 local Translations = {
     error = {
-        no_vehicles = 'Không có phương tiện nào ở vị trí này!',
+        no_vehicles = 'Bạn hiện không có phương tiện nào để mở garage này',
         not_depot = 'Xe của bạn không có trong Garage',
         not_owned = 'Không thể cất chiếc xe này',
         not_correct_type = 'Bạn không thể cất loại xe này ở đây',

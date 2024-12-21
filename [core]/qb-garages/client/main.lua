@@ -99,7 +99,7 @@ local function CreateBlips(setloc)
 end
 
 local function CreateZone(index, garage, zoneType)
-    local takeZone = CircleZone:Create(garage.takeVehicle, 2.0, {
+    local takeZone = CircleZone:Create(garage.takeVehicle, 1.5, {
         name = zoneType .. '_' .. index,
         debugPoly = false,
         useZ = true,
@@ -155,7 +155,7 @@ local function CreateBlipsZones()
         if garage.showBlip then
             CreateBlips(garage)
             CreateThread(function()
-                CreateCircleMarkerZone(garage.takeVehicle, 3.5, 0, 255, 0, 155)
+                CreateCircleMarkerZone(garage.takeVehicle, 2.5, 0, 255, 0, 155)
             end)
             CreateThread(function()
                 CreateCircleMarkerZone(garage.depositVehicle, 4.5, 255, 0, 0, 155)
