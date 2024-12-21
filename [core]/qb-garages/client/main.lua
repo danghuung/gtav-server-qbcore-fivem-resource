@@ -123,7 +123,19 @@ local function CreateZone(index, garage, zoneType)
         }
     })
 
-    return takeZone, depositZone
+    local depotZone = CircleZone:Create(garage.depotVehicle, 1.25, {
+        name = zoneType .. '_' .. index,
+        debugPoly = false,
+        useZ = true,
+        data = {
+            indexgarage = index,
+            type = garage.type,
+            category = garage.category,
+            zoneType = "depot"
+        }
+    })
+
+    return takeZone, depositZone, depotZone
 end
 
 local function CreateCircleMarkerZone(coords, zoneDiameter, colorR, colorG, colorB, colorAlpha)
@@ -152,6 +164,7 @@ local function CreateBlipsZones()
     for index, garage in pairs(Config.Garages) do
         local takeZone
         local depositZone
+        local depotZone
         if garage.showBlip then
             CreateBlips(garage)
             CreateThread(function()
@@ -160,16 +173,19 @@ local function CreateBlipsZones()
             CreateThread(function()
                 CreateCircleMarkerZone(garage.depositVehicle, 4.5, 255, 0, 0, 155)
             end)
+            CreateThread(function()
+                CreateCircleMarkerZone(garage.depotVehicle, 2.0, 255, 255, 0, 155)
+            end)
         end
         local garageType = garage.type
         if garageType == 'job' and (PlayerJob.name == garage.job or PlayerJob.type == garage.jobType) then
-            takeZone, depositZone = CreateZone(index, garage, garageType)
+            takeZone, depositZone, depotZone = CreateZone(index, garage, garageType)
         elseif garageType == 'gang' and PlayerGang.name == garage.job then
-            takeZone, depositZone = CreateZone(index, garage, garageType)
+            takeZone, depositZone, depotZone = CreateZone(index, garage, garageType)
         elseif garageType == 'depot' then
-            takeZone, depositZone = CreateZone(index, garage, garageType)
+            takeZone, depositZone, depotZone = CreateZone(index, garage, garageType)
         elseif garageType == 'public' then
-            takeZone, depositZone = CreateZone(index, garage, garageType)
+            takeZone, depositZone, depotZone = CreateZone(index, garage, garageType)
         end
 
         if takeZone then
@@ -178,6 +194,10 @@ local function CreateBlipsZones()
 
         if depositZone then
             garageZones[#garageZones + 1] = depositZone
+        end
+
+        if depotZone then
+            garageZones[#garageZones + 1] = depotZone
         end
     end
 
@@ -201,7 +221,7 @@ local function CreateBlipsZones()
                             if zone.data.zoneType == 'deposit' then
                                 DepositVehicle(currentVehicle, zone.data)
                             end
-                        elseif zone.data.zoneType == 'take' then
+                        elseif zone.data.zoneType == 'take' or zone.data.zoneType == 'depot' then
                             OpenGarageMenu(zone.data)
                         end
                     end
@@ -214,6 +234,9 @@ local function CreateBlipsZones()
                 exports['qb-core']:DrawText(displayText, 'left')
             elseif zone.data.zoneType == 'deposit' and GetVehiclePedIsUsing(PlayerPedId()) ~= 0 then
                 displayText = displayText .. Config.depositVehicleText
+                exports['qb-core']:DrawText(displayText, 'left')
+            elseif zone.data.zoneType == 'depot' and GetVehiclePedIsUsing(PlayerPedId()) == 0 then
+                displayText = displayText .. Config.depotVehicleText
                 exports['qb-core']:DrawText(displayText, 'left')
             end
         else

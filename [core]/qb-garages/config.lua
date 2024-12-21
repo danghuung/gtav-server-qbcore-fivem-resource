@@ -7,6 +7,7 @@ Config.FuelResource = 'LegacyFuel' -- supports any that has a GetFuel() and SetF
 Config.Warp = true                 -- true == warp player into vehicle | false == vehicle spawns without warping
 Config.takeVehicleText = 'lấy phương tiện'
 Config.depositVehicleText = 'cất phương tiện'
+Config.depotVehicleText = 'chuộc phương tiện'
 
 -- https://docs.fivem.net/natives/?_0x29439776AAA00A62
 Config.VehicleClass = {
@@ -27,8 +28,9 @@ Config.Garages = {
     -- Garage tttp
     downTownGarage = {
         label = 'Downtown Garage',
-        takeVehicle = vector3(217.45, -810.78, 30.69),
+        takeVehicle = vector3(219.05, -811.13, 30.65),
         depositVehicle = vector3(218.2, -782.53, 30.81),
+        depotVehicle = vector3(213.75, -809.25, 31.01),
         spawnPoint = {
             vector4(229.6, -798.3, 29.88, 161.89)
         },
@@ -45,6 +47,7 @@ Config.Garages = {
         label = 'Hours 6 Garage',
         takeVehicle = vector3(459.22, -1969.82, 23.01),
         depositVehicle = vector3(438.33, -1959.78, 23.03),
+        depotVehicle = vector3(446.83, -1972.23, 23.18),
         spawnPoint = {
             vector4(453.8, -1966.62, 22.26, 183.67)
         },
@@ -61,6 +64,7 @@ Config.Garages = {
         label = 'Hours 9 Garage',
         takeVehicle = vector3(-1527.12, -447.03, 35.44),
         depositVehicle = vector3(-1517.52, -433.67, 35.44),
+        depotVehicle = vector3(-1526.24, -454.12, 35.59),
         spawnPoint = {
             vector4(-1530.2, -443.4, 35.38, 318.93)
         },
@@ -77,6 +81,7 @@ Config.Garages = {
         label = 'Hours 12 Town Garage',
         takeVehicle = vector3(666.71, 625.05, 129.12),
         depositVehicle = vector3(655.58, 632.17, 128.91),
+        depotVehicle = vector3(663.18, 612.98, 129.1),
         spawnPoint = {
             vector4(660.6, 623.49, 128.91, 67.9)
         },
@@ -91,8 +96,9 @@ Config.Garages = {
         -- Garage 3h
     hours3TownGarage = {
         label = 'Hours 3 Town Garage',
-        takeVehicle = vector3(1029.91, -764.08, 57.99),
+        takeVehicle = vector3(1032.42, -760.91, 57.89),
         depositVehicle = vector3(1040.52, -774.84, 58.02),
+        depotVehicle = vector3(1034.08, -766.38, 58.0),
         spawnPoint = {
             vector4(1023.69, -762.17, 57.98, 314.02)
         },
@@ -109,6 +115,7 @@ Config.Garages = {
         label = 'Desert 1 Garage',
         takeVehicle = vector3(1131.22, 2663.04, 38.0),
         depositVehicle = vector3(1120.03, 2669.7, 38.05),
+        depotVehicle = vector3(1137.94, 2666.52, 38.03),
         spawnPoint = {
             vector4(1129.28, 2670.38, 38.06, 358.44)
         },
@@ -123,10 +130,11 @@ Config.Garages = {
     -- Garage tt samac 2
     desert2Garage = {
         label = 'Desert 2 Garage',
-        takeVehicle = vector3(1737.37, 3712.47, 34.13),
-        depositVehicle = vector3(1720.7, 3716.46, 34.17),
+        takeVehicle = vector3(1744.73, 3714.01, 34.11),
+        depositVehicle = vector3(1728.85, 3721.6, 34.06),
+        depotVehicle = vector3(1737.54, 3709.93, 34.14),
         spawnPoint = {
-            vector4(1741.81, 3716.38, 34.08, 27.64)
+            vector4(1739.03, 3724.16, 33.27, 23.05)
         },
         showBlip = true,
         blipName = Config.Blips['public']['blipName'],
@@ -141,6 +149,7 @@ Config.Garages = {
         label = 'Hours 12 Garage',
         takeVehicle = vector3(122.96, 6620.9, 31.83),
         depositVehicle = vector3(121.41, 6604.61, 31.93),
+        depotVehicle = vector3(106.49, 6612.08, 31.97),
         spawnPoint = {
             vector4(121.57, 6615.76, 31.84, 230.98)
         },
@@ -155,8 +164,9 @@ Config.Garages = {
     -- Garage bai bien
     fuelGarage = {
         label = 'Fuel Garage',
-        takeVehicle = vector3(-2537.1, 2345.4, 33.06),
+        takeVehicle = vector3(-2538.15, 2347.49, 33.06),
         depositVehicle = vector3(-2538.5, 2334.48, 33.06),
+        depotVehicle = vector3(-2548.02, 2348.85, 33.06),
         spawnPoint = {
             vector4(-2530.71, 2347.5, 33.06, 210.81)
         },
@@ -173,6 +183,7 @@ Config.Garages = {
         label = 'City Hall Garage',
         takeVehicle = vector3(-274.37, -1014.8, 30.38),
         depositVehicle = vector3(-284.71, -1008.73, 30.38),
+        depotVehicle = vector3(-278.01, -1028.12, 30.38),
         spawnPoint = {
             vector4(-277.04, -1008.06, 30.39, 246.33)
         },
@@ -189,6 +200,7 @@ Config.Garages = {
         label = 'City Hall Garage',
         takeVehicle = vector3(-973.51, -2928.14, 13.95),
         depositVehicle = vector3(-962.7, -2934.79, 13.95),
+        depotVehicle = vector3(-969.54, -2916.35, 13.95),
         spawnPoint = {
             vector4(-974.7, -2935.45, 13.95, 152.15)
         },
@@ -205,6 +217,7 @@ Config.Garages = {
         label = 'Airport Town',
         takeVehicle = vector3(-1037.01, -2990.52, 13.95),
         depositVehicle = vector3(-1049.52, -2982.88, 13.95),
+        depotVehicle = vector3(-1037.43, -3009.22, 13.95),
         spawnPoint = {
             vector4(-1028.53, -2975.4, 13.95, 61.87)
         },
@@ -221,6 +234,7 @@ Config.Garages = {
         label = 'Airport Desert',
         takeVehicle = vector3(1724.86, 3273.74, 41.15),
         depositVehicle = vector3(1730.2, 3261.38, 41.2),
+        depotVehicle = vector3(1726.08, 3289.96, 41.19),
         spawnPoint = {
             vector4(1716.5, 3253.72, 41.13, 103.23)
         },
