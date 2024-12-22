@@ -14,7 +14,7 @@ Config.Blips = {
     ['ltdgasoline'] = { label= 'Tạp hóa cây xăng', blipsprite = 52, blipscale = 0.8, blipcolor = 36 },
     ['robsliquor'] = { label= 'Tiệm rượu', blipsprite = 93, blipscale = 0.7, blipcolor = 1 },
     ['ammunation'] = { label= 'Cửa hàng vũ khí', blipsprite = 110, blipscale = 0.6, blipcolor = 0 },
-    ['weedshop'] = { label= 'Tạp hóa bãi biển', blipsprite = 378, blipscale = 0.6, blipcolor = 1 },
+    ['weedshop'] = { label= 'Tạp hóa bãi biển', blipsprite = 378, blipscale = 0.8, blipcolor = 1 },
     ['mechanic'] = { label= 'Trung tâm cứu hộ', blipsprite = 446, blipscale = 0.99, blipcolor = 46 },
     ['hardware'] = { label= 'Cửa hàng dụng cụ', blipsprite = 402, blipscale = 0.8, blipcolor = 0 }
 }
@@ -186,8 +186,8 @@ Config.Locations = {
     -- 24/7 Locations
     ['247supermarket'] = {
         ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(24.47, -1346.62, 29.5, 271.66),
-        ['coordsBlips'] = vector4(24.47, -1346.62, 29.5, 271.66),
+        ['coords'] = vector4(26.12, -1346.95, 29.5, 92.15),
+        ['coordsBlips'] = vector4(27.66, -1347.66, 29.5, 65.65),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
         ['radius'] = 1.5,
@@ -220,7 +220,7 @@ Config.Locations = {
 
     ['247supermarket3'] = {
         ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(-3242.97, 1000.01, 12.83, 357.57),
+        ['coords'] = vector4(-3242.65, 1001.7, 12.83, 24.32),
         ['coordsBlips'] = vector4(-3242.97, 1000.01, 12.83, 357.57),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -237,7 +237,7 @@ Config.Locations = {
 
     ['247supermarket4'] = {
         ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(1728.07, 6415.63, 35.04, 242.95),
+        ['coords'] = vector4(1729.54, 6414.63, 35.04, 39.08),
         ['coordsBlips'] = vector4(1728.07, 6415.63, 35.04, 242.95),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -254,7 +254,7 @@ Config.Locations = {
 
     ['247supermarket5'] = {
         ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(1959.82, 3740.48, 32.34, 301.57),
+        ['coords'] = vector4(1961.39, 3741.06, 32.34, 106.42),
         ['coordsBlips'] = vector4(1959.82, 3740.48, 32.34, 301.57),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -271,7 +271,7 @@ Config.Locations = {
 
     ['247supermarket6'] = {
         ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(549.13, 2670.85, 42.16, 99.39),
+        ['coords'] = vector4(547.26, 2670.79, 42.16, 100.54),
         ['coordsBlips'] = vector4(549.13, 2670.85, 42.16, 99.39),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -288,7 +288,7 @@ Config.Locations = {
 
     ['247supermarket7'] = {
         ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(2677.47, 3279.76, 55.24, 335.08),
+        ['coords'] = vector4(2678.65, 3281.12, 55.24, 148.69),
         ['coordsBlips'] = vector4(2677.47, 3279.76, 55.24, 335.08),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -305,7 +305,7 @@ Config.Locations = {
 
     ['247supermarket8'] = {
         ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(2556.66, 380.84, 108.62, 356.67),
+        ['coords'] = vector4(2556.98, 382.56, 108.62, 193.82),
         ['coordsBlips'] = vector4(2556.66, 380.84, 108.62, 356.67),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -322,7 +322,7 @@ Config.Locations = {
 
     ['247supermarket9'] = {
         ['label'] = Config.Blips['normal']['label'],
-        ['coords'] = vector4(372.66, 326.98, 103.57, 253.73),
+        ['coords'] = vector4(374.24, 326.21, 103.57, 229.55),
         ['coordsBlips'] = vector4(372.66, 326.98, 103.57, 253.73),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -340,7 +340,7 @@ Config.Locations = {
     -- LTD Gasoline Locationsd
     ['ltdgasoline'] = {
         ['label'] = Config.Blips['ltdgasoline']['label'],
-        ['coords'] = vector4(-47.02, -1758.23, 29.42, 45.05),
+        ['coords'] = vector4(-48.41, -1757.27, 29.42, 44.33),
         ['coordsBlips'] = vector4(-47.02, -1758.23, 29.42, 45.05),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -357,7 +357,7 @@ Config.Locations = {
 
     ['ltdgasoline2'] = {
         ['label'] = Config.Blips['ltdgasoline']['label'],
-        ['coords'] = vector4(-706.06, -913.97, 19.22, 88.04),
+        ['coords'] = vector4(-707.8, -914.43, 19.22, 267.14),
         ['coordsBlips'] = vector4(-706.06, -913.97, 19.22, 88.04),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -374,7 +374,7 @@ Config.Locations = {
 
     ['ltdgasoline3'] = {
         ['label'] = Config.Blips['ltdgasoline']['label'],
-        ['coords'] = vector4(-1820.02, 794.03, 138.09, 135.45),
+        ['coords'] = vector4(-1820.78, 792.59, 138.12, 128.31),
         ['coordsBlips'] = vector4(-1820.02, 794.03, 138.09, 135.45),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -391,7 +391,7 @@ Config.Locations = {
 
     ['ltdgasoline4'] = {
         ['label'] = Config.Blips['ltdgasoline']['label'],
-        ['coords'] = vector4(1164.71, -322.94, 69.21, 101.72),
+        ['coords'] = vector4(1163.34, -323.8, 69.21, 88.07),
         ['coordsBlips'] = vector4(1164.71, -322.94, 69.21, 101.72),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -408,7 +408,7 @@ Config.Locations = {
 
     ['ltdgasoline5'] = {
         ['label'] = Config.Blips['ltdgasoline']['label'],
-        ['coords'] = vector4(1697.87, 4922.96, 42.06, 324.71),
+        ['coords'] = vector4(1698.16, 4924.77, 42.06, 141.28),
         ['coordsBlips'] = vector4(1697.87, 4922.96, 42.06, 324.71),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -426,7 +426,7 @@ Config.Locations = {
     -- Rob's Liquor Locations
     ['robsliquor'] = {
         ['label'] = Config.Blips['robsliquor']['label'],
-        ['coords'] = vector4(-1221.58, -908.15, 12.33, 35.49),
+        ['coords'] = vector4(-1223.45, -906.92, 12.33, 219.3),
         ['coordsBlips'] = vector4(-1221.58, -908.15, 12.33, 35.49),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -443,7 +443,7 @@ Config.Locations = {
 
     ['robsliquor2'] = {
         ['label'] = Config.Blips['robsliquor']['label'],
-        ['coords'] = vector4(-1486.59, -377.68, 40.16, 139.51),
+        ['coords'] = vector4(-1487.32, -379.54, 40.16, 149.36),
         ['coordsBlips'] = vector4(-1486.59, -377.68, 40.16, 139.51),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -460,7 +460,7 @@ Config.Locations = {
 
     ['robsliquor3'] = {
         ['label'] = Config.Blips['robsliquor']['label'],
-        ['coords'] = vector4(-2966.39, 391.42, 15.04, 87.48),
+        ['coords'] = vector4(-2968.37, 390.74, 15.04, 285.87),
         ['coordsBlips'] = vector4(-2966.39, 391.42, 15.04, 87.48),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -477,7 +477,7 @@ Config.Locations = {
 
     ['robsliquor4'] = {
         ['label'] = Config.Blips['robsliquor']['label'],
-        ['coords'] = vector4(1165.17, 2710.88, 38.16, 179.43),
+        ['coords'] = vector4(1166.18, 2708.86, 38.16, 3.81),
         ['coordsBlips'] = vector4(1165.17, 2710.88, 38.16, 179.43),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -494,7 +494,7 @@ Config.Locations = {
 
     ['robsliquor5'] = {
         ['label'] = Config.Blips['robsliquor']['label'],
-        ['coords'] = vector4(1134.2, -982.91, 46.42, 277.24),
+        ['coords'] = vector4(1136.12, -981.72, 46.42, 283.11),
         ['coordsBlips'] = vector4(1134.2, -982.91, 46.42, 277.24),
         ['ped'] = 'mp_m_shopkeep_01',
         ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
@@ -743,7 +743,7 @@ Config.Locations = {
     -- Weedshop Locations
     ['weedshop'] = {
         ['label'] = Config.Blips['weedshop']['label'],
-        ['coords'] = vector4(-1172.2, -1572.02, 4.66, 126.61),
+        ['coords'] = vector4(-1172.61, -1572.25, 4.66, 312.4),
         ['coordsBlips'] = vector4(-1172.2, -1572.02, 4.66, 126.61),
         ['ped'] = 'a_m_y_hippy_01',
         ['scenario'] = 'WORLD_HUMAN_AA_SMOKE',
@@ -822,7 +822,7 @@ Config.Locations = {
 
     ['mechanic2'] = {
         ['label'] = Config.Blips['mechanic']['label'],
-        ['coords'] = vector4(1189.36, 2641.00, 38.44, 0),
+        ['coords'] = vector4(1188.25, 2641.69, 38.4, 276.67),
         ['coordsBlips'] = vector4(1185.09, 2653.29, 37.82, 38.47),
         ['products'] = Config.Products['mechanic'],
         ['delivery'] = vector4(1189.9852, 2651.1873, 37.8351, 317.7137),
@@ -835,7 +835,7 @@ Config.Locations = {
 
     ['mechanic'] = {
         ['label'] = Config.Blips['mechanic']['label'],
-        ['coords'] = vector4(-343.66, -140.78, 39.02, 0),
+        ['coords'] = vector4(-345.16, -132.08, 39.01, 77.83),
         ['coordsBlips'] = vector4(-371.99, -124.11, 38.69, 77.52),
         ['products'] = Config.Products['mechanic'],
         ['delivery'] = vector4(-354.3936, -128.2882, 39.4307, 251.4931),
@@ -896,6 +896,10 @@ Config.Locations = {
         ['targetIcon'] = 'fas fa-clipboard',
         ['targetLabel'] = 'Open Shop',
         ['products'] = Config.Products['blackmarket'],
-        ['delivery'] = vector4(-428.6385, -1728.1962, 19.7838, 75.6646)
+        ['delivery'] = vector4(-428.6385, -1728.1962, 19.7838, 75.6646),
+        ['showblip'] = true,
+        ['blipsprite'] = 605,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 1,
     },
 }

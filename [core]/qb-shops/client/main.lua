@@ -41,62 +41,62 @@ local function listenForControl()
     end)
 end
 
-local function createPeds()
-    if pedSpawned then return end
-    local defaultTargetIcon = 'fas fa-shopping-cart'
-    local defaultTargetLabel = 'Open Shop'
-
-    for k, v in pairs(Config.Locations) do
-        if not v.ped then
-            exports['qb-target']:AddCircleZone(k, vector3(v.coords.x, v.coords.y, v.coords.z), 0.5, {
-                name = k,
-                debugPoly = false,
-                useZ = true
-            }, {
-                options = {
-                    {
-                        label = v.targetLabel or defaultTargetLabel,
-                        icon = v.targetIcon or defaultTargetIcon,
-                        item = v.requiredItem,
-                        type = 'server',
-                        event = 'qb-shops:server:openShop',
-                        shop = k,
-                        job = v.requiredJob,
-                        gang = v.requiredGang
-                    }
-                },
-                distance = 2.0
-            })
-        else
-            local current = type(v['ped']) == 'number' and v['ped'] or joaat(v['ped'])
-            RequestModel(current)
-            while not HasModelLoaded(current) do Wait(0) end
-            ShopPed[k] = CreatePed(0, current, v['coords'].x, v['coords'].y, v['coords'].z - 1, v['coords'].w, false, false)
-            TaskStartScenarioInPlace(ShopPed[k], v['scenario'], 0, true)
-            FreezeEntityPosition(ShopPed[k], true)
-            SetEntityInvincible(ShopPed[k], true)
-            SetBlockingOfNonTemporaryEvents(ShopPed[k], true)
-            if Config.UseTarget then
-                exports['qb-target']:AddTargetEntity(ShopPed[k], {
-                    options = {
-                        {
-                            label = v.targetLabel or defaultTargetLabel,
-                            icon = v.targetIcon or defaultTargetIcon,
-                            item = v.requiredItem,
-                            type = 'server',
-                            event = 'qb-shops:server:openShop',
-                            shop = k,
-                            job = v.requiredJob,
-                            gang = v.requiredGang
-                        }
-                    },
-                    distance = 2.0
-                })
-            end
-        end
-    end
-    pedSpawned = true
-end
+--local function createPeds()
+--    if pedSpawned then return end
+--    local defaultTargetIcon = 'fas fa-shopping-cart'
+--    local defaultTargetLabel = 'Open Shop'
+--
+--    for k, v in pairs(Config.Locations) do
+--        if not v.ped then
+--            exports['qb-target']:AddCircleZone(k, vector3(v.coords.x, v.coords.y, v.coords.z), 0.5, {
+--                name = k,
+--                debugPoly = false,
+--                useZ = true
+--            }, {
+--                options = {
+--                    {
+--                        label = v.targetLabel or defaultTargetLabel,
+--                        icon = v.targetIcon or defaultTargetIcon,
+--                        item = v.requiredItem,
+--                        type = 'server',
+--                        event = 'qb-shops:server:openShop',
+--                        shop = k,
+--                        job = v.requiredJob,
+--                        gang = v.requiredGang
+--                    }
+--                },
+--                distance = 2.0
+--            })
+--        else
+--            local current = type(v['ped']) == 'number' and v['ped'] or joaat(v['ped'])
+--            RequestModel(current)
+--            while not HasModelLoaded(current) do Wait(0) end
+--            ShopPed[k] = CreatePed(0, current, v['coords'].x, v['coords'].y, v['coords'].z - 1, v['coords'].w, false, false)
+--            TaskStartScenarioInPlace(ShopPed[k], v['scenario'], 0, true)
+--            FreezeEntityPosition(ShopPed[k], true)
+--            SetEntityInvincible(ShopPed[k], true)
+--            SetBlockingOfNonTemporaryEvents(ShopPed[k], true)
+--            if Config.UseTarget then
+--                exports['qb-target']:AddTargetEntity(ShopPed[k], {
+--                    options = {
+--                        {
+--                            label = v.targetLabel or defaultTargetLabel,
+--                            icon = v.targetIcon or defaultTargetIcon,
+--                            item = v.requiredItem,
+--                            type = 'server',
+--                            event = 'qb-shops:server:openShop',
+--                            shop = k,
+--                            job = v.requiredJob,
+--                            gang = v.requiredGang
+--                        }
+--                    },
+--                    distance = 2.0
+--                })
+--            end
+--        end
+--    end
+--    pedSpawned = true
+--end
 
 local function deletePeds()
     if not pedSpawned then return end
@@ -161,7 +161,7 @@ end
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     playerData = QBCore.Functions.GetPlayerData()
     createBlips()
-    createPeds()
+    --createPeds()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
@@ -177,13 +177,31 @@ AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
     playerData = QBCore.Functions.GetPlayerData()
     createBlips()
-    createPeds()
+    --createPeds()
 end)
 
 AddEventHandler('onResourceStop', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
     deletePeds()
 end)
+
+local function CreateCircleMarkerZone(coords, zoneDiameter, colorR, colorG, colorB, colorAlpha)
+    while true do
+        Wait(0)
+        local playerCoords = GetEntityCoords(PlayerPedId())
+        local distancePlayerToZone = #(playerCoords - coords)
+
+        local metadata = {
+            zoneDiameter = zoneDiameter,
+            zoneHeight = 0.5,
+            colorR = colorR,
+            colorG = colorG,
+            colorB = colorB,
+            colorAlpha = colorAlpha
+        }
+        exports['qb-core']:DrawCircleMarker(distancePlayerToZone, 20, coords, metadata)
+    end
+end
 
 -- Threads
 if not Config.UseTarget then
@@ -194,6 +212,11 @@ if not Config.UseTarget then
                 debugPoly = false,
                 name = shop,
             })
+
+            CreateThread(function()
+                local coords = vector3(Config.Locations[shop]['coords']['x'], Config.Locations[shop]['coords']['y'], Config.Locations[shop]['coords']['z'])
+                CreateCircleMarkerZone(coords, 1.25, 0, 255, 0, 155)
+            end)
         end
 
         local combo = ComboZone:Create(NewZones, { name = 'RandomZOneName', debugPoly = false })
