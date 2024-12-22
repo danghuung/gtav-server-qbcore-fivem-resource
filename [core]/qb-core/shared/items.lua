@@ -323,7 +323,7 @@ QBShared.Items = {
 
     -- Medication
     firstaid                     = { name = 'firstaid', label = 'First Aid', weight = 2500, type = 'item', image = 'firstaid.png', unique = false, useable = true, shouldClose = true, description = 'You can use this First Aid kit to get people back on their feet' },
-    bandage                      = { name = 'bandage', label = 'Bandage', weight = 0, type = 'item', image = 'bandage.png', unique = false, useable = true, shouldClose = true, description = 'A bandage works every time' },
+    bandage                      = { name = 'bandage', label = 'Băng gạc', weight = 0, type = 'item', image = 'bandage.png', unique = false, useable = true, shouldClose = true, description = 'Sơ cứu vết thương' },
     ifaks                        = { name = 'ifaks', label = 'ifaks', weight = 200, type = 'item', image = 'ifaks.png', unique = false, useable = true, shouldClose = true, description = 'ifaks for healing and a complete stress remover.' },
     painkillers                  = { name = 'painkillers', label = 'Painkillers', weight = 0, type = 'item', image = 'painkillers.png', unique = false, useable = true, shouldClose = true, description = 'For pain you can\'t stand anymore, take this pill that\'d make you feel great again' },
     walkstick                    = { name = 'walkstick', label = 'Walking Stick', weight = 1000, type = 'item', image = 'walkstick.png', unique = false, useable = true, shouldClose = true, description = 'Walking stick for ya\'ll grannies out there.. HAHA' },
