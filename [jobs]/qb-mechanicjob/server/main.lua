@@ -202,7 +202,7 @@ end)
 
 RegisterNetEvent('qb-mechanicjob:server:SaveVehicleProps', function(vehicleProps)
     if IsVehicleOwned(vehicleProps.plate) then
-        MySQL.update('UPDATE player_vehicles SET mods = ? WHERE plate = ?', { json.encode(vehicleProps), vehicleProps.plate })
+        MySQL.update('UPDATE player_vehicles SET mods = ?, depotprice = ?, balance = ? WHERE plate = ?', { json.encode(vehicleProps), 0, 0, vehicleProps.plate })
     end
 end)
 

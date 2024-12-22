@@ -129,7 +129,7 @@ local function CreateZone(index, garage, zoneType)
         useZ = true,
         data = {
             indexgarage = index,
-            type = garage.type,
+            type = "depot",
             category = garage.category,
             zoneType = "depot"
         }
@@ -353,6 +353,7 @@ local function CheckPlate(vehicle, plateToSet)
 end
 
 RegisterNetEvent('qb-garages:client:takeOutGarage', function(data)
+    local depotPrice = data.depotPrice
     QBCore.Functions.TriggerCallback('qb-garages:server:IsSpawnOk', function(spawn)
         if spawn then
             local location = GetSpawnPoint(data.garage)
@@ -363,7 +364,7 @@ RegisterNetEvent('qb-garages:client:takeOutGarage', function(data)
                 Citizen.Await(CheckPlate(veh, vehPlate))
                 QBCore.Functions.SetVehicleProperties(veh, properties)
                 exports[Config.FuelResource]:SetFuel(veh, data.stats.fuel)
-                TriggerServerEvent('qb-garages:server:updateVehicleState', 0, vehPlate)
+                TriggerServerEvent('qb-garages:server:updateVehicleState', 0, 1200, vehPlate)
                 TriggerEvent('vehiclekeys:client:SetOwner', vehPlate)
                 if Config.Warp then TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1) end
                 if Config.VisuallyDamageCars then doCarDamage(veh, data.stats, properties) end
@@ -372,7 +373,7 @@ RegisterNetEvent('qb-garages:client:takeOutGarage', function(data)
         else
             QBCore.Functions.Notify(Lang:t('error.not_depot'), 'error', 5000)
         end
-    end, data.plate, data.type)
+    end, data.plate, depotPrice)
 end)
 
 -- Housing calls

@@ -83,7 +83,8 @@ function populateVehicleList(garageLabel, vehicles) {
         financeInfo.classList.add("finance-info");
 
         if (v.balance && v.balance > 0) {
-            financeInfo.textContent = "Balance: $" + v.balance.toFixed(0);
+            financeInfo.textContent = "Trả phí $";
+            financeInfo.classList.add("finance-info-depot");
         } else {
             financeInfo.textContent = "Sẵn sàng";
         }
@@ -99,14 +100,14 @@ function populateVehicleList(garageLabel, vehicles) {
                 isDepotPrice = true;
 
                 if (v.type === "public") {
-                    status = "Depot";
-                } else if (v.type === "depot") {
-                    status = "$" + v.depotPrice.toFixed(0);
-                } else {
                     status = "Thất lạc";
+                } else if (v.type === "depot") {
+                    status = "Lấy xe: $" + v.depotPrice.toFixed(0);
+                } else {
+                    status = "Không xác định";
                 }
             } else {
-                status = "Thất lạc";
+                status = "Không xác định";
             }
         } else if (v.state === 1) {
             if (v.depotPrice && v.depotPrice > 0) {
@@ -115,7 +116,7 @@ function populateVehicleList(garageLabel, vehicles) {
                 if (v.type === "depot") {
                     status = "$" + v.depotPrice.toFixed(0);
                 } else if (v.type === "public") {
-                    status = "Depot";
+                    status = "Thất lạc";
                 } else {
                     status = "Lấy xe";
                 }
@@ -130,7 +131,7 @@ function populateVehicleList(garageLabel, vehicles) {
         driveButton.classList.add("drive-btn");
         driveButton.textContent = status;
 
-        if (status === "Depot" || status === "Bị giam") {
+        if (status === "Thất lạc" || status === "Bị giam") {
             driveButton.style.backgroundColor = "#222";
             driveButton.disabled = true;
         }

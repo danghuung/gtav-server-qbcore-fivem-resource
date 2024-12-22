@@ -164,6 +164,10 @@ div {
     padding: 4px 8px;
 }
 
+.finance-info-depot {
+    background-color: #ff7d14;
+}
+
 .drive-btn {
     font-family: "Roboto", sans-serif;
     color: #ffffff;
