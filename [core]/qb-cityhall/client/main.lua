@@ -208,12 +208,69 @@ local function deletePeds()
     pedsSpawned = false
 end
 
+local function CreateCircleMarkerZone(coords, zoneDiameter, colorR, colorG, colorB, colorAlpha)
+    while true do
+        Wait(0)
+        local playerCoords = GetEntityCoords(PlayerPedId())
+        local distancePlayerToZone = #(playerCoords - coords)
+
+        local metadata = {
+            zoneDiameter = zoneDiameter,
+            zoneHeight = 0.5,
+            colorR = colorR,
+            colorG = colorG,
+            colorB = colorB,
+            colorAlpha = colorAlpha
+        }
+        exports['qb-core']:DrawCircleMarker(distancePlayerToZone, 15, coords, metadata)
+    end
+end
+
+local function createZone()
+    for _, v in pairs(Config.Peds) do
+        CreateThread(function()
+            CreateCircleMarkerZone(v.coords.xyz, 2.5, 0, 255, 0, 155)
+        end)
+        local options = v.zoneOptions
+        if options then
+            local zone = BoxZone:Create(v.coords.xyz, options.length, options.width, {
+                name = "zone_cityhall_",
+                heading = v.coords.w,
+                debugPoly = false,
+                minZ = v.coords.z - 3.0,
+                maxZ = v.coords.z + 2.0
+            })
+            zone:onPlayerInOut(function(inside)
+                if isLoggedIn and closestCityhall and closestDrivingSchool then
+                    if inside then
+                        if v.drivingschool then
+                            inRangeDrivingSchool = true
+                            exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> để học bằng lái')
+                        elseif v.cityhall then
+                            inRangeCityhall = true
+                            exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[E]</span> để mở')
+                        end
+                    else
+                        exports['qb-core']:HideText()
+                        if v.drivingschool then
+                            inRangeDrivingSchool = false
+                        elseif v.cityhall then
+                            inRangeCityhall = false
+                        end
+                    end
+                end
+            end)
+        end
+
+    end
+end
 
 -- Events
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
     isLoggedIn = true
-    spawnPeds()
+    --spawnPeds()
+    createZone()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
@@ -310,7 +367,8 @@ end)
 
 CreateThread(function()
     initBlips()
-    spawnPeds()
+    --spawnPeds()
+    createZone()
     if not Config.UseTarget then
         while true do
             local sleep = 1000

@@ -3,13 +3,13 @@ Config = Config or {}
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
 
 Config.AvailableJobs = {                                     -- Only used when not using qb-jobs.
-    ['trucker'] = { ['label'] = 'Lái xe tải', ['isManaged'] = false },
-    ['taxi'] = { ['label'] = 'Taxi', ['isManaged'] = false },
-    ['tow'] = { ['label'] = 'Lái Xe kéo', ['isManaged'] = false },
-    ['reporter'] = { ['label'] = 'Phóng viên', ['isManaged'] = false },
-    ['garbage'] = { ['label'] = 'Nhặt rác', ['isManaged'] = false },
-    ['bus'] = { ['label'] = 'Lái xe buýt', ['isManaged'] = false },
-    ['hotdog'] = { ['label'] = 'Bán xúc xích', ['isManaged'] = false }
+    --['trucker'] = { ['label'] = 'Lái xe tải', ['isManaged'] = false },
+    --['taxi'] = { ['label'] = 'Taxi', ['isManaged'] = false },
+    --['tow'] = { ['label'] = 'Lái Xe kéo', ['isManaged'] = false },
+    --['reporter'] = { ['label'] = 'Phóng viên', ['isManaged'] = false },
+    ['garbage'] = { ['label'] = 'Lao Công', ['isManaged'] = false },
+    --['bus'] = { ['label'] = 'Lái xe buýt', ['isManaged'] = false },
+    --['hotdog'] = { ['label'] = 'Bán xúc xích', ['isManaged'] = false }
 }
 
 Config.Cityhalls = {
@@ -25,19 +25,19 @@ Config.Cityhalls = {
         },
         licenses = {
             ['id_card'] = {
-                label = 'CCCD',
+                label = 'Mua CCCD',
                 cost = 50,
             },
-            ['driver_license'] = {
-                label = 'Giấy phép lái xe',
-                cost = 50,
-                metadata = 'driver'
-            },
-            ['weaponlicense'] = {
-                label = 'Giấy phép sử dụng vũ khí',
-                cost = 50,
-                metadata = 'weapon'
-            },
+            --['driver_license'] = {
+            --    label = 'Giấy phép lái xe',
+            --    cost = 50,
+            --    metadata = 'driver'
+            --},
+            --['weaponlicense'] = {
+            --    label = 'Giấy phép sử dụng vũ khí',
+            --    cost = 50,
+            --    metadata = 'weapon'
+            --},
         }
     },
 }
@@ -65,7 +65,7 @@ Config.Peds = {
     -- Cityhall Ped
     {
         model = 'csb_stripper_01',
-        coords = vec4(-262.79, -964.18, 30.22, 181.71),
+        coords = vector4(-265.0, -964.45, 31.22, 353.07),
         scenario = 'WORLD_HUMAN_AA_SMOKE',
         cityhall = true,
         zoneOptions = { -- Used for when UseTarget is false
@@ -77,7 +77,7 @@ Config.Peds = {
     -- Driving School Ped
     {
         model = 'csb_stripper_01',
-        coords = vec4(240.91, -1379.2, 32.74, 138.96),
+        coords = vector4(240.44, -1379.62, 33.74, 315.31),
         scenario = 'WORLD_HUMAN_STAND_MOBILE',
         drivingschool = true,
         zoneOptions = { -- Used for when UseTarget is false
