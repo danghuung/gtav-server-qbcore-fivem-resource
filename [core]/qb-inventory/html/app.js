@@ -5,8 +5,8 @@ const InventoryContainer = Vue.createApp({
     computed: {
         playerWeight() {
             const weight = Object.values(this.playerInventory).reduce((total, item) => {
-                if (item && item.weight !== undefined && item.amount !== undefined) {
-                    return total + item.weight * item.amount;
+                if (item && item.amount !== undefined) {
+                    return total + item.amount;
                 }
                 return total;
             }, 0);
@@ -14,8 +14,8 @@ const InventoryContainer = Vue.createApp({
         },
         otherInventoryWeight() {
             const weight = Object.values(this.otherInventory).reduce((total, item) => {
-                if (item && item.weight !== undefined && item.amount !== undefined) {
-                    return total + item.weight * item.amount;
+                if (item && item.amount !== undefined) {
+                    return total + item.amount;
                 }
                 return total;
             }, 0);
@@ -249,7 +249,7 @@ const InventoryContainer = Vue.createApp({
                 return;
             }
 
-            const totalWeightAfterTransfer = this.otherInventoryWeight + sourceItem.weight * amountToTransfer;
+            const totalWeightAfterTransfer = this.otherInventoryWeight + amountToTransfer;
             if (totalWeightAfterTransfer > this.otherInventoryMaxWeight) {
                 this.inventoryError(item.slot);
                 return;
@@ -451,14 +451,15 @@ const InventoryContainer = Vue.createApp({
 
                 if (targetInventoryType !== this.dragStartInventoryType) {
                     if (targetInventoryType == "other") {
-                        const totalWeightAfterTransfer = this.otherInventoryWeight + sourceItem.weight * amountToTransfer;
+                        const totalWeightAfterTransfer = this.otherInventoryWeight + amountToTransfer;
                         if (totalWeightAfterTransfer > this.otherInventoryMaxWeight) {
                             throw new Error("Insufficient weight capacity in target inventory");
                         }
                     }
                     else if (targetInventoryType == "player") {
-                        const totalWeightAfterTransfer = this.playerWeight + sourceItem.weight * amountToTransfer;
-                        if (totalWeightAfterTransfer > this.maxWeight) {
+                        const maxAmount = this.playerInventory[targetSlot].maxamount === undefined ? 21 : this.playerInventory[targetSlot].maxamount;
+                        const totalWeightAfterTransfer = this.playerInventory[targetSlot].amount + amountToTransfer;
+                        if (totalWeightAfterTransfer > maxAmount) {
                             throw new Error("Insufficient weight capacity in player inventory");
                         }
                     }
@@ -511,10 +512,10 @@ const InventoryContainer = Vue.createApp({
                     const sourceInventory = this.getInventoryByType("other");
                     const targetInventory = this.getInventoryByType("player");
                     const amountToTransfer = transferAmount !== null ? transferAmount : sourceItem.amount;
-                    if (sourceItem.amount < amountToTransfer) {
-                        this.inventoryError(sourceSlot);
-                        return;
-                    }
+                    // if (sourceItem.amount < amountToTransfer) {
+                    //     this.inventoryError(sourceSlot);
+                    //     return;
+                    // }
                     let targetItem = targetInventory[targetSlot];
                     if (!targetItem || targetItem.name !== sourceItem.name) {
                         let foundSlot = Object.keys(targetInventory).find((slot) => targetInventory[slot] && targetInventory[slot].name === sourceItem.name);
@@ -536,10 +537,10 @@ const InventoryContainer = Vue.createApp({
                     } else {
                         targetItem.amount += amountToTransfer;
                     }
-                    sourceItem.amount -= amountToTransfer;
-                    if (sourceItem.amount <= 0) {
-                        delete sourceInventory[sourceSlot];
-                    }
+                    // sourceItem.amount -= amountToTransfer;
+                    // if (sourceItem.amount <= 0) {
+                    //     delete sourceInventory[sourceSlot];
+                    // }
                 } else {
                     this.inventoryError(sourceSlot);
                 }
@@ -755,10 +756,11 @@ const InventoryContainer = Vue.createApp({
             }
         },
         showItemNotification(itemData) {
+            const timeout = itemData.type === "sell" ? 600 : 2000
             const newNotification = {
                 text: itemData.item.label,
                 image: "images/" + itemData.item.image,
-                type: itemData.type === "add" ? "Nhận" : itemData.type === "use" ? "Sử Dụng" : "Đã Xóa",
+                type: itemData.type === "add" ? "Nhận" : itemData.type === "use" ? "Sử Dụng" : itemData.type === "sell" ? "Đã Bán" : "Đã Xóa",
                 amount: itemData.amount || 1
             };
 
@@ -768,7 +770,7 @@ const InventoryContainer = Vue.createApp({
             // Xóa thông báo cũ sau 2.5 giây
             setTimeout(() => {
                 this.notifications.shift();
-            }, 2500);
+            }, timeout);
         },
         showRequiredItem(data) {
             if (data.toggle) {

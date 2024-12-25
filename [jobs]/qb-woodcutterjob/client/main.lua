@@ -48,6 +48,23 @@ local function CreateZone(index, location)
     return zone
 end
 
+local function DisplayText(zoneType)
+    local displayText = 'Nhấn <span class="key-start-action-input">[E]</span> '
+    if zoneType == 'takeWood' then
+        displayText = displayText .. Config.takeWoodText
+        exports['qb-core']:DrawText(displayText, 'left')
+    elseif zoneType == 'cutWood' then
+        displayText = displayText .. Config.cutWoodText
+        exports['qb-core']:DrawText(displayText, 'left')
+    elseif zoneType == 'plyWood' then
+        displayText = displayText .. Config.plyWoodText
+        exports['qb-core']:DrawText(displayText, 'left')
+    elseif zoneType == 'sellWood' then
+        displayText = displayText .. Config.sellWoodText
+        exports['qb-core']:DrawText(displayText, 'left')
+    end
+end
+
 local function CreateBlipsZones()
     PlayerData = QBCore.Functions.GetPlayerData()
     PlayerJob = PlayerData.job
@@ -71,22 +88,8 @@ local function CreateBlipsZones()
         local comboZone = ComboZone:Create(woodZone, { name = 'woodZoneCombo', debugPoly = false })
         comboZone:onPlayerInOut(function(isPointInside, _, zone)
             if isPointInside then
-
                 local zoneType = zone.data.zoneType
-                local displayText = 'Nhấn <span class="key-start-action-input">[E]</span> '
-                if zoneType == 'takeWood' then
-                    displayText = displayText .. Config.takeWoodText
-                    exports['qb-core']:DrawText(displayText, 'left')
-                elseif zoneType == 'cutWood' then
-                    displayText = displayText .. Config.cutWoodText
-                    exports['qb-core']:DrawText(displayText, 'left')
-                elseif zoneType == 'plyWood' then
-                    displayText = displayText .. Config.plyWoodText
-                    exports['qb-core']:DrawText(displayText, 'left')
-                elseif zoneType == 'sellWood' then
-                    displayText = displayText .. Config.sellWoodText
-                    exports['qb-core']:DrawText(displayText, 'left')
-                end
+                DisplayText(zoneType)
 
                 listenForKey = true
                 local isProcessing = false
@@ -137,10 +140,14 @@ local function CreateBlipsZones()
                                                     QBCore.Functions.Notify(Config.Messages.storeFull, 'error', 2500)
                                                     isProcessing = false
                                                 end
-                                            end, Config.Items.wood['name'], Config.maxSlotWood, Config.Comparison.lessOrEquals)
+                                            end, Config.Items.wood['name'], Config.Items.wood['maxamount'], Config.Comparison.lessOrEquals)
                                         end
                                     end
-                                    Wait(3000)
+                                    if zoneType == 'sellWood' then
+                                        Wait(1000)
+                                    else
+                                        Wait(3000)
+                                    end
                                 end
                                 isProcessing = false
                             end)

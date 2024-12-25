@@ -352,7 +352,7 @@ QBCore.Functions.CreateCallback('qb-inventory:server:attemptPurchase', function(
     end
 
     if not CanAddItem(source, itemInfo.name, amount) then
-        TriggerClientEvent('QBCore:Notify', source, 'Cannot hold item', 'error')
+        TriggerClientEvent('QBCore:Notify', source, 'Đã đạt số lượng tối đa', 'error')
         cb(false)
         return
     end
@@ -363,7 +363,7 @@ QBCore.Functions.CreateCallback('qb-inventory:server:attemptPurchase', function(
         TriggerEvent('qb-shops:server:UpdateShopItems', shop, itemInfo, amount)
         cb(true)
     else
-        TriggerClientEvent('QBCore:Notify', source, 'You do not have enough money', 'error')
+        TriggerClientEvent('QBCore:Notify', source, 'Bạn không có đủ tiền', 'error')
         cb(false)
     end
 end)
@@ -499,11 +499,17 @@ RegisterNetEvent('qb-inventory:server:SetInventoryData', function(fromInventory,
 
         if toItem and fromItem.name == toItem.name then
             if RemoveItem(fromId, fromItem.name, toAmount, fromSlot, 'stacked item') then
-                AddItem(toId, toItem.name, toAmount, toSlot, toItem.info, 'stacked item')
+                if not AddItem(toId, toItem.name, toAmount, toSlot, toItem.info, 'stacked item') then
+                    TriggerClientEvent('QBCore:Notify', source, 'Kho đã đầy...', 'error')
+                    AddItem(fromId, fromItem.name, toAmount, fromSlot, fromItem.info, 'rollback: stacked item')
+                end
             end
         elseif not toItem and toAmount < fromAmount then
             if RemoveItem(fromId, fromItem.name, toAmount, fromSlot, 'split item') then
-                AddItem(toId, fromItem.name, toAmount, toSlot, fromItem.info, 'split item')
+                if not AddItem(toId, fromItem.name, toAmount, toSlot, fromItem.info, 'split item') then
+                    TriggerClientEvent('QBCore:Notify', source, 'Kho đã đầy...', 'error')
+                    AddItem(fromId, fromItem.name, toAmount, fromSlot, fromItem.info, 'rollback: split item')
+                end
             end
         else
             if toItem then
@@ -516,7 +522,10 @@ RegisterNetEvent('qb-inventory:server:SetInventoryData', function(fromInventory,
                 end
             else
                 if RemoveItem(fromId, fromItem.name, toAmount, fromSlot, 'moved item') then
-                    AddItem(toId, fromItem.name, toAmount, toSlot, fromItem.info, 'moved item')
+                    if not AddItem(toId, fromItem.name, toAmount, toSlot, fromItem.info, 'moved item') then
+                        TriggerClientEvent('QBCore:Notify', source, 'Kho đã đầy...', 'error')
+                        AddItem(fromId, fromItem.name, toAmount, fromSlot, fromItem.info, 'rollback: moved item')
+                    end
                 end
             end
         end

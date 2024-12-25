@@ -3,73 +3,73 @@ VehicleStorage = {
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 35,
-        trunkWeight = 60000
+        trunkWeight = 60
     },
     [0] = { -- Compacts
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 30,
-        trunkWeight = 38000
+        trunkWeight = 40
     },
     [1] = { -- Sedans
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 40,
-        trunkWeight = 50000
+        trunkWeight = 50
     },
     [2] = { -- SUVs
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 50,
-        trunkWeight = 75000
+        trunkWeight = 75
     },
     [3] = { -- Coupes
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 35,
-        trunkWeight = 42000
+        trunkWeight = 42
     },
     [4] = { -- Muscle
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 30,
-        trunkWeight = 38000
+        trunkWeight = 38
     },
     [5] = { -- Sports Classics
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 25,
-        trunkWeight = 30000
+        trunkWeight = 30
     },
     [6] = { -- Sports
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 25,
-        trunkWeight = 30000
+        trunkWeight = 30
     },
     [7] = { -- Super
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 25,
-        trunkWeight = 30000
+        trunkWeight = 30
     },
     [8] = { -- Motorcycles
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 15,
-        trunkWeight = 15000
+        trunkWeight = 15
     },
     [9] = { -- Off-road
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 35,
-        trunkWeight = 60000
+        trunkWeight = 60
     },
     [12] = { -- Vans
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 35,
-        trunkWeight = 120000
+        trunkWeight = 100
     },
     [13] = { -- Cycles
         gloveboxSlots = 5,
@@ -81,19 +81,19 @@ VehicleStorage = {
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 50,
-        trunkWeight = 120000
+        trunkWeight = 100
     },
     [15] = { -- Helicopters
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 50,
-        trunkWeight = 120000
+        trunkWeight = 100
     },
     [16] = { -- Planes
         gloveboxSlots = 5,
         gloveboxWeight = 10000,
         trunkSlots = 50,
-        trunkWeight = 120000
+        trunkWeight = 100
     },
     [17] = { -- service
         gloveboxSlots = 0,
@@ -105,7 +105,7 @@ VehicleStorage = {
         gloveboxSlots = 4,
         gloveboxWeight = 10000,
         trunkSlots = 12,
-        trunkWeight = 150000
+        trunkWeight = 150
     },
     [19] = { -- Military
         gloveboxSlots = 0,

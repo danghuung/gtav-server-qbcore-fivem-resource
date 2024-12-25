@@ -11,6 +11,13 @@ local function InitializeInventory(inventoryId, data)
     return Inventories[inventoryId]
 end
 
+local function GetTotalItemSlotUsed(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+    local currentAmountObj = Player.Functions.GetItemByName(item:lower())
+    local totalAmount = (currentAmountObj ~= nil) and currentAmountObj.amount or 0
+    return totalAmount
+end
+
 local function GetFirstFreeSlot(items, maxSlots)
     for i = 1, maxSlots do
         if items[i] == nil then
@@ -219,7 +226,7 @@ function GetTotalWeight(items)
     if not items then return 0 end
     local weight = 0
     for _, item in pairs(items) do
-        weight = weight + (item.weight * item.amount)
+        weight = weight + item.amount
     end
     return tonumber(weight)
 end
@@ -325,11 +332,17 @@ function CanAddItem(source, item, amount)
     if not Player then return false end
     local itemData = QBCore.Shared.Items[item:lower()]
     if not itemData then return false end
-    local weight = itemData.weight * amount
-    local totalWeight = GetTotalWeight(Player.PlayerData.items) + weight
-    if totalWeight > Config.MaxWeight then
+    --local weight = itemData.weight * amount
+    --local totalWeight = GetTotalWeight(Player.PlayerData.items) + weight
+    --if totalWeight > Config.MaxWeight then
+    --    return false, 'weight'
+    --end
+    local itemMaxSlot = itemData.maxamount or Config.MaxamountDefault
+    local totalAmount = GetTotalItemSlotUsed(source, item)
+    if totalAmount + amount > itemMaxSlot then
         return false, 'weight'
     end
+
     local slotsUsed = 0
     for _, v in pairs(Player.PlayerData.items) do
         if v then
@@ -589,25 +602,29 @@ exports('OpenInventory', OpenInventory)
 --- @return boolean Returns true if the item was successfully added, false otherwise.
 function AddItem(identifier, item, amount, slot, info, reason)
     local itemInfo = QBCore.Shared.Items[item:lower()]
+    local itemAmount = itemInfo.maxamount or Config.MaxamountDefault
     if not itemInfo then
         print('AddItem: Invalid item')
         return false
     end
-    local inventory, inventoryWeight, inventorySlots
+    local inventory, inventoryWeight, inventorySlots, itemSlotMax
     local player = QBCore.Functions.GetPlayer(identifier)
 
     if player then
         inventory = player.PlayerData.items
         inventoryWeight = Config.MaxWeight
         inventorySlots = Config.MaxSlots
+        itemSlotMax = itemSlot
     elseif Inventories[identifier] then
         inventory = Inventories[identifier].items
         inventoryWeight = Inventories[identifier].maxweight
         inventorySlots = Inventories[identifier].slots
+        itemSlotMax = Inventories[identifier].maxweight
     elseif Drops[identifier] then
         inventory = Drops[identifier].items
         inventoryWeight = Drops[identifier].maxweight
         inventorySlots = Drops[identifier].slots
+        itemSlotMax = Drops[identifier].maxweight
     end
 
     if not inventory then
@@ -615,8 +632,12 @@ function AddItem(identifier, item, amount, slot, info, reason)
         return false
     end
 
-    local totalWeight = GetTotalWeight(inventory)
-    if totalWeight + (itemInfo.weight * amount) > inventoryWeight then
+    if player and GetTotalItemSlotUsed(identifier, item) + amount > itemAmount then
+        print('AddItem: Not enough item slot available')
+        return false
+    end
+
+    if not player and GetTotalWeight(inventory) + amount > inventoryWeight then
         print('AddItem: Not enough weight available')
         return false
     end
@@ -657,7 +678,8 @@ function AddItem(identifier, item, amount, slot, info, reason)
             image = itemInfo.image,
             shouldClose = itemInfo.shouldClose,
             slot = slot,
-            combinable = itemInfo.combinable
+            combinable = itemInfo.combinable,
+            maxamount = itemAmount
         }
 
         if QBCore.Shared.SplitStr(item, '_')[1] == 'weapon' then

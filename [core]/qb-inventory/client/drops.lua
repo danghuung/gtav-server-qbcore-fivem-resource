@@ -55,7 +55,7 @@ RegisterNetEvent('qb-inventory:client:setupDropTarget', function(dropId)
             },
             {
                 icon = 'fas fa-hand-pointer',
-                label = 'Pick up bag',
+                label = 'Nhặt túi rác',
                 action = function()
                     if IsPedArmed(PlayerPedId(), 4) then
                         return QBCore.Functions.Notify("You can not be holding a Gun and a Bag!", "error", 5500)
@@ -78,7 +78,7 @@ RegisterNetEvent('qb-inventory:client:setupDropTarget', function(dropId)
                     bagObject = bag
                     holdingDrop = true
                     heldDrop = newDropId
-                    exports['qb-core']:DrawText('Nhấn [G] để thả túi')
+                    exports['qb-core']:DrawText('Nhấn <span class="key-start-action-input">[G]</span> bỏ túi rác')
                 end,
             }
         },

@@ -1,28 +1,29 @@
 Config = {
     UseTarget = GetConvar('UseTarget', 'false') == 'true',
 
-    MaxWeight = 120000,
+    MaxWeight = 100,
     MaxSlots = 40,
+    MaxamountDefault = 21,
 
     StashSize = {
-        maxweight = 2000000,
+        maxweight = 2000,
         slots = 100
     },
 
     DropSize = {
-        maxweight = 1000000,
+        maxweight = 1000,
         slots = 50
     },
 
     Keybinds = {
-        Open = 'TAB',
-        Hotbar = 'Z',
+        Open = 'Z',
+        Hotbar = 'TAB',
     },
 
     CleanupDropTime = 15,    -- in minutes
     CleanupDropInterval = 1, -- in minutes
 
-    ItemDropObject = `bkr_prop_duffel_bag_01a`,
+    ItemDropObject = "p_binbag_01_s",
     ItemDropObjectBone = 28422,
     ItemDropObjectOffset = {
         vector3(0.260000, 0.040000, 0.000000),

@@ -20,9 +20,9 @@ Config.Messages = {
 }
 
 Config.Items = {
-    wood = { name = "wood", price = 0},
-    cutWood = { name = "cut_wood", price = 0 },
-    plyWood = { name = "ply_wood", price = 500}
+    wood = { name = "wood", price = 0, maxamount = 20},
+    cutWood = { name = "cut_wood", price = 0, maxamount = 20 },
+    plyWood = { name = "ply_wood", price = 500, maxamount = 100}
 }
 
 Config.Locations = {
