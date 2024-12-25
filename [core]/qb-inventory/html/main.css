@@ -199,7 +199,7 @@ div {
     position: absolute;
     white-space: nowrap;
     bottom: 0;
-    height: 1vh;
+    height: 2.5vh;
     width: 100%;
     background-color: #cccccc;
     display: flex;
@@ -238,7 +238,7 @@ div {
     text-transform: uppercase;
     font-weight: bolder;
     color: #000000;
-    font-size: 0.7vh;
+    font-size: 1.2vh;
     text-align: center;
 }
 
@@ -286,28 +286,50 @@ div {
 .hotbar {
     display: flex;
     justify-content: space-between;
-    width: 25vw;
+    width: 40vw;
     padding: 0 10px;
 }
 
+
 .notification-container {
     display: flex;
-    justify-content: center;
     position: fixed;
-    bottom: 2vh;
-    left: 50%;
-    transform: translate(-50%);
+    bottom: 4vh;
+    right: 4%;
+    flex-direction: row-reverse;
+    gap: 1vh; /* Khoảng cách giữa các thông báo */
 }
 
 .notification-slot {
-    position: relative;
-    width: 10vh;
-    height: 10vh;
-    background-color: rgba(0, 0, 0, 0.3);
+    width: 13vh;
+    height: 13vh;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 0.5vh;
+    overflow: hidden;
+    animation: fadeInOut 2.5s ease;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
 }
 
 .notification-title {
@@ -320,7 +342,8 @@ div {
 .notification-title p {
     margin: 0;
     padding: 0;
-    font-size: 0.7vh;
+    font-size: 1.4vh;
+    font-weight: bold;
 }
 
 .required-item-container {
@@ -547,4 +570,10 @@ div {
 
 .attachment-slot:nth-child(7) {
     transform: rotate(0deg) translate(150px) rotate(0deg);
+}
+.notification-title,
+.item-slot-img,
+.item-slot-amount,
+.item-slot-label {
+    margin: 0.5vh 0.5vh 0;
 }

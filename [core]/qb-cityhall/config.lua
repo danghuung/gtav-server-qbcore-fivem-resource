@@ -8,6 +8,7 @@ Config.AvailableJobs = {                                     -- Only used when n
     --['tow'] = { ['label'] = 'Lái Xe kéo', ['isManaged'] = false },
     --['reporter'] = { ['label'] = 'Phóng viên', ['isManaged'] = false },
     ['garbage'] = { ['label'] = 'Lao Công', ['isManaged'] = false },
+    ['woodcutter'] = { ['label'] = 'Tiều Phu', ['isManaged'] = false },
     --['bus'] = { ['label'] = 'Lái xe buýt', ['isManaged'] = false },
     --['hotdog'] = { ['label'] = 'Bán xúc xích', ['isManaged'] = false }
 }

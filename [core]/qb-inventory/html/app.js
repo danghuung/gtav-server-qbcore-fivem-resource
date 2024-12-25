@@ -87,7 +87,7 @@ const InventoryContainer = Vue.createApp({
                 showNotification: false,
                 notificationText: "",
                 notificationImage: "",
-                notificationType: "added",
+                notificationType: "Thêm",
                 notificationAmount: 1,
                 // Required items box
                 showRequiredItems: false,
@@ -104,6 +104,7 @@ const InventoryContainer = Vue.createApp({
                 ghostElement: null,
                 dragStartInventoryType: "player",
                 transferAmount: null,
+                notifications: [],
             };
         },
         openInventory(data) {
@@ -754,14 +755,20 @@ const InventoryContainer = Vue.createApp({
             }
         },
         showItemNotification(itemData) {
-            this.notificationText = itemData.item.label;
-            this.notificationImage = "images/" + itemData.item.image;
-            this.notificationType = itemData.type === "add" ? "Received" : itemData.type === "use" ? "Used" : "Removed";
-            this.notificationAmount = itemData.amount || 1;
-            this.showNotification = true;
+            const newNotification = {
+                text: itemData.item.label,
+                image: "images/" + itemData.item.image,
+                type: itemData.type === "add" ? "Nhận" : itemData.type === "use" ? "Sử Dụng" : "Đã Xóa",
+                amount: itemData.amount || 1
+            };
+
+            // Thêm thông báo mới vào danh sách
+            this.notifications.push(newNotification);
+
+            // Xóa thông báo cũ sau 2.5 giây
             setTimeout(() => {
-                this.showNotification = false;
-            }, 3000);
+                this.notifications.shift();
+            }, 2500);
         },
         showRequiredItem(data) {
             if (data.toggle) {

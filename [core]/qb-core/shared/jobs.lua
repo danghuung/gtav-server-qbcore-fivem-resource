@@ -11,6 +11,7 @@ QBShared.Jobs = {
 	garbage = { label = 'Lao Công', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Nhân viên', payment = 50 } } },
 	--vineyard = { label = 'Vineyard', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Picker', payment = 50 } } },
 	--hotdog = { label = 'Hotdog', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Sales', payment = 50 } } },
+	woodcutter = { label = 'Tiều Phu', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Nhân viên', payment = 50 } } },
 
 	police = {
 		label = 'Công An',

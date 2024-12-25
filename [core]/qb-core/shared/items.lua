@@ -382,4 +382,9 @@ QBShared.Items = {
     newscam                      = { name = 'newscam', label = 'News Camera', weight = 100, type = 'item', image = 'newscam.png', unique = true, useable = true, shouldClose = true, description = 'A camera for the news' },
     newsmic                      = { name = 'newsmic', label = 'News Microphone', weight = 100, type = 'item', image = 'newsmic.png', unique = true, useable = true, shouldClose = true, description = 'A microphone for the news' },
     newsbmic                     = { name = 'newsbmic', label = 'Boom Microphone', weight = 100, type = 'item', image = 'newsbmic.png', unique = true, useable = true, shouldClose = true, description = 'A Useable BoomMic' },
+
+    -- add new
+    wood                     = { name = 'wood', label = 'Gỗ', weight = 1000, type = 'item', image = 'wood.png', unique = false, useable = false, shouldClose = true, description = 'Gỗ thô chưa cắt' },
+    cut_wood                 = { name = 'cut_wood', label = 'Gỗ đã cắt', weight = 500, type = 'item', image = 'cutwood.png', unique = false, useable = false, shouldClose = true, description = 'Gỗ đã được cắt' },
+    ply_wood                 = { name = 'ply_wood', label = 'Ván gỗ', weight = 500, type = 'item', image = 'plywood.png', unique = false, useable = false, shouldClose = true, description = 'Gỗ đã thành phẩm có thể đem đi bán' },
 }
