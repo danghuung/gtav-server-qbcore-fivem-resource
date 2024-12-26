@@ -55,18 +55,18 @@
                                 ></div>
                                 <div class="item-slot-durability-fill" v-else style="width: 0%"></div>
                             </div>
-<!--                             <div class="item-slot-label" v-if="getItemInSlot(slot, 'player')">-->
-<!--                                <p>{{ getItemInSlot(slot, 'player').maxamount }}</p>-->
-<!--                            </div>-->
+                             <div class="item-slot-label" v-if="getItemInSlot(slot, 'player')">
+                                <p>{{ getItemInSlot(slot, 'player').label }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="input-container" v-if="!isOtherInventoryEmpty">
                     <div class="input-wrapper">
                         <input type="number" v-model="transferAmount" min="1" :placeholder="transferAmount === null ? 'Số lượng' : ''" />
-                        <button @click="clearTransferAmount" class="clear-button">
-                            <i class="fas fa-times"></i>
-                        </button>
+<!--                        <button @click="clearTransferAmount" class="clear-button">-->
+<!--                            <i class="fas fa-times"></i>-->
+<!--                        </button>-->
                     </div>
                 </div>
                 <div class="other-inventory-header" v-if="!isOtherInventoryEmpty">

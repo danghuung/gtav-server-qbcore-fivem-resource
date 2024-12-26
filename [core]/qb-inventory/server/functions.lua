@@ -47,6 +47,7 @@ local function SetupShopItems(shopItems)
                     price = item.price,
                     image = itemInfo['image'],
                     slot = slot,
+                    maxamount = itemInfo['maxamount']
                 }
                 slot = slot + 1
             end
@@ -82,7 +83,8 @@ function LoadInventory(source, citizenid)
                     image = itemInfo['image'],
                     shouldClose = itemInfo['shouldClose'],
                     slot = item.slot,
-                    combinable = itemInfo['combinable']
+                    combinable = itemInfo['combinable'],
+                    maxamount = itemInfo['maxamount']
                 }
             else
                 missingItems[#missingItems + 1] = item.name:lower()
@@ -121,6 +123,7 @@ function SaveInventory(source, offline)
                     info = item.info,
                     type = item.type,
                     slot = slot,
+                    maxamount = item.maxamount
                 }
             end
         end
