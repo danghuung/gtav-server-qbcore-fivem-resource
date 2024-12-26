@@ -82,8 +82,14 @@ function populateVehicleList(garageLabel, vehicles) {
         const financeInfo = document.createElement("div");
         financeInfo.classList.add("finance-info");
 
-        if (v.balance && v.balance > 0) {
-            financeInfo.textContent = "Trả phí $";
+        // if (v.balance && v.balance > 0) {
+        //     financeInfo.textContent = "Trả phí $";
+        //     financeInfo.classList.add("finance-info-depot");
+        // } else {
+        //     financeInfo.textContent = "Sẵn sàng";
+        // }
+        if (v.depotPrice && v.depotPrice > 0) {
+            financeInfo.textContent = "Kho xe";
             financeInfo.classList.add("finance-info-depot");
         } else {
             financeInfo.textContent = "Sẵn sàng";

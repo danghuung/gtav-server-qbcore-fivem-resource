@@ -176,7 +176,7 @@ RegisterNetEvent('qb-garages:server:updateVehicleState', function(state, depotPr
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
-    MySQL.update('UPDATE player_vehicles SET state = ?, depotprice = ?, balance = ? WHERE plate = ? AND citizenid = ?', { state, depotPrice, depotPrice, plate, Player.PlayerData.citizenid })
+    MySQL.update('UPDATE player_vehicles SET state = ?, depotprice = ? WHERE plate = ? AND citizenid = ?', { state, depotPrice, plate, Player.PlayerData.citizenid })
 end)
 
 RegisterNetEvent('qb-garages:server:UpdateOutsideVehicle', function(plate, vehicleNetID)
