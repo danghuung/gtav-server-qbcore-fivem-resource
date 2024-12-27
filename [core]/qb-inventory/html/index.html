@@ -40,7 +40,8 @@
                                 <img :src="'images/' + getItemInSlot(slot, 'player').image" alt="" />
                             </div>
                             <div class="item-slot-amount" v-if="getItemInSlot(slot, 'player')">
-                                <p>{{ getItemInSlot(slot, 'player').amount }}/{{ getItemInSlot(slot, 'player').maxamount }}</p>
+                                <p v-if="getItemInSlot(slot, 'player').name.startsWith('cash')">${{ getItemInSlot(slot, 'player').amount }}</p>
+                                <p v-else>{{ getItemInSlot(slot, 'player').amount }}/{{ getItemInSlot(slot, 'player').maxamount }}</p>
                             </div>
                             <div class="item-slot-durability" v-if="getItemInSlot(slot, 'player')">
                                 <div
@@ -89,7 +90,8 @@
                                 <img :src="'images/' + getItemInSlot(slot, 'other').image" alt="" />
                             </div>
                             <div class="item-slot-amount" v-if="getItemInSlot(slot, 'other') && !isShopInventory">
-                                <p>x{{ getItemInSlot(slot, 'other').amount }}</p>
+                                <p v-if="getItemInSlot(slot, 'other').name.startsWith('cash')">${{ getItemInSlot(slot, 'other').amount }}</p>
+                                <p v-else>x{{ getItemInSlot(slot, 'other').amount }}</p>
                             </div>
                             <div v-if="isShopInventory && getItemInSlot(slot, 'other')" class="item-price">
                                 <p>${{ getItemInSlot(slot, 'other').price }}</p>

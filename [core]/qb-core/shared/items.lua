@@ -384,10 +384,13 @@ QBShared.Items = {
     --newsbmic                     = { name = 'newsbmic', label = 'Boom Microphone', weight = 100, type = 'item', image = 'newsbmic.png', unique = true, useable = true, shouldClose = true, description = 'A Useable BoomMic' },
 
     -- add new
+    cash                     = { name = 'cash', label = 'Tiền mặt', weight = 0, maxamount = 1, type = 'item', image = 'cash.png', unique = false, useable = false, shouldClose = true, description = 'Tiền mặt dùng trực tiếp' },
+    cash_black               = { name = 'cash_black', label = 'Tiền bẩn', weight = 0, maxamount = 1, type = 'item', image = 'cashblack.png', unique = false, useable = false, shouldClose = true, description = 'Tiền bẩn bất hợp pháp' },
+
+    -- job
     wood                     = { name = 'wood', label = 'Gỗ', weight = 0, maxamount = 20, type = 'item', image = 'wood.png', unique = false, useable = false, shouldClose = true, description = 'Gỗ thô chưa cắt' },
     cut_wood                 = { name = 'cut_wood', label = 'Gỗ đã cắt', weight = 0, maxamount = 20, type = 'item', image = 'cutwood.png', unique = false, useable = false, shouldClose = true, description = 'Gỗ đã được cắt' },
     ply_wood                 = { name = 'ply_wood', label = 'Ván gỗ', weight = 0, maxamount = 100, type = 'item', image = 'plywood.png', unique = false, useable = false, shouldClose = true, description = 'Gỗ đã thành phẩm có thể đem đi bán' },
-    cash                     = { name = 'cash', label = 'Tiền mặt', weight = 0, maxamount = 100, type = 'item', image = 'cash.png', unique = false, useable = false, shouldClose = true, description = 'Tiền mặt dùng trực tiếp' },
 
     -- Drink ITEMS
     water_bottle                 = { name = 'water_bottle', label = 'Nước', weight = 0, maxamount = 20, type = 'item', image = 'water_bottle.png', unique = false, useable = true, shouldClose = true, description = 'Cho tất cả những ai đang khát' },
@@ -396,9 +399,9 @@ QBShared.Items = {
     sandwich                     = { name = 'sandwich', label = 'Hamburger ', weight = 0, maxamount = 20, type = 'item', image = 'sandwich.png', unique = false, useable = true, shouldClose = true, description = 'Bánh mì ngon cho dạ dày của bạn' },
 
     -- Alcohol
-    beer                         = { name = 'beer', label = 'Bia', weight = 0, maxamount = 20, type = 'item', image = 'beer.png', unique = false, useable = true, shouldClose = true, description = 'Không có gì giống như một ly bia lạnh ngon!' },
-    whiskey                      = { name = 'whiskey', label = 'Whiskey', weight = 0, maxamount = 20, type = 'item', image = 'whiskey.png', unique = false, useable = true, shouldClose = true, description = 'Cho tất cả những người khát khao ngoài kia' },
-    vodka                        = { name = 'vodka', label = 'Vodka', weight = 0, maxamount = 20, type = 'item', image = 'vodka.png', unique = false, useable = true, shouldClose = true, description = 'Cho tất cả những người khát khao ngoài kia' },
+    beer                         = { name = 'beer', label = 'Bia', weight = 0, maxamount = 5, type = 'item', image = 'beer.png', unique = false, useable = true, shouldClose = true, description = 'Không có gì giống như một ly bia lạnh ngon!' },
+    whiskey                      = { name = 'whiskey', label = 'Whiskey', weight = 0, maxamount = 5, type = 'item', image = 'whiskey.png', unique = false, useable = true, shouldClose = true, description = 'Cho tất cả những người khát khao ngoài kia' },
+    vodka                        = { name = 'vodka', label = 'Vodka', weight = 0, maxamount = 5, type = 'item', image = 'vodka.png', unique = false, useable = true, shouldClose = true, description = 'Cho tất cả những người khát khao ngoài kia' },
 
     -- Medication
     bandage                      = { name = 'bandage', label = 'Băng gạc', weight = 0, maxamount = 20, type = 'item', image = 'bandage.png', unique = false, useable = true, shouldClose = true, description = 'Sơ cứu vết thương' },
@@ -407,14 +410,14 @@ QBShared.Items = {
     phone                        = { name = 'phone', label = 'Điện thoại', weight = 0, maxamount = 1, type = 'item', image = 'iphone_16.png', unique = true, useable = false, shouldClose = false, description = 'Điện thoại smartphone đời mới' },
 
     -- Cops Tools
-    armor                        = { name = 'armor', label = 'Áo giáp', weight = 0, maxamount = 20, type = 'item', image = 'armor.png', unique = false, useable = true, shouldClose = true, description = 'Một số biện pháp bảo vệ sẽ không gây tổn hại gì... phải không?' },
+    armor                        = { name = 'armor', label = 'Áo giáp', weight = 0, maxamount = 5, type = 'item', image = 'armor.png', unique = false, useable = true, shouldClose = true, description = 'Một số biện pháp bảo vệ sẽ không gây tổn hại gì... phải không?' },
 
     -- Sea Tools
-    diving_gear                  = { name = 'diving_gear', label = 'Thiết bị lặn', weight = 0, maxamount = 10, type = 'item', image = 'diving_gear.png', unique = true, useable = true, shouldClose = true, description = 'Bình oxy và máy thở lại' },
-    diving_fill                  = { name = 'diving_fill', label = 'Ống lặn', weight = 0, maxamount = 10, type = 'item', image = 'diving_tube.png', unique = true, useable = true, shouldClose = true, description = 'Một ống oxy và một máy thở lại' },
+    diving_gear                  = { name = 'diving_gear', label = 'Thiết bị lặn', weight = 0, maxamount = 5, type = 'item', image = 'diving_gear.png', unique = false, useable = true, shouldClose = true, description = 'Bình oxy và máy thở lại' },
+    diving_fill                  = { name = 'diving_fill', label = 'Ống lặn', weight = 0, maxamount = 5, type = 'item', image = 'diving_tube.png', unique = false, useable = true, shouldClose = true, description = 'Một ống oxy và một máy thở lại' },
 
     -- malee
-    weapon_bat                   = { name = 'weapon_bat', label = 'Gậy', weight = 0, maxamount = 1, type = 'weapon', ammotype = nil, image = 'weapon_bat.png', unique = true, useable = false, description = 'Dùng để đánh bóng trong thể thao (hoặc các việc khác)' },
+    weapon_bat                   = { name = 'weapon_bat', label = 'Gậy', weight = 0, maxamount = 1, type = 'weapon', ammotype = nil, image = 'weapon_bat.png', unique = false, useable = false, description = 'Dùng để đánh bóng trong thể thao (hoặc các việc khác)' },
 
     -- other tools
     binoculars                   = { name = 'binoculars', label = 'Ống nhòm', weight = 0, maxamount = 5, type = 'item', image = 'binoculars.png', unique = false, useable = true, shouldClose = true, description = 'Lén lút phá vỡ...' },

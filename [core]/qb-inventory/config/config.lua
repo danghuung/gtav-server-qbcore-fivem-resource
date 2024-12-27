@@ -16,8 +16,8 @@ Config = {
     },
 
     Keybinds = {
-        Open = 'Z',
-        Hotbar = 'TAB',
+        Open = 'TAB',
+        Hotbar = 'Z',
     },
 
     CleanupDropTime = 15,    -- in minutes

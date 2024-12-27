@@ -340,10 +340,13 @@ function CanAddItem(source, item, amount)
     --if totalWeight > Config.MaxWeight then
     --    return false, 'weight'
     --end
-    local itemMaxSlot = itemData.maxamount or Config.MaxamountDefault
-    local totalAmount = GetTotalItemSlotUsed(source, item)
-    if totalAmount + amount > itemMaxSlot then
-        return false, 'weight'
+
+    if itemData.name ~= "cash" and itemData.name ~= "cash_black" then
+        local itemMaxSlot = itemData.maxamount or Config.MaxamountDefault
+        local totalAmount = GetTotalItemSlotUsed(source, item)
+        if totalAmount + amount > itemMaxSlot then
+            return false, 'weight'
+        end
     end
 
     local slotsUsed = 0
@@ -613,6 +616,11 @@ function AddItem(identifier, item, amount, slot, info, reason)
     local inventory, inventoryWeight, inventorySlots, itemSlotMax
     local player = QBCore.Functions.GetPlayer(identifier)
 
+    if itemInfo.name == "cash" and not player then
+        print('AddItem: player not found')
+        return false
+    end
+
     if player then
         inventory = player.PlayerData.items
         inventoryWeight = Config.MaxWeight
@@ -635,14 +643,16 @@ function AddItem(identifier, item, amount, slot, info, reason)
         return false
     end
 
-    if player and GetTotalItemSlotUsed(identifier, item) + amount > itemAmount then
-        print('AddItem: Not enough item slot available')
-        return false
-    end
+    if itemInfo.name ~= "cash" and itemInfo.name ~= "cash_black" then
+        if player and GetTotalItemSlotUsed(identifier, item) + amount > itemAmount then
+            print('AddItem: Not enough item slot available')
+            return false
+        end
 
-    if not player and GetTotalWeight(inventory) + amount > inventoryWeight then
-        print('AddItem: Not enough weight available')
-        return false
+        if not player and GetTotalWeight(inventory) + amount > inventoryWeight then
+            print('AddItem: Not enough weight available')
+            return false
+        end
     end
 
     amount = tonumber(amount) or 1
@@ -775,18 +785,23 @@ function RemoveItem(identifier, item, amount, slot, reason)
 
     inventoryItem.amount = inventoryItem.amount - amount
     if inventoryItem.amount <= 0 then
-        inventory[itemKey] = nil
+        if inventoryItem.name == "cash" and amount ~= 0 then
+            inventory[itemKey] = inventoryItem
+        else
+            inventory[itemKey] = nil
+        end
+        --inventory[itemKey] = nil
     else
         inventory[itemKey] = inventoryItem
     end
 
-    if player then player.Functions.SetPlayerData('items', inventory) end
+        if player then player.Functions.SetPlayerData('items', inventory) end
 
-    local invName = player and GetPlayerName(identifier) .. ' (' .. identifier .. ')' or identifier
-    local removeReason = reason or 'No reason specified'
-    local resourceName = GetInvokingResource() or 'qb-inventory'
+        local invName = player and GetPlayerName(identifier) .. ' (' .. identifier .. ')' or identifier
+        local removeReason = reason or 'No reason specified'
+        local resourceName = GetInvokingResource() or 'qb-inventory'
 
-    TriggerEvent(
+        TriggerEvent(
         'qb-log:server:CreateLog',
         'playerinventory',
         'Item Removed',
@@ -795,10 +810,10 @@ function RemoveItem(identifier, item, amount, slot, reason)
         '**Item:** ' .. item .. '\n' ..
         '**Amount:** ' .. amount .. '\n' ..
         '**Reason:** ' .. removeReason .. '\n' ..
-        '**Resource:** ' .. resourceName
+    '**Resource:** ' .. resourceName
     )
     return true
-end
+        end
 
 exports('RemoveItem', RemoveItem)
 

@@ -5,7 +5,7 @@ const InventoryContainer = Vue.createApp({
     computed: {
         playerWeight() {
             const weight = Object.values(this.playerInventory).reduce((total, item) => {
-                if (item && item.amount !== undefined) {
+                if (item && item.amount !== undefined && !["cash", "cash_black"].includes(item.name)) {
                     return total + item.amount;
                 }
                 return total;
@@ -14,7 +14,7 @@ const InventoryContainer = Vue.createApp({
         },
         otherInventoryWeight() {
             const weight = Object.values(this.otherInventory).reduce((total, item) => {
-                if (item && item.amount !== undefined) {
+                if (item && item.amount !== undefined && !["cash", "cash_black"].includes(item.name)) {
                     return total + item.amount;
                 }
                 return total;
@@ -250,7 +250,7 @@ const InventoryContainer = Vue.createApp({
             }
 
             const totalWeightAfterTransfer = this.otherInventoryWeight + amountToTransfer;
-            if (totalWeightAfterTransfer > this.otherInventoryMaxWeight) {
+            if (totalWeightAfterTransfer > this.otherInventoryMaxWeight && !["cash", "cash_black"].includes(item.name)) {
                 this.inventoryError(item.slot);
                 return;
             }
@@ -296,7 +296,7 @@ const InventoryContainer = Vue.createApp({
 
             sourceItem.amount -= amountToTransfer;
 
-            if (sourceItem.amount <= 0) {
+            if (sourceItem.amount <= 0 && sourceItem.name !== 'cash') {
                 delete sourceInventory[item.slot];
             }
 
@@ -451,15 +451,19 @@ const InventoryContainer = Vue.createApp({
 
                 if (targetInventoryType !== this.dragStartInventoryType) {
                     if (targetInventoryType == "other") {
+                        if (sourceItem.name === 'cash') {
+                            throw new Error("Cash can only be exchanged between player");
+                        }
                         const totalWeightAfterTransfer = this.otherInventoryWeight + amountToTransfer;
-                        if (totalWeightAfterTransfer > this.otherInventoryMaxWeight) {
+                        if (totalWeightAfterTransfer > this.otherInventoryMaxWeight && sourceItem.name !== "cash_black") {
                             throw new Error("Insufficient weight capacity in target inventory");
                         }
                     }
                     else if (targetInventoryType == "player") {
-                        const maxAmount = this.playerInventory[targetSlot].maxamount === undefined ? 21 : this.playerInventory[targetSlot].maxamount;
-                        const totalWeightAfterTransfer = this.playerInventory[targetSlot].amount + amountToTransfer;
-                        if (totalWeightAfterTransfer > maxAmount) {
+                        const maxAmount = this.playerInventory[targetSlot] === undefined ? sourceItem.maxamount : this.playerInventory[targetSlot].maxamount;
+                        const amount = this.playerInventory[targetSlot] === undefined ? 0 : this.playerInventory[targetSlot].amount;
+                        const totalWeightAfterTransfer = amount + amountToTransfer;
+                        if (totalWeightAfterTransfer > maxAmount && !["cash", "cash_black"].includes(sourceItem.name)) {
                             throw new Error("Insufficient weight capacity in player inventory");
                         }
                     }
@@ -516,11 +520,17 @@ const InventoryContainer = Vue.createApp({
                     //     this.inventoryError(sourceSlot);
                     //     return;
                     // }
+                    const cashItemSlot = Object.keys(targetInventory).find((slot) => targetInventory[slot] && targetInventory[slot].name === 'cash');
+                    if (cashItemSlot === undefined) {
+                        this.inventoryError("khong du tien");
+                        return;
+                    }
                     let targetItem = targetInventory[targetSlot];
                     if (!targetItem || targetItem.name !== sourceItem.name) {
                         let foundSlot = Object.keys(targetInventory).find((slot) => targetInventory[slot] && targetInventory[slot].name === sourceItem.name);
                         if (foundSlot) {
                             targetInventory[foundSlot].amount += amountToTransfer;
+                            targetInventory[cashItemSlot].amount -= sourceItem.price;
                         } else {
                             const targetInventoryKeys = Object.keys(targetInventory);
                             if (targetInventoryKeys.length < this.totalSlots) {
@@ -529,6 +539,7 @@ const InventoryContainer = Vue.createApp({
                                     ...sourceItem,
                                     amount: amountToTransfer,
                                 };
+                                targetInventory[cashItemSlot].amount -= sourceItem.price;
                             } else {
                                 this.inventoryError(sourceSlot);
                                 return;
@@ -536,6 +547,7 @@ const InventoryContainer = Vue.createApp({
                         }
                     } else {
                         targetItem.amount += amountToTransfer;
+                        targetInventory[cashItemSlot].amount -= sourceItem.price;
                     }
                     // sourceItem.amount -= amountToTransfer;
                     // if (sourceItem.amount <= 0) {
@@ -550,6 +562,10 @@ const InventoryContainer = Vue.createApp({
         },
         async dropItem(item, quantity) {
             if (item && item.name) {
+                if (item.name === 'cash') {
+                    console.error("Cash can not drop.");
+                    return;
+                }
                 const playerItemKey = Object.keys(this.playerInventory).find((key) => this.playerInventory[key] && this.playerInventory[key].slot === item.slot);
                 if (playerItemKey) {
                     let amountToGive;
@@ -679,7 +695,7 @@ const InventoryContainer = Vue.createApp({
 
                 if (playerHasItem) {
                     let amountToGive;
-                    if (typeof quantity === "string") {
+                    if (typeof quantity === "string" && item.name !== 'cash') {
                         switch (quantity) {
                             case "half":
                                 amountToGive = Math.ceil(selectedItem.amount / 2);
@@ -732,7 +748,7 @@ const InventoryContainer = Vue.createApp({
         },
         splitAndPlaceItem(item, inventoryType) {
             const inventoryRef = inventoryType === "player" ? this.playerInventory : this.otherInventory;
-            if (item && item.amount > 1) {
+            if (item && item.amount > 1 && item.name !== 'cash') {
                 const originalSlot = Object.keys(inventoryRef).find((key) => inventoryRef[key] === item);
                 if (originalSlot !== undefined) {
                     const newItem = { ...item, amount: Math.ceil(item.amount / 2) };

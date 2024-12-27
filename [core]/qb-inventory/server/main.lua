@@ -286,6 +286,12 @@ QBCore.Functions.CreateCallback('qb-inventory:server:createDrop', function(sourc
         cb(false)
         return
     end
+
+    if item.name == ("cash") then
+        cb(false)
+        return
+    end
+
     local playerPed = GetPlayerPed(src)
     local playerCoords = GetEntityCoords(playerPed)
     if RemoveItem(src, item.name, item.amount, item.fromSlot, 'dropped item') then
@@ -357,9 +363,15 @@ QBCore.Functions.CreateCallback('qb-inventory:server:attemptPurchase', function(
         return
     end
 
-    if Player.PlayerData.money.cash >= price then
-        Player.Functions.RemoveMoney('cash', price, 'shop-purchase')
+    local currentAmountObj = Player.Functions.GetItemByName('cash')
+    local totalAmount = (currentAmountObj ~= nil) and currentAmountObj.amount or 0
+    if totalAmount >= price then
+        --Player.Functions.RemoveMoney('cash', price, 'shop-purchase')
+
         AddItem(source, itemInfo.name, amount, nil, itemInfo.info, 'shop-purchase')
+        RemoveItem(source, 'cash', price, nil, 'shop-purchase')
+        TriggerClientEvent('qb-inventory:client:ItemBox', source, itemInfo, 'add', amount)
+        TriggerClientEvent('qb-inventory:client:ItemBox', source, QBCore.Shared.Items['cash'], 'remove', price)
         TriggerEvent('qb-shops:server:UpdateShopItems', shop, itemInfo, amount)
         cb(true)
     else
@@ -491,6 +503,7 @@ RegisterNetEvent('qb-inventory:server:SetInventoryData', function(fromInventory,
     local toItem = getItem(toInventory, src, toSlot)
 
     if fromItem then
+        if fromInventory == 'player' and toInventory ~= 'player' and fromItem.name == 'cash' then return end
         if not toItem and toAmount > fromItem.amount then return end
         if fromInventory == 'player' and toInventory ~= 'player' then checkWeapon(src, fromItem) end
 
@@ -525,6 +538,9 @@ RegisterNetEvent('qb-inventory:server:SetInventoryData', function(fromInventory,
                     if not AddItem(toId, fromItem.name, toAmount, toSlot, fromItem.info, 'moved item') then
                         TriggerClientEvent('QBCore:Notify', source, 'Kho đã đầy...', 'error')
                         AddItem(fromId, fromItem.name, toAmount, fromSlot, fromItem.info, 'rollback: moved item')
+                    end
+                    if fromItem.name == "cash" then
+                        RemoveItem(fromId, fromItem.name, 0, fromSlot, 'moved item')
                     end
                 end
             end
