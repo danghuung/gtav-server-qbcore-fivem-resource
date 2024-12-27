@@ -126,7 +126,8 @@
                             <img :src="'images/' + getHotbarItemInSlot(slot).image" alt="" />
                         </div>
                         <div class="item-slot-amount" v-if="getHotbarItemInSlot(slot)">
-                            <p>{{ getHotbarItemInSlot(slot).amount }}/{{ getHotbarItemInSlot(slot).maxamount }}</p>
+                            <p v-if="getHotbarItemInSlot(slot).name.startsWith('cash')">${{ getHotbarItemInSlot(slot).amount }}</p>
+                            <p v-else>{{ getHotbarItemInSlot(slot).amount }}/{{ getHotbarItemInSlot(slot).maxamount }}</p>
                         </div>
                         <div class="item-slot-durability" v-if="getHotbarItemInSlot(slot)">
                             <div
@@ -161,7 +162,8 @@
                         <img :src="notification.image" alt="" />
                     </div>
                     <div class="item-slot-amount">
-                        <p>x{{ notification.amount }}</p>
+                        <p v-if="notification.text.startsWith('Tiền')">${{ notification.amount }}</p>
+                        <p v-else>x{{ notification.amount }}</p>
                     </div>
                     <div class="item-slot-label">
                         <p>{{ notification.text }}</p>

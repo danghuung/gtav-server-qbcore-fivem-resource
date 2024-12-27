@@ -63,6 +63,7 @@ RegisterNetEvent('qb-woodcutterjob:server:sellWood', function()
     if Player ~= nil then
         exports['qb-inventory']:RemoveItem(src, itemRemove, 1, false, 'qb-woodcutterjob:server:sellWood')
         TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[itemRemove], 'sell', 1)
-        Player.Functions.AddMoney('cash', 500, 'qb-woodcutterjob:server:sellWood')
+        exports['qb-inventory']:AddItem(src, 'cash', 650, false, 'qb-woodcutterjob:server:sellWood')
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add', 650)
     end
 end)

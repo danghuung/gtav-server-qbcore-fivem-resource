@@ -785,12 +785,7 @@ function RemoveItem(identifier, item, amount, slot, reason)
 
     inventoryItem.amount = inventoryItem.amount - amount
     if inventoryItem.amount <= 0 then
-        if inventoryItem.name == "cash" and amount ~= 0 then
-            inventory[itemKey] = inventoryItem
-        else
-            inventory[itemKey] = nil
-        end
-        --inventory[itemKey] = nil
+        inventory[itemKey] = nil
     else
         inventory[itemKey] = inventoryItem
     end

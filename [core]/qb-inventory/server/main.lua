@@ -366,10 +366,11 @@ QBCore.Functions.CreateCallback('qb-inventory:server:attemptPurchase', function(
     local currentAmountObj = Player.Functions.GetItemByName('cash')
     local totalAmount = (currentAmountObj ~= nil) and currentAmountObj.amount or 0
     if totalAmount >= price then
-        --Player.Functions.RemoveMoney('cash', price, 'shop-purchase')
-
         AddItem(source, itemInfo.name, amount, nil, itemInfo.info, 'shop-purchase')
         RemoveItem(source, 'cash', price, nil, 'shop-purchase')
+        if totalAmount == price then
+            AddItem(source, 'cash', 0, currentAmountObj.slot, itemInfo.info, 'shop-purchase')
+        end
         TriggerClientEvent('qb-inventory:client:ItemBox', source, itemInfo, 'add', amount)
         TriggerClientEvent('qb-inventory:client:ItemBox', source, QBCore.Shared.Items['cash'], 'remove', price)
         TriggerEvent('qb-shops:server:UpdateShopItems', shop, itemInfo, amount)
@@ -516,6 +517,10 @@ RegisterNetEvent('qb-inventory:server:SetInventoryData', function(fromInventory,
                     TriggerClientEvent('QBCore:Notify', source, 'Kho đã đầy...', 'error')
                     AddItem(fromId, fromItem.name, toAmount, fromSlot, fromItem.info, 'rollback: stacked item')
                 end
+
+                if fromItem.name == 'cash' and fromAmount <= toAmount then
+                    AddItem(fromId, fromItem.name, 0, fromSlot, fromItem.info, 'rollback: initial cash 0 value')
+                end
             end
         elseif not toItem and toAmount < fromAmount then
             if RemoveItem(fromId, fromItem.name, toAmount, fromSlot, 'split item') then
@@ -538,9 +543,6 @@ RegisterNetEvent('qb-inventory:server:SetInventoryData', function(fromInventory,
                     if not AddItem(toId, fromItem.name, toAmount, toSlot, fromItem.info, 'moved item') then
                         TriggerClientEvent('QBCore:Notify', source, 'Kho đã đầy...', 'error')
                         AddItem(fromId, fromItem.name, toAmount, fromSlot, fromItem.info, 'rollback: moved item')
-                    end
-                    if fromItem.name == "cash" then
-                        RemoveItem(fromId, fromItem.name, 0, fromSlot, 'moved item')
                     end
                 end
             end
