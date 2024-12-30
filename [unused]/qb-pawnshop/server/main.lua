@@ -37,7 +37,10 @@ RegisterNetEvent('qb-pawnshop:server:sellPawnItems', function(itemName, itemAmou
         if Config.BankMoney then
             Player.Functions.AddMoney('bank', totalPrice, 'qb-pawnshop:server:sellPawnItems')
         else
-            Player.Functions.AddMoney('cash', totalPrice, 'qb-pawnshop:server:sellPawnItems')
+            --Player.Functions.AddMoney('cash', totalPrice, 'qb-pawnshop:server:sellPawnItems')
+            exports['qb-inventory']:AddItem(src, 'cash', totalPrice, false, 'qb-pawnshop:server:sellPawnItems')
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  totalPrice)
+
         end
         TriggerClientEvent('QBCore:Notify', src, Lang:t('success.sold', { value = tonumber(itemAmount), value2 = QBCore.Shared.Items[itemName].label, value3 = totalPrice }), 'success')
         TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[itemName], 'remove')

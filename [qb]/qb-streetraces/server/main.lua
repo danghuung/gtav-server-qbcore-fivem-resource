@@ -5,8 +5,10 @@ local Races = {}
 RegisterNetEvent('qb-streetraces:NewRace', function(RaceTable)
     local src = source
     local RaceId = math.random(1000, 9999)
-    local xPlayer = QBCore.Functions.GetPlayer(src)
-    if xPlayer.Functions.RemoveMoney('cash', RaceTable.amount, 'streetrace-created') then
+
+    if exports['qb-inventory']:RemoveItem(src, 'cash', RaceTable.amount, false, 'streetrace-created') then
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', RaceTable.amount)
+
         Races[RaceId] = RaceTable
         Races[RaceId].creator = src
         Races[RaceId].joined[#Races[RaceId].joined + 1] = src
@@ -21,8 +23,11 @@ end)
 
 RegisterNetEvent('qb-streetraces:RaceWon', function(RaceId)
     local src = source
-    local xPlayer = QBCore.Functions.GetPlayer(src)
-    xPlayer.Functions.AddMoney('cash', Races[RaceId].pot, 'race-won')
+    --local xPlayer = QBCore.Functions.GetPlayer(src)
+    --xPlayer.Functions.AddMoney('cash', Races[RaceId].pot, 'race-won')
+    exports['qb-inventory']:AddItem(src, 'cash', Races[RaceId].pot, false, 'race-won')
+    TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  Races[RaceId].pot)
+
     TriggerClientEvent('QBCore:Notify', src, 'You won the race and ' .. Config.Currency .. Races[RaceId].pot .. ',- recieved', 'success')
     TriggerClientEvent('qb-streetraces:SetRace', -1, Races)
     TriggerClientEvent('qb-streetraces:RaceDone', -1, RaceId, GetPlayerName(src))
@@ -30,10 +35,10 @@ end)
 
 RegisterNetEvent('qb-streetraces:JoinRace', function(RaceId)
     local src = source
-    local xPlayer = QBCore.Functions.GetPlayer(src)
     local zPlayer = QBCore.Functions.GetPlayer(Races[RaceId].creator)
     if zPlayer ~= nil then
-        if xPlayer.Functions.RemoveMoney('cash', Races[RaceId].amount, 'streetrace-joined') then
+        if exports['qb-inventory']:RemoveItem(src, 'cash', Races[RaceId].amount, false, 'streetrace-joined') then
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', Races[RaceId].amount)
             Races[RaceId].pot = Races[RaceId].pot + Races[RaceId].amount
             Races[RaceId].joined[#Races[RaceId].joined + 1] = src
             TriggerClientEvent('qb-streetraces:SetRace', -1, Races)
@@ -80,7 +85,9 @@ QBCore.Commands.Add(Config.Commands.QuitRace, 'Leave A Race', {}, false, functio
     if RaceId ~= 0 then
         if GetCreatedRace(src) ~= RaceId then
             local xPlayer = QBCore.Functions.GetPlayer(src)
-            xPlayer.Functions.AddMoney('cash', Races[RaceId].amount, 'Race Quit')
+            --xPlayer.Functions.AddMoney('cash', Races[RaceId].amount, 'Race Quit')
+            exports['qb-inventory']:AddItem(src, 'cash', Races[RaceId].amount, false, 'Race Quit')
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  Races[RaceId].amount)
 
             Races[RaceId].pot = Races[RaceId].pot - Races[RaceId].amount
             TriggerClientEvent('qb-streetraces:SetRace', -1, Races)
@@ -120,7 +127,10 @@ function CancelRace(source)
                 if not Races[key].started then
                     for _, iden in pairs(Races[key].joined) do
                         local xdPlayer = QBCore.Functions.GetPlayer(iden)
-                        xdPlayer.Functions.AddMoney('cash', Races[key].amount, 'Race')
+                        --xdPlayer.Functions.AddMoney('cash', Races[key].amount, 'Race')
+                        exports['qb-inventory']:AddItem(iden, 'cash', Races[key].amount, false, 'Race')
+                        TriggerClientEvent('qb-inventory:client:ItemBox', iden, QBCore.Shared.Items['cash'], 'add',  Races[key].amount)
+
                         TriggerClientEvent('QBCore:Notify', xdPlayer.PlayerData.source, 'Race Has Ended, You Got Back ' .. Config.Currency .. Races[key].amount .. '', 'error')
                         TriggerClientEvent('qb-streetraces:StopRace', xdPlayer.PlayerData.source)
                     end

@@ -34,7 +34,10 @@ RegisterNetEvent('qb-taxi:server:NpcPay', function(payment, hasReceivedBonus)
             if Config.Management then
                 exports['qb-banking']:AddMoney('taxi', payment, 'Customer payment')
             else
-                Player.Functions.AddMoney('cash', payment, 'Taxi payout')
+                --Player.Functions.AddMoney('cash', payment, 'Taxi payout')
+                exports['qb-inventory']:AddItem(src, 'cash', payment, false, 'Taxi payout')
+                TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  payment)
+
             end
 
             local chance = math.random(1, 100)

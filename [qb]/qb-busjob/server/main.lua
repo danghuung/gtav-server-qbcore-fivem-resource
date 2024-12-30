@@ -20,7 +20,10 @@ RegisterNetEvent('qb-busjob:server:NpcPay', function()
             local randomAmount = math.random(1, 5)
             local r1, r2 = math.random(1, 5), math.random(1, 5)
             if randomAmount == r1 or randomAmount == r2 then Payment = Payment + math.random(10, 20) end
-            Player.Functions.AddMoney('cash', Payment, 'Bus job')
+            --Player.Functions.AddMoney('cash', Payment, 'Bus job')
+            exports['qb-inventory']:AddItem(src, 'cash', Payment, false, 'Bus job')
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add', Payment)
+
         else
             DropPlayer(src, Lang:t('error.exploit'))
         end

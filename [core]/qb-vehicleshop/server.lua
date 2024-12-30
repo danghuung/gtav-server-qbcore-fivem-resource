@@ -147,7 +147,9 @@ RegisterNetEvent('qb-vehicleshop:server:financePayment', function(paymentAmount,
     if newBalance > 0 then
         if player and paymentAmount >= minPayment then
             if cash >= paymentAmount then
-                player.Functions.RemoveMoney('cash', paymentAmount, 'financed vehicle')
+                --player.Functions.RemoveMoney('cash', paymentAmount, 'financed vehicle')
+                exports['qb-inventory']:RemoveItem(src, 'cash', paymentAmount, false, 'financed vehicle')
+                TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', paymentAmount)
                 MySQL.update('UPDATE player_vehicles SET balance = ?, paymentamount = ?, paymentsleft = ?, financetime = ? WHERE plate = ?', { newBalance, newPayment, newPaymentsLeft, timer, plate })
             elseif bank >= paymentAmount then
                 player.Functions.RemoveMoney('bank', paymentAmount, 'financed vehicle')
@@ -174,7 +176,9 @@ RegisterNetEvent('qb-vehicleshop:server:financePaymentFull', function(data)
     local vehPlate = data.vehPlate
     if player and vehBalance ~= 0 then
         if cash >= vehBalance then
-            player.Functions.RemoveMoney('cash', vehBalance, 'paid off vehicle')
+            --player.Functions.RemoveMoney('cash', vehBalance, 'paid off vehicle')
+            exports['qb-inventory']:RemoveItem(src, 'cash', vehBalance, false, 'paid off vehicle')
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', vehBalance)
             MySQL.update('UPDATE player_vehicles SET balance = ?, paymentamount = ?, paymentsleft = ?, financetime = ? WHERE plate = ?', { 0, 0, 0, 0, vehPlate })
         elseif bank >= vehBalance then
             player.Functions.RemoveMoney('bank', vehBalance, 'paid off vehicle')
@@ -210,7 +214,9 @@ RegisterNetEvent('qb-vehicleshop:server:buyShowroomVehicle', function(vehicle)
         })
         TriggerClientEvent('QBCore:Notify', src, Lang:t('success.purchased'), 'success')
         TriggerClientEvent('qb-vehicleshop:client:buyShowroomVehicle', src, vehicle, plate)
-        pData.Functions.RemoveMoney('cash', vehiclePrice, 'vehicle-bought-in-showroom')
+        --pData.Functions.RemoveMoney('cash', vehiclePrice, 'vehicle-bought-in-showroom')
+        exports['qb-inventory']:RemoveItem(src, 'cash', vehiclePrice, false, 'vehicle-bought-in-showroom')
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', vehiclePrice)
     elseif bank > tonumber(vehiclePrice) then
         MySQL.insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', {
             pData.PlayerData.license,
@@ -264,7 +270,9 @@ RegisterNetEvent('qb-vehicleshop:server:financeVehicle', function(downPayment, p
         })
         TriggerClientEvent('QBCore:Notify', src, Lang:t('success.purchased'), 'success')
         TriggerClientEvent('qb-vehicleshop:client:buyShowroomVehicle', src, vehicle, plate)
-        pData.Functions.RemoveMoney('cash', downPayment, 'vehicle-bought-in-showroom')
+        --pData.Functions.RemoveMoney('cash', downPayment, 'vehicle-bought-in-showroom')
+        exports['qb-inventory']:RemoveItem(src, 'cash', downPayment, false, 'vehicle-bought-in-showroom')
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', downPayment)
     elseif bank >= downPayment then
         MySQL.insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state, balance, paymentamount, paymentsleft, financetime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', {
             pData.PlayerData.license,
@@ -319,7 +327,10 @@ RegisterNetEvent('qb-vehicleshop:server:sellShowroomVehicle', function(data, pla
                 0
             })
             TriggerClientEvent('qb-vehicleshop:client:buyShowroomVehicle', target.PlayerData.source, vehicle, plate)
-            target.Functions.RemoveMoney('cash', vehiclePrice, 'vehicle-bought-in-showroom')
+            --target.Functions.RemoveMoney('cash', vehiclePrice, 'vehicle-bought-in-showroom')
+            exports['qb-inventory']:RemoveItem(tonumber(playerid), 'cash', vehiclePrice, false, 'vehicle-bought-in-showroom')
+            TriggerClientEvent('qb-inventory:client:ItemBox', tonumber(playerid), QBCore.Shared.Items['cash'], 'remove', vehiclePrice)
+
             player.Functions.AddMoney('bank', commission, 'vehicle sale commission')
             TriggerClientEvent('QBCore:Notify', src, Lang:t('success.earned_commission', { amount = comma_value(commission) }), 'success')
             exports['qb-banking']:AddMoney(player.PlayerData.job.name, vehiclePrice, 'Vehicle sale')
@@ -391,7 +402,10 @@ RegisterNetEvent('qb-vehicleshop:server:sellfinanceVehicle', function(downPaymen
                 timer
             })
             TriggerClientEvent('qb-vehicleshop:client:buyShowroomVehicle', target.PlayerData.source, vehicle, plate)
-            target.Functions.RemoveMoney('cash', downPayment, 'vehicle-bought-in-showroom')
+            --target.Functions.RemoveMoney('cash', downPayment, 'vehicle-bought-in-showroom')
+            exports['qb-inventory']:RemoveItem(tonumber(playerid), 'cash', downPayment, false, 'vehicle-bought-in-showroom')
+            TriggerClientEvent('qb-inventory:client:ItemBox', tonumber(playerid), QBCore.Shared.Items['cash'], 'remove', downPayment)
+
             player.Functions.AddMoney('bank', commission, 'vehicle sale commission')
             TriggerClientEvent('QBCore:Notify', src, Lang:t('success.earned_commission', { amount = comma_value(commission) }), 'success')
             exports['qb-banking']:AddMoney(player.PlayerData.job.name, vehiclePrice, 'Vehicle sale')
@@ -477,8 +491,14 @@ QBCore.Commands.Add('transfervehicle', Lang:t('general.command_transfervehicle')
     end
     if target.Functions.GetMoney('cash') > sellAmount then
         MySQL.update('UPDATE player_vehicles SET citizenid = ?, license = ? WHERE plate = ?', { targetcid, targetlicense, plate })
-        player.Functions.AddMoney('cash', sellAmount, 'transferred vehicle')
-        target.Functions.RemoveMoney('cash', sellAmount, 'transferred vehicle')
+        --player.Functions.AddMoney('cash', sellAmount, 'transferred vehicle')
+        exports['qb-inventory']:AddItem(src, 'cash', sellAmount, false, 'transferred vehicle')
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add', sellAmount)
+
+        --target.Functions.RemoveMoney('cash', sellAmount, 'transferred vehicle')
+        exports['qb-inventory']:RemoveItem(buyerId, 'cash', sellAmount, false, 'transferred vehicle')
+        TriggerClientEvent('qb-inventory:client:ItemBox', buyerId, QBCore.Shared.Items['cash'], 'remove', sellAmount)
+
         TriggerClientEvent('QBCore:Notify', src, Lang:t('success.soldfor') .. comma_value(sellAmount), 'success')
         TriggerClientEvent('vehiclekeys:client:SetOwner', buyerId, plate)
         TriggerClientEvent('QBCore:Notify', buyerId, Lang:t('success.boughtfor') .. comma_value(sellAmount), 'success')

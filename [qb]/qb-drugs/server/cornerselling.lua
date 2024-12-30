@@ -46,7 +46,10 @@ RegisterNetEvent('qb-drugs:server:sellCornerDrugs', function(drugType, amount, p
     if hasItem.amount >= amount then
         TriggerClientEvent('QBCore:Notify', src, Lang:t('success.offer_accepted'), 'success')
         exports['qb-inventory']:RemoveItem(src, item, amount, false, 'qb-drugs:server:sellCornerDrugs')
-        Player.Functions.AddMoney('cash', price, 'qb-drugs:server:sellCornerDrugs')
+        --Player.Functions.AddMoney('cash', price, 'qb-drugs:server:sellCornerDrugs')
+        exports['qb-inventory']:AddItem(src, 'cash', price, false, 'qb-drugs:server:sellCornerDrugs')
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add', price)
+
         TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item], 'remove')
         TriggerClientEvent('qb-drugs:client:refreshAvailableDrugs', src, getAvailableDrugs(src))
     else

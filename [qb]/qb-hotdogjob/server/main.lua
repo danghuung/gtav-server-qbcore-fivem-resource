@@ -35,7 +35,12 @@ RegisterNetEvent('qb-hotdogjob:server:Sell', function(coords, amount, price)
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
     if #(pCoords - coords) > 4 then exports['qb-core']:ExploitBan(src, 'hotdog job') end
-    Player.Functions.AddMoney('cash', tonumber(amount * price), 'sold hotdog')
+    --Player.Functions.AddMoney('cash', tonumber(amount * price), 'sold hotdog')
+
+    local priceAdd = tonumber(amount * price)
+    exports['qb-inventory']:AddItem(src, 'cash', priceAdd, false, 'sold hotdog')
+    TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  priceAdd)
+
 end)
 
 RegisterNetEvent('qb-hotdogjob:server:UpdateReputation', function(quality)

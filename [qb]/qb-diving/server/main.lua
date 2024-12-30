@@ -56,7 +56,9 @@ RegisterNetEvent('qb-diving:server:SellCorals', function()
             local price = item.amount * v.price
             local reward = getItemPrice(item.amount, price)
             exports['qb-inventory']:RemoveItem(src, item.name, item.amount, false, 'qb-diving:server:SellCorals')
-            Player.Functions.AddMoney('cash', reward, 'qb-diving:server:SellCorals')
+            --Player.Functions.AddMoney('cash', reward, 'qb-diving:server:SellCorals')
+            exports['qb-inventory']:AddItem(src, 'cash', reward, false, 'qb-diving:server:SellCorals')
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add', reward)
             TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item.name], 'remove')
         end
     else

@@ -23,7 +23,10 @@ RegisterNetEvent('prison:server:SaveJailItems', function()
     if not Player then return end
     if not Player.PlayerData.metadata['jailitems'] or table.type(Player.PlayerData.metadata['jailitems']) == 'empty' then
         Player.Functions.SetMetaData('jailitems', Player.PlayerData.items)
-        Player.Functions.AddMoney('cash', 80, 'jail money')
+        --Player.Functions.AddMoney('cash', 80, 'jail money')
+        exports['qb-inventory']:AddItem(src, 'cash', 80, false, 'jail money')
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  80)
+
         Wait(2000)
         Player.Functions.ClearInventory()
     end

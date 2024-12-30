@@ -20,7 +20,11 @@ RegisterNetEvent('qb-drugs:server:updateDealerItems', function(itemData, amount,
         TriggerClientEvent('qb-drugs:client:setDealerItems', -1, itemData, amount, dealer)
     else
         exports['qb-inventory']:RemoveItem(src, itemData.name, amount, false, 'qb-drugs:server:updateDealerItems')
-        Player.Functions.AddMoney('cash', amount * Config.Dealers[dealer]['products'][itemData.slot].price, 'qb-drugs:server:updateDealerItems')
+        --Player.Functions.AddMoney('cash', amount * Config.Dealers[dealer]['products'][itemData.slot].price, 'qb-drugs:server:updateDealerItems')
+        local price = amount * Config.Dealers[dealer]['products'][itemData.slot].price
+        exports['qb-inventory']:AddItem(src, 'cash', price, false, 'qb-drugs:server:updateDealerItems')
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  price)
+
         TriggerClientEvent('QBCore:Notify', src, Lang:t('error.item_unavailable'), 'error')
     end
 end)
@@ -53,14 +57,21 @@ RegisterNetEvent('qb-drugs:server:successDelivery', function(deliveryData, inTim
                     local info = { worth = math.floor(payout * copModifier) }
                     exports['qb-inventory']:AddItem(src, 'markedbills', 1, false, info, 'qb-drugs:server:successDelivery')
                 else
-                    Player.Functions.AddMoney('cash', math.floor(payout * copModifier), 'qb-drugs:server:successDelivery')
+                    --Player.Functions.AddMoney('cash', math.floor(payout * copModifier), 'qb-drugs:server:successDelivery')
+                    local price = math.floor(payout * copModifier)
+                    exports['qb-inventory']:AddItem(src, 'cash', price, false, 'qb-drugs:server:successDelivery')
+                    TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  price)
+
                 end
             else
                 if Config.UseMarkedBills then
                     local info = { worth = payout }
                     exports['qb-inventory']:AddItem(src, 'markedbills', 1, false, info, 'qb-drugs:server:successDelivery')
                 else
-                    Player.Functions.AddMoney('cash', payout, 'qb-drugs:server:successDelivery')
+                    --Player.Functions.AddMoney('cash', payout, 'qb-drugs:server:successDelivery')
+                    exports['qb-inventory']:AddItem(src, 'cash', payout, false, 'qb-drugs:server:successDelivery')
+                    TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  payout)
+
                 end
             end
             TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item], 'remove')
@@ -76,7 +87,11 @@ RegisterNetEvent('qb-drugs:server:successDelivery', function(deliveryData, inTim
                 local modifiedPayout = deliveryData.itemData.payout * newItemAmount
                 exports['qb-inventory']:RemoveItem(src, item, newItemAmount, false, 'qb-drugs:server:successDelivery')
                 TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item], 'remove')
-                Player.Functions.AddMoney('cash', math.floor(modifiedPayout / Config.WrongAmountFee), 'qb-drugs:server:successDelivery')
+                --Player.Functions.AddMoney('cash', math.floor(modifiedPayout / Config.WrongAmountFee), 'qb-drugs:server:successDelivery')
+                local price = math.floor(modifiedPayout / Config.WrongAmountFee)
+                exports['qb-inventory']:AddItem(src, 'cash', price, false, 'qb-drugs:server:successDelivery')
+                TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  price)
+
             end
             SetTimeout(math.random(5000, 10000), function()
                 TriggerClientEvent('qb-drugs:client:sendDeliveryMail', src, 'bad', deliveryData)
@@ -87,7 +102,11 @@ RegisterNetEvent('qb-drugs:server:successDelivery', function(deliveryData, inTim
         if invItem and invItem.amount >= itemAmount then -- late correct amount
             TriggerClientEvent('QBCore:Notify', src, Lang:t('error.too_late'), 'error')
             exports['qb-inventory']:RemoveItem(src, item, itemAmount, false, 'qb-drugs:server:successDelivery')
-            Player.Functions.AddMoney('cash', math.floor(payout / Config.OverdueDeliveryFee), 'qb-drugs:server:successDelivery')
+            --Player.Functions.AddMoney('cash', math.floor(payout / Config.OverdueDeliveryFee), 'qb-drugs:server:successDelivery')
+            local price = math.floor(payout / Config.OverdueDeliveryFee)
+            exports['qb-inventory']:AddItem(src, 'cash', price, false, 'qb-drugs:server:successDelivery')
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  price)
+
             TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item], 'remove')
             SetTimeout(math.random(5000, 10000), function()
                 TriggerClientEvent('qb-drugs:client:sendDeliveryMail', src, 'late', deliveryData)
@@ -99,7 +118,12 @@ RegisterNetEvent('qb-drugs:server:successDelivery', function(deliveryData, inTim
                 local modifiedPayout = deliveryData.itemData.payout * newItemAmount
                 TriggerClientEvent('QBCore:Notify', src, Lang:t('error.too_late'), 'error')
                 exports['qb-inventory']:RemoveItem(src, item, itemAmount, false, 'qb-drugs:server:successDelivery')
-                Player.Functions.AddMoney('cash', math.floor(modifiedPayout / Config.OverdueDeliveryFee), 'qb-drugs:server:successDelivery')
+
+                --Player.Functions.AddMoney('cash', math.floor(modifiedPayout / Config.OverdueDeliveryFee), 'qb-drugs:server:successDelivery')
+                local price = math.floor(modifiedPayout / Config.OverdueDeliveryFee)
+                exports['qb-inventory']:AddItem(src, 'cash',price, false, 'qb-drugs:server:successDelivery')
+                TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  price)
+
                 TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item], 'remove')
                 SetTimeout(math.random(5000, 10000), function()
                     TriggerClientEvent('qb-drugs:client:sendDeliveryMail', src, 'late', deliveryData)

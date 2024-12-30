@@ -6,7 +6,9 @@ RegisterNetEvent('fuel:pay', function(price)
 
 	if not Player or price <= 0 then return end
 
-	Player.Functions.RemoveMoney('cash', amount)
+	--Player.Functions.RemoveMoney('cash', amount)
+	exports['qb-inventory']:RemoveItem(source, 'cash', amount, false, 'fuel:pay')
+	TriggerClientEvent('qb-inventory:client:ItemBox', source, QBCore.Shared.Items['cash'], 'remove', amount)
 end)
 
 RegisterNetEvent('fuel:addPetrolCan', function()

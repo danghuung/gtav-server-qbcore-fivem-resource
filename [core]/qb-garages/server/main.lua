@@ -207,7 +207,9 @@ RegisterNetEvent('qb-garages:server:PayDepotPrice', function(data)
             local depotPrice = result
 
             if cashBalance >= depotPrice then
-                Player.Functions.RemoveMoney('cash', depotPrice, 'paid-depot')
+                --Player.Functions.RemoveMoney('cash', depotPrice, 'paid-depot')
+                exports['qb-inventory']:RemoveItem(src, 'cash', depotPrice, false, 'paid-depot')
+                TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', depotPrice)
                 TriggerClientEvent('qb-garages:client:takeOutGarage', src, data)
             --elseif bankBalance >= depotPrice then
             --    Player.Functions.RemoveMoney('bank', depotPrice, 'paid-depot')

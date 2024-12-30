@@ -405,7 +405,9 @@ QBCore.Commands.Add('fine', Lang:t('commands.fine'), { { name = 'id', help = Lan
                         TriggerClientEvent('QBCore:Notify', source, Lang:t('info.fine_issued'), 'success')
                         TriggerClientEvent('QBCore:Notify', billed.PlayerData.source, Lang:t('info.received_fine'))
                         exports['qb-banking']:AddMoney(biller.PlayerData.job.name, amount, 'Fine')
-                    elseif billed.Functions.RemoveMoney('cash', amount, 'paid-fine') then
+                    elseif exports['qb-inventory']:RemoveItem(tonumber(args[1]), 'cash', amount, false, 'paid-fine') then
+                        TriggerClientEvent('qb-inventory:client:ItemBox', tonumber(args[1]), QBCore.Shared.Items['cash'], 'remove', amount)
+
                         TriggerClientEvent('QBCore:Notify', source, Lang:t('info.fine_issued'), 'success')
                         TriggerClientEvent('QBCore:Notify', billed.PlayerData.source, Lang:t('info.received_fine'))
                         exports['qb-banking']:AddMoney(biller.PlayerData.job.name, amount, 'Fine')
@@ -533,7 +535,12 @@ QBCore.Functions.CreateUseableItem('moneybag', function(source, item)
     if not Player.Functions.GetItemByName('moneybag') or not item.info or item.info == '' then return end
     if not Player.PlayerData.job.type == 'leo' then return end
     if not exports['qb-inventory']:RemoveItem(src, 'moneybag', 1, item.slot, 'qb-policejob:moneybag') then return end
-    Player.Functions.AddMoney('cash', tonumber(item.info.cash), 'qb-policejob:moneybag')
+
+    local priceAdd = tonumber(item.info.cash)
+    --Player.Functions.AddMoney('cash', tonumber(item.info.cash), 'qb-policejob:moneybag')
+    exports['qb-inventory']:AddItem(src, 'cash', priceAdd, false, 'qb-policejob:moneybag')
+    TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  priceAdd)
+
 end)
 
 -- Callbacks
@@ -899,7 +906,10 @@ RegisterNetEvent('police:server:SeizeCash', function(playerId)
     if Player.PlayerData.job.type ~= 'leo' then return end
     local moneyAmount = SearchedPlayer.PlayerData.money['cash']
     local info = { cash = moneyAmount }
-    SearchedPlayer.Functions.RemoveMoney('cash', moneyAmount, 'police-cash-seized')
+    --SearchedPlayer.Functions.RemoveMoney('cash', moneyAmount, 'police-cash-seized')
+    exports['qb-inventory']:RemoveItem(playerId, 'cash', moneyAmount, false, 'police-cash-seized')
+    TriggerClientEvent('qb-inventory:client:ItemBox', playerId, QBCore.Shared.Items['cash'], 'remove', moneyAmount)
+
     exports['qb-inventory']:AddItem(src, 'moneybag', 1, false, info, 'police:server:SeizeCash')
     TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['moneybag'], 'add')
     TriggerClientEvent('QBCore:Notify', SearchedPlayer.PlayerData.source, Lang:t('info.cash_confiscated'))
@@ -939,8 +949,14 @@ RegisterNetEvent('police:server:RobPlayer', function(playerId)
     if not Player or not SearchedPlayer then return end
 
     local money = SearchedPlayer.PlayerData.money['cash']
-    Player.Functions.AddMoney('cash', money, 'police-player-robbed')
-    SearchedPlayer.Functions.RemoveMoney('cash', money, 'police-player-robbed')
+    --Player.Functions.AddMoney('cash', money, 'police-player-robbed')
+    exports['qb-inventory']:AddItem(src, 'cash', money, false, 'police-player-robbed')
+    TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add', money)
+
+    --SearchedPlayer.Functions.RemoveMoney('cash', money, 'police-player-robbed')
+    exports['qb-inventory']:RemoveItem(playerId, 'cash', money, false, 'police-player-robbed')
+    TriggerClientEvent('qb-inventory:client:ItemBox', playerId, QBCore.Shared.Items['cash'], 'remove', money)
+
     exports['qb-inventory']:OpenInventoryById(src, playerId)
     TriggerClientEvent('QBCore:Notify', SearchedPlayer.PlayerData.source, Lang:t('info.cash_robbed', { money = money }))
     TriggerClientEvent('QBCore:Notify', Player.PlayerData.source, Lang:t('info.stolen_money', { stolen = money }))

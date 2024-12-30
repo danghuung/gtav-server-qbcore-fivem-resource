@@ -51,7 +51,8 @@ RegisterNetEvent('qb-cityhall:server:requestId', function(item, hall)
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
     local itemInfo = Config.Cityhalls[hall].licenses[item]
-    if not Player.Functions.RemoveMoney('cash', itemInfo.cost, 'cityhall id') then return TriggerClientEvent('QBCore:Notify', src, ('Bạn không có đủ tiền, bạn cần %s tiền mặt'):format(itemInfo.cost), 'error') end
+    if not exports['qb-inventory']:RemoveItem(src, 'cash', itemInfo.cost, false, 'cityhall id') then return TriggerClientEvent('QBCore:Notify', src, ('Bạn không có đủ tiền, bạn cần %s tiền mặt'):format(itemInfo.cost), 'error') end
+    TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', itemInfo.cost)
     local info = {}
     if item == 'id_card' then
         info.citizenid = Player.PlayerData.citizenid

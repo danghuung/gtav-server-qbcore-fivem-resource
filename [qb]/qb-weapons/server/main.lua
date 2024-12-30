@@ -59,10 +59,11 @@ QBCore.Functions.CreateCallback('qb-weapons:server:RepairWeapon', function(sourc
         return
     end
 
-    if not Player.Functions.RemoveMoney('cash', Config.WeaponRepairCosts[WeaponClass]) then
+    if not exports['qb-inventory']:RemoveItem(src, 'cash', Config.WeaponRepairCosts[WeaponClass], false, 'qb-weapons:server:RepairWeapon') then
         cb(false)
         return
     end
+    TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', Config.WeaponRepairCosts[WeaponClass])
 
     Config.WeaponRepairPoints[RepairPoint].IsRepairing = true
     Config.WeaponRepairPoints[RepairPoint].RepairingData = {
@@ -72,7 +73,10 @@ QBCore.Functions.CreateCallback('qb-weapons:server:RepairWeapon', function(sourc
     }
 
     if not exports['qb-inventory']:RemoveItem(src, data.name, 1, data.slot, 'qb-weapons:server:RepairWeapon') then
-        Player.Functions.AddMoney('cash', Config.WeaponRepairCosts[WeaponClass], 'qb-weapons:server:RepairWeapon')
+        --Player.Functions.AddMoney('cash', Config.WeaponRepairCosts[WeaponClass], 'qb-weapons:server:RepairWeapon')
+        exports['qb-inventory']:AddItem(src, 'cash', Config.WeaponRepairCosts[WeaponClass], false, 'qb-weapons:server:RepairWeapon')
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add',  Config.WeaponRepairCosts[WeaponClass])
+
         return
     end
 
