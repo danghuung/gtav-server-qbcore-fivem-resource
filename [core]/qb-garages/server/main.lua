@@ -200,7 +200,8 @@ end)
 RegisterNetEvent('qb-garages:server:PayDepotPrice', function(data)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local cashBalance = Player.PlayerData.money['cash']
+    local cash = Player.Functions.GetItemByName('cash')
+    local cashBalance = (cash ~= nil) and cash.amount or 0
     --local bankBalance = Player.PlayerData.money['bank']
     MySQL.scalar('SELECT depotprice FROM player_vehicles WHERE plate = ?', { data.plate }, function(result)
         if result then

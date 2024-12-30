@@ -692,7 +692,9 @@ RegisterNetEvent('police:server:SearchPlayer', function()
         local SearchedPlayer = QBCore.Functions.GetPlayer(tonumber(player))
         if not SearchedPlayer then return end
         exports['qb-inventory']:OpenInventoryById(src, tonumber(player))
-        TriggerClientEvent('QBCore:Notify', src, Lang:t('info.cash_found', { cash = SearchedPlayer.PlayerData.money['cash'] }))
+        local cashItem = SearchedPlayer.Functions.GetItemByName('cash')
+        local cashBalance = (cashItem ~= nil) and cashItem.amount or 0
+        TriggerClientEvent('QBCore:Notify', src, Lang:t('info.cash_found', { cash = cashBalance }))
         TriggerClientEvent('QBCore:Notify', player, Lang:t('info.being_searched'))
     else
         TriggerClientEvent('QBCore:Notify', src, Lang:t('error.none_nearby'), 'error')
@@ -904,7 +906,8 @@ RegisterNetEvent('police:server:SeizeCash', function(playerId)
     local SearchedPlayer = QBCore.Functions.GetPlayer(playerId)
     if not Player or not SearchedPlayer then return end
     if Player.PlayerData.job.type ~= 'leo' then return end
-    local moneyAmount = SearchedPlayer.PlayerData.money['cash']
+    local cashItem = SearchedPlayer.Functions.GetItemByName('cash')
+    local moneyAmount = (cashItem ~= nil) and cashItem.amount or 0
     local info = { cash = moneyAmount }
     --SearchedPlayer.Functions.RemoveMoney('cash', moneyAmount, 'police-cash-seized')
     exports['qb-inventory']:RemoveItem(playerId, 'cash', moneyAmount, false, 'police-cash-seized')
@@ -947,8 +950,8 @@ RegisterNetEvent('police:server:RobPlayer', function(playerId)
     local Player = QBCore.Functions.GetPlayer(src)
     local SearchedPlayer = QBCore.Functions.GetPlayer(playerId)
     if not Player or not SearchedPlayer then return end
-
-    local money = SearchedPlayer.PlayerData.money['cash']
+    local cashItem = SearchedPlayer.Functions.GetItemByName('cash')
+    local money = (cashItem ~= nil) and cashItem.amount or 0
     --Player.Functions.AddMoney('cash', money, 'police-player-robbed')
     exports['qb-inventory']:AddItem(src, 'cash', money, false, 'police-player-robbed')
     TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add', money)
