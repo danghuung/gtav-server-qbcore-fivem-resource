@@ -432,7 +432,7 @@ RegisterNetEvent('consumables:client:ResetParachute', function()
 end)
 
 RegisterNetEvent('consumables:client:UseArmor', function()
-    if GetPedArmour(PlayerPedId()) >= 75 then
+    if GetPedArmour(PlayerPedId()) >= 95 then
         QBCore.Functions.Notify(Lang:t('consumables.armor_full'), 'error')
         return
     end

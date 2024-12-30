@@ -150,8 +150,8 @@ RegisterNetEvent('consumables:server:useArmor', function()
     if not Player then return end
     if not exports['qb-inventory']:RemoveItem(source, 'armor', 1, false, 'consumables:server:useArmor') then return end
     TriggerClientEvent('qb-inventory:client:ItemBox', source, QBCore.Shared.Items['armor'], 'remove')
-    TriggerClientEvent('hospital:server:SetArmor', source, 75)
-    SetPedArmour(GetPlayerPed(source), 75)
+    TriggerClientEvent('hospital:server:SetArmor', source, 100)
+    SetPedArmour(GetPlayerPed(source), 100)
 end)
 
 RegisterNetEvent('consumables:server:useMeth', function()
