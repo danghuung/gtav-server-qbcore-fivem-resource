@@ -4,13 +4,14 @@ local zones = {}
 -- Functions
 
 local function OpenBank()
-    QBCore.Functions.TriggerCallback('qb-banking:server:openBank', function(accounts, statements, playerData)
+    QBCore.Functions.TriggerCallback('qb-banking:server:openBank', function(accounts, statements, playerData, cash)
         SetNuiFocus(true, true)
         SendNUIMessage({
             action = 'openBank',
             accounts = accounts,
             statements = statements,
-            playerData = playerData
+            playerData = playerData,
+            cash = cash
         })
     end)
 end
@@ -30,13 +31,14 @@ local function OpenATM()
         coords = vector3(0.1, 0.03, -0.05),
         rotation = vector3(0.0, 0.0, 180.0),
     }, {}, function()
-        QBCore.Functions.TriggerCallback('qb-banking:server:openATM', function(accounts, playerData, acceptablePins)
+        QBCore.Functions.TriggerCallback('qb-banking:server:openATM', function(accounts, playerData, acceptablePins, cash)
             SetNuiFocus(true, true)
             SendNUIMessage({
                 action = 'openATM',
                 accounts = accounts,
                 pinNumbers = acceptablePins,
-                playerData = playerData
+                playerData = playerData,
+                cash = cash
             })
         end)
     end)

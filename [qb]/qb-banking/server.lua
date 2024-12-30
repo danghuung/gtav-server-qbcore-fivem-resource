@@ -179,7 +179,10 @@ QBCore.Functions.CreateCallback('qb-banking:server:openBank', function(source, c
             if Statements[accountName] then statements[accountName] = Statements[accountName] end
         end
     end
-    cb(accounts, statements, Player.PlayerData)
+
+    local cashItem = Player.Functions.GetItemByName('cash')
+    local cash = (cashItem ~= nil) and cashItem.amount or 0
+    cb(accounts, statements, Player.PlayerData, cash)
 end)
 
 QBCore.Functions.CreateCallback('qb-banking:server:openATM', function(source, cb)
@@ -205,7 +208,10 @@ QBCore.Functions.CreateCallback('qb-banking:server:openATM', function(source, cb
             accounts[#accounts + 1] = accountInfo
         end
     end
-    cb(accounts, Player.PlayerData, acceptablePins)
+
+    local cashItem = Player.Functions.GetItemByName('cash')
+    local cash = (cashItem ~= nil) and cashItem.amount or 0
+    cb(accounts, Player.PlayerData, acceptablePins, cash)
 end)
 
 QBCore.Functions.CreateCallback('qb-banking:server:withdraw', function(source, cb, data)
@@ -250,7 +256,8 @@ QBCore.Functions.CreateCallback('qb-banking:server:deposit', function(source, cb
     local depositAmount = tonumber(data.amount)
     local reason = (data.reason ~= '' and data.reason) or 'Bank Deposit'
     if accountName == 'checking' then
-        local accountBalance = Player.PlayerData.money.cash
+        local cashItem = Player.Functions.GetItemByName('cash')
+        local accountBalance = (cashItem ~= nil) and cashItem.amount or 0
         if accountBalance < depositAmount then return cb({ success = false, message = Lang:t('error.money') }) end
         --Player.Functions.RemoveMoney('cash', depositAmount, 'bank deposit')
         exports['qb-inventory']:RemoveItem(src, 'cash', depositAmount, false, 'bank deposit')
@@ -262,9 +269,11 @@ QBCore.Functions.CreateCallback('qb-banking:server:deposit', function(source, cb
     if Accounts[accountName] then
         local job = Player.PlayerData.job
         local gang = Player.PlayerData.gang
+        local cashItem = Player.Functions.GetItemByName('cash')
+        local cashBalance = (cashItem ~= nil) and cashItem.amount or 0
         if Accounts[accountName].account_type == 'job' and job.name ~= accountName and not job.isboss then return cb({ success = false, message = Lang:t('error.access') }) end
         if Accounts[accountName].account_type == 'gang' and gang.name ~= accountName and not gang.isboss then return cb({ success = false, message = Lang:t('error.access') }) end
-        if Player.PlayerData.money.cash < depositAmount then return cb({ success = false, message = Lang:t('error.money') }) end
+        if cashBalance < depositAmount then return cb({ success = false, message = Lang:t('error.money') }) end
         --Player.Functions.RemoveMoney('cash', depositAmount, 'bank account: ' .. accountName .. ' deposit')
         exports['qb-inventory']:RemoveItem(src, 'cash', depositAmount, false, 'bank account: ' .. accountName .. ' deposit')
         TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', depositAmount)
@@ -510,10 +519,12 @@ QBCore.Commands.Add('givecash', 'Give Cash', { { name = 'id', help = 'Player ID'
     local targetPed = GetPlayerPed(tonumber(args[1]))
     local targetCoords = GetEntityCoords(targetPed)
     local amount = tonumber(args[2])
+    local cashItem = Player.Functions.GetItemByName('cash')
+    local cashBalance = (cashItem ~= nil) and cashItem.amount or 0
     if not amount then return TriggerClientEvent('QBCore:Notify', src, Lang:t('error.amount'), 'error') end
     if amount <= 0 then return TriggerClientEvent('QBCore:Notify', src, Lang:t('error.amount'), 'error') end
     if #(playerCoords - targetCoords) > 5 then return TriggerClientEvent('QBCore:Notify', src, Lang:t('error.toofar'), 'error') end
-    if Player.PlayerData.money.cash < amount then return TriggerClientEvent('QBCore:Notify', src, Lang:t('error.money'), 'error') end
+    if cashBalance < amount then return TriggerClientEvent('QBCore:Notify', src, Lang:t('error.money'), 'error') end
     --Player.Functions.RemoveMoney('cash', amount, 'cash transfer')
     exports['qb-inventory']:RemoveItem(src, 'cash', amount, false, 'cash transfer')
     TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'remove', amount)

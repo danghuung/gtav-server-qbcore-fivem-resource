@@ -386,6 +386,7 @@ QBShared.Items = {
     -- add new
     cash                     = { name = 'cash', label = 'Tiền mặt', weight = 0, maxamount = 1, type = 'item', image = 'cash.png', unique = false, useable = false, shouldClose = true, description = 'Tiền mặt dùng trực tiếp' },
     cash_black               = { name = 'cash_black', label = 'Tiền bẩn', weight = 0, maxamount = 1, type = 'item', image = 'cashblack.png', unique = false, useable = false, shouldClose = true, description = 'Tiền bẩn bất hợp pháp' },
+    bank               = { name = 'bank', label = 'Bank', weight = 0, maxamount = 0, type = 'item', image = 'bank.png', unique = true, useable = false, shouldClose = true, description = 'Bank' },
 
     -- job
     wood                     = { name = 'wood', label = 'Gỗ', weight = 0, maxamount = 20, type = 'item', image = 'wood.png', unique = false, useable = false, shouldClose = true, description = 'Gỗ thô chưa cắt' },

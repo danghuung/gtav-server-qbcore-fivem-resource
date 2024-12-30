@@ -6,7 +6,9 @@ RegisterNetEvent('qb-tow:server:DoBail', function(bool, vehInfo)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if bool then
-        if Player.PlayerData.money.cash >= Config.BailPrice then
+        local cashItem = Player.Functions.GetItemByName('cash')
+        local cashBalance = (cashItem ~= nil) and cashItem.amount or 0
+        if cashBalance >= Config.BailPrice then
             Bail[Player.PlayerData.citizenid] = Config.BailPrice
             --Player.Functions.RemoveMoney('cash', Config.BailPrice, 'tow-paid-bail')
             exports['qb-inventory']:RemoveItem(src, 'cash', Config.BailPrice, false, 'tow-paid-bail')

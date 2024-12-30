@@ -55,7 +55,7 @@ const bankingApp = Vue.createApp({
             const playerData = bankData.playerData;
             this.playerName = playerData.charinfo.firstname;
             this.accountNumber = playerData.citizenid;
-            this.playerCash = playerData.money.cash;
+            this.playerCash = bankData.cash;
             this.accounts = [];
             bankData.accounts.forEach((account) => {
                 this.accounts.push({
@@ -86,7 +86,7 @@ const bankingApp = Vue.createApp({
             const playerData = bankData.playerData;
             this.playerName = playerData.charinfo.firstname;
             this.accountNumber = playerData.citizenid;
-            this.playerCash = playerData.money.cash;
+            this.playerCash = bankData.cash;
             this.accounts = [];
             bankData.accounts.forEach((account) => {
                 this.accounts.push({
