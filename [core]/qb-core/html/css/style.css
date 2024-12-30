@@ -4,7 +4,7 @@ html::-webkit-scrollbar {
 
 @media (width: 3840px) and (height: 2160px) {
     .success {
-        background-color: rgba(23, 23, 23, 90%);
+        /*background-color: rgba(23, 23, 23, 40%);*/
         border-radius: 10px;
         box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
         border-left: 0.5rem solid #20bb44;
@@ -12,7 +12,7 @@ html::-webkit-scrollbar {
     }
 
     .primary {
-        background-color: rgba(23, 23, 23, 90%);
+        /*background-color: rgba(23, 23, 23, 40%);*/
         border-radius: 10px;
         box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
         border-left: 5px solid #1c75d2;
@@ -20,7 +20,7 @@ html::-webkit-scrollbar {
     }
 
     .error {
-        background-color: rgba(23, 23, 23, 90%);
+        background-color: rgba(23, 23, 23, 40%);
         border-radius: 10px;
         box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
         border-left: 5px solid #c10114;
@@ -28,7 +28,7 @@ html::-webkit-scrollbar {
     }
 
     .police {
-        background-color: rgba(23, 23, 23, 90%);
+        background-color: rgba(23, 23, 23, 40%);
         border-radius: 10px;
         box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
         border-left: 5px solid #2197f2;
@@ -36,46 +36,59 @@ html::-webkit-scrollbar {
     }
 
     .ambulance {
-        background-color: rgba(23, 23, 23, 90%);
+        background-color: rgba(23, 23, 23, 40%);
         border-radius: 10px;
         box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
         border-left: 5px solid #f44236;
         font-size: 1.5vh;
     }
+
+    .job {
+        background-color: rgba(23, 23, 23, 40%);
+        border-radius: 10px;
+        box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+        border-left: 5px solid #000000;
+        font-size: 1.5vh;
+    }
 }
 
 .success {
-    background-color: #20bb44;
+    /*background-color: #20bb44;*/
     border-radius: 5px;
     border: 1px solid #6ae587;
 }
 
 .primary {
-    background-color: #1c75d2;
+    /*background-color: #1c75d2;*/
     border-radius: 5px;
     border: 1px solid #6facec;
 }
 
 .warning {
-    background-color: #ff9800;
+    /*background-color: #ff9800;*/
     border-radius: 5px;
     border: 1px solid #ffc107;
 }
 
 .error {
-    background-color: #c10114;
+    /*background-color: #c10114;*/
     border-radius: 5px;
     border: 1px solid #fe4255;
 }
 
 .police {
-    background-color: #2197f2;
+    /*background-color: #2197f2;*/
     border-radius: 5px;
     border: 1px solid #7ac1f7;
 }
 
 .ambulance {
-    background-color: #f44236;
+    /*background-color: #f44236;*/
     border-radius: 5px;
     border: 1px solid #f88e86;
+}
+
+.job {
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0);
 }

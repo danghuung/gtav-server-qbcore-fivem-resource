@@ -13,7 +13,7 @@ const app = Vue.createApp({
             // Otherwise we process any old MessageEvent with a data property
             if (data?.action !== "notify") return;
 
-            const { text, length, type, caption, icon: dataIcon } = data;
+            const { text, length, position, type, caption, icon: dataIcon } = data;
             let { classes, icon } = determineStyleFromVariant(type);
 
             if (dataIcon) {
@@ -37,7 +37,7 @@ const app = Vue.createApp({
                 // we should use multiline notifications
                 group: NOTIFY_CONFIG.NotificationStyling.group ?? false,
                 progress: NOTIFY_CONFIG.NotificationStyling.progress ?? true,
-                position: NOTIFY_CONFIG.NotificationStyling.position ?? "right",
+                position: position ?? "right",
                 timeout: length,
                 caption,
                 classes,

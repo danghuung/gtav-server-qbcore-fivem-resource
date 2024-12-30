@@ -153,5 +153,9 @@ QBConfig.Notify.VariantDefinitions = {
     ambulance = {
         classes = 'ambulance',
         icon = 'fas fa-ambulance'
+    },
+    woodcutter = {
+        classes = 'woodcutter',
+        icon = 'fa fa-tree'
     }
 }

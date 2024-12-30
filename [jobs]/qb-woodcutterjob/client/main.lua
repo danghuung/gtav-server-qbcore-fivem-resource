@@ -110,7 +110,7 @@ local function CreateBlipsZones()
                                                 if canHandleWood then
                                                     TriggerServerEvent('qb-woodcutterjob:server:cutWood')
                                                 else
-                                                    QBCore.Functions.Notify(Config.Messages.enoughIngredients .. "Gỗ thô", 'error', 2500)
+                                                    QBCore.Functions.Notify(Config.Messages.enoughIngredients .. "Gỗ thô", 'woodcutter', 2500, false, 'left')
                                                     isProcessing = false
                                                 end
                                             end,  Config.Items.wood['name'], 0, Config.Comparison.moreOrEquals)
@@ -119,7 +119,7 @@ local function CreateBlipsZones()
                                                 if canHandleWood then
                                                     TriggerServerEvent('qb-woodcutterjob:server:plyWood')
                                                 else
-                                                    QBCore.Functions.Notify(Config.Messages.enoughIngredients .. "Gỗ đã cắt", 'error', 2500)
+                                                    QBCore.Functions.Notify(Config.Messages.enoughIngredients .. "Gỗ đã cắt", 'woodcutter', 2500, false, 'left')
                                                     isProcessing = false
                                                 end
                                             end,  Config.Items.cutWood['name'], 0, Config.Comparison.moreOrEquals)
@@ -128,7 +128,7 @@ local function CreateBlipsZones()
                                                 if canHandleWood then
                                                     TriggerServerEvent('qb-woodcutterjob:server:sellWood')
                                                 else
-                                                    QBCore.Functions.Notify(Config.Messages.enoughIngredients .. "Ván gỗ", 'error', 2500)
+                                                    QBCore.Functions.Notify(Config.Messages.enoughIngredients .. "Ván gỗ", 'woodcutter', 2500, false, 'left')
                                                     isProcessing = false
                                                 end
                                             end,  Config.Items.plyWood['name'], 0, Config.Comparison.moreOrEquals)
@@ -137,7 +137,7 @@ local function CreateBlipsZones()
                                                 if canHandleWood then
                                                     TriggerServerEvent('qb-woodcutterjob:server:takeWood')
                                                 else
-                                                    QBCore.Functions.Notify(Config.Messages.storeFull, 'error', 2500)
+                                                    QBCore.Functions.Notify(Config.Messages.storeFull, 'woodcutter', 2500, false, 'left')
                                                     isProcessing = false
                                                 end
                                             end, Config.Items.wood['name'], Config.Items.wood['maxamount'], Config.Comparison.lessOrEquals)

@@ -167,11 +167,12 @@ end
 
 -- NUI Calls
 
-function QBCore.Functions.Notify(text, texttype, length, icon)
+function QBCore.Functions.Notify(text, texttype, length, icon, position)
     local message = {
         action = 'notify',
         type = texttype or 'primary',
         length = length or 5000,
+        position = position or QBConfig.Notify.NotificationStyling.position,
     }
 
     if type(text) == 'table' then

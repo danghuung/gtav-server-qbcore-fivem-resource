@@ -81,7 +81,7 @@
 }
 
 .left {
-    top: 50%;
+    top: 40%;
     left: -100px;
 }
 
@@ -109,6 +109,23 @@
 }
 
 .top-left.hide {
+    transition: 0.5s;
+    left: -100px;
+    opacity: 0;
+}
+
+.left-job {
+    top: 75%;
+    left: -100px;
+}
+
+.left-job.show {
+    transition: 0.5s;
+    left: 10px;
+    opacity: 1;
+}
+
+.left-job.hide {
     transition: 0.5s;
     left: -100px;
     opacity: 0;
