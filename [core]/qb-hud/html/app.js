@@ -617,6 +617,41 @@ $(".closeMenu").click(() => {
     closeMenu();
 });
 
+const testHud = Vue.createApp({
+    data() {
+        return {
+            id: 0,
+            totalPlayer: 0,
+            cashItem: 0,
+            job: "",
+            show: false,
+        };
+    },
+    destroyed() {
+        window.removeEventListener("message", this.listener);
+    },
+    mounted() {
+        this.listener = window.addEventListener("message", (event) => {
+            if (event.data.action === "serverInfoHud") {
+                this.serverInfoHud(event.data);
+            }
+        });
+        Config = {};
+    },
+    methods: {
+        formatCurrency(amount) {
+            return new Intl.NumberFormat().format(amount);
+        },
+        serverInfoHud(data) {
+            this.show = data.show;
+            this.id = data.id;
+            this.totalPlayer = data.totalPlayer;
+            this.cashItem = data.cashItem;
+            this.job = data.job;
+        },
+    }
+}).mount("#player-info-container");
+
 // MONEY HUD
 
 const moneyHud = Vue.createApp({

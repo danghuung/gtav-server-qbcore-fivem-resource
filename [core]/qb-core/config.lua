@@ -53,7 +53,7 @@ QBConfig.Player.PlayerDefaults = {
     },
     gang = {
         name = 'none',
-        label = 'No Gang Affiliation',
+        label = 'none',
         isboss = false,
         grade = {
             name = 'none',

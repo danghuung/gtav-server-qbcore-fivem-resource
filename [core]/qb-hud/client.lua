@@ -28,6 +28,11 @@ local CinematicHeight = 0.2
 local w = 0
 local radioActive = false
 
+local id = 0
+local totalPlayer = 0
+local cashItem = 0
+local job = ""
+
 DisplayRadar(false)
 
 local function CinematicShow(bool)
@@ -136,7 +141,7 @@ RegisterNUICallback('closeMenu', function(_, cb)
     cb('ok')
 end)
 
-RegisterKeyMapping('menu', 'Open Menu', 'keyboard', config.OpenMenu)
+--RegisterKeyMapping('menu', 'Open Menu', 'keyboard', config.OpenMenu)
 
 -- Reset hud
 local function restartHud()
@@ -676,6 +681,77 @@ local function getFuelLevel(vehicle)
     end
     return lastFuelCheck
 end
+
+local prevServerInfoHud = {nil, nil, nil, nil, nil}
+
+local function updateServerInfoHud(data)
+    local shouldUpdate = false
+    for k, v in pairs(data) do
+        if prevServerInfoHud[k] ~= v then
+            shouldUpdate = true
+            break
+        end
+    end
+    prevServerInfoHud = data
+    if shouldUpdate then
+        SendNUIMessage({
+            action = 'serverInfoHud',
+            show = data[1],
+            id = data[2],
+            totalPlayer = data[3],
+            cashItem = data[4],
+            job = data[5]
+        })
+    end
+end
+
+local function getItemAmount(items)
+    local amount = 0
+    for _, item in pairs(items) do
+        if item.name == 'cash' then
+            amount = item.amount
+            break
+        end
+    end
+
+    return amount
+end
+
+CreateThread(function()
+    while true do
+        if LocalPlayer.state.isLoggedIn then
+            local show = true
+            id = GetPlayerServerId(PlayerId())
+            totalPlayer = 93
+            job = PlayerData.job.label
+            cashItem = getItemAmount(PlayerData.items)
+            if IsPauseMenuActive() then
+                updateServerInfoHud({
+                    false,
+                    id,
+                    totalPlayer,
+                    cashItem,
+                    job
+                })
+            else
+                updateServerInfoHud({
+                    show,
+                    id,
+                    totalPlayer,
+                    cashItem,
+                    job
+                })
+            end
+
+        else
+            SendNUIMessage({
+                action = 'serverInfoHud',
+                show = false
+            })
+        end
+        Wait(500)
+    end
+end)
 
 -- HUD Update loop
 

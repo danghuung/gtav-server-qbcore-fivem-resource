@@ -64,6 +64,5 @@ RegisterNetEvent('qb-woodcutterjob:server:sellWood', function()
         exports['qb-inventory']:RemoveItem(src, itemRemove, 1, false, 'qb-woodcutterjob:server:sellWood')
         TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[itemRemove], 'sell', 1)
         exports['qb-inventory']:AddItem(src, 'cash', 650, false, 'qb-woodcutterjob:server:sellWood')
-        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items['cash'], 'add', 650)
     end
 end)
